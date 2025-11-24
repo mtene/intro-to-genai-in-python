@@ -2,23 +2,19 @@
 name = "python-genai-intro"
 version = "0.1.0"
 description = "A step-by-step tutorial to get familiar with Gen-AI usage from Python using LangGraph"
-authors = [
-    {name = "Matei Tene",email = "matei.tene@gmail.com"}
-]
-readme = "README.md"
+authors = [{ name = "Matei Tene", email = "matei.tene@gmail.com" }]
 requires-python = ">=3.13,<4.0.0"
-
-[tool.poetry]
-packages = [
-  { include = "user_interface", from = "src" },
-  { include = "chatbot", from = "src" }
+readme = "README.md"
+dependencies = [
+    "streamlit>=1.50.0,<2",
+    "streamlit-chat>=0.1.1,<0.2",
+    "langgraph>=0.6.8,<0.7",
+    "langchain-openai>=0.3.35,<0.4",
+    "pyyaml>=6.0.3,<7",
+    "rich>=14.1.0,<15",
 ]
 
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
+[project.scripts]
 genai-chat = "user_interface.__main__:main"
 step-0 = "chatbot.lessons.step0_intro.__main__:main"
 step-1 = "chatbot.lessons.step1_prompting.__main__:main"
@@ -34,10 +30,22 @@ step-5-solution = "chatbot.lessons.step5_tool_calling_solution.__main__:main"
 step-6 = "chatbot.lessons.step6_custom_agent.__main__:main"
 step-6-solution = "chatbot.lessons.step6_custom_agent_solution.__main__:main"
 
-[tool.poetry.dependencies]
-streamlit = "^1.50.0"
-streamlit-chat = "^0.1.1"
-langgraph = "^0.6.8"
-langchain-openai = "^0.3.35"
-pyyaml = "^6.0.3"
-rich = "^14.1.0"
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/user_interface",
+    "src/chatbot",
+]
+
+[tool.hatch.build.targets.wheel]
+include = [
+    "src/user_interface",
+    "src/chatbot",
+]
+
+[tool.hatch.build.targets.wheel.sources]
+"src/user_interface" = "user_interface"
+"src/chatbot" = "chatbot"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

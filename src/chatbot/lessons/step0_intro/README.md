@@ -13,13 +13,13 @@ The graphical user interface is defined using [`streamlit`](https://docs.streaml
 The chatbot defined in each lesson or solution can also be tested at the command-line, by issuing the following launch commands:
 
 ```bash
-poetry run lesson-5
+uv run step-5
 ```
 
 or
 
 ```bash
-poetry run lesson-5-solution
+uv run step-5-solution
 ```
 
 This allows one to attach a debugger and step through the code or capture exceptions.

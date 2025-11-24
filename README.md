@@ -20,42 +20,54 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
 
 1. Clone this repo.
 
-1. Install a recent version of Python 3.
+1. Install a recent version of Python 3. You can use:
+    * `winget`
+    >
+    > ```powershell
+    > winget install --id Python.Python.3.13 --version 3.13.3 --scope user
+    > ```
 
-    You can use `winget` within `powershell`
+    * or [download](https://www.python.org/downloads/release/python-3133/) and install somewhere accessible e.g. `%APPDATA%`.
+
+1. Install uv, which will manage the project's Python package dependencies. You can use:
+    * `winget`
+    >
+    > ```powershell
+    > winget install --id astral-sh.uv --scope user
+    > ```
+
+    * `pip`
+    >
+    > ```powershell
+    > pip install uv
+    > ```
+
+    * `powershell`
+    >
+    > ```powershell
+    > powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+    > ```
+
+1. Install Ollama server, which will be used to launch local language models. You can use:
+
+    * `winget`
+    >
+    > ```powershell
+    > winget install --id Ollama.Ollama --scope user
+    > ```
+
+    * or [download](https://github.com/ollama/ollama/releases/tag/v0.12.3) and install somewhere accessible e.g. `%APPDATA%`.
+
+1. Use uv to setup the dependencies by running the following command at the git clone location
 
     ```powershell
-    winget install --id Python.Python.3.13 --version 3.13.3 --scope user
+    uv sync
     ```
-
-    Or [download](https://www.python.org/downloads/release/python-3133/) and install somewhere accessible e.g. `%APPDATA%`.
-
-1. Install poetry, which will manage the project's Python package dependencies.
-
-    ```bash
-    pip install poetry
-    ```
-
-1. Use poetry to setup the dependencies by running the following command at the git clone location
-
-    ```bash
-    poetry install
-    ```
-
-1. Install Ollama server, which will be used to launch local language models.
-
-    Using `winget`
-
-    ```powershell
-    winget install --id Ollama.Ollama --scope user
-    ```
-
-    Or [download](https://github.com/ollama/ollama/releases/tag/v0.12.3) and install somewhere accessible e.g. `%APPDATA%`.
 
 1. Start the app by running the command below in the clone location
 
     ```bash
-    poetry run genai-chat
+    uv run genai-chat
     ```
 
     If you make code changes to the chatbot logic while the app is running, you need to kill and restart it. Do this by issuing Ctrl-C in the terminal - simply closing the webpage is not enough, since the streamlit server continues to run!
@@ -63,11 +75,11 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
 1. Alternatively, each lesson can be run in console mode
 
     ```bash
-    poetry run lesson-5
+    uv run step-5
     ```
 
     or a corresponding solution
 
     ```bash
-    poetry run lesson-5-solution
+    uv run step-5-solution
     ```
