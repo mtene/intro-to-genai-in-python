@@ -20,43 +20,43 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
 
 1. Clone this repo.
 
-1. Install a recent version of Python 3. You can use:
-    * `winget`
+1. Install a recent version of Python 3 - options include:
+    * using winget
     >
     > ```powershell
     > winget install --id Python.Python.3.13 --version 3.13.3 --scope user
     > ```
 
-    * or [download](https://www.python.org/downloads/release/python-3133/) and install somewhere accessible e.g. `%APPDATA%`.
+    * or [downloading](https://www.python.org/downloads/release/python-3133/) and installing somewhere accessible e.g. `%APPDATA%`.
 
-1. Install uv, which will manage the project's Python package dependencies. You can use:
-    * `winget`
+1. Install uv, which will manage the project's Python package dependencies - options include:
+    * using winget
     >
     > ```powershell
     > winget install --id astral-sh.uv --scope user
     > ```
 
-    * `pip`
+    * using pip
     >
     > ```powershell
     > pip install uv
     > ```
 
-    * `powershell`
+    * executing the [installation steps](https://docs.astral.sh/uv/getting-started/installation/#installation-methods) via powershell
     >
     > ```powershell
     > powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
     > ```
 
-1. Install Ollama server, which will be used to launch local language models. You can use:
+1. Install Ollama server, which will be used to launch local language models - options include:
 
-    * `winget`
+    * using winget
     >
     > ```powershell
     > winget install --id Ollama.Ollama --scope user
     > ```
 
-    * or [download](https://github.com/ollama/ollama/releases/tag/v0.12.3) and install somewhere accessible e.g. `%APPDATA%`.
+    * or [downloading](https://github.com/ollama/ollama/releases/tag/v0.12.3) and installing somewhere accessible e.g. `%APPDATA%`.
 
 1. Use uv to setup the dependencies by running the following command at the git clone location
 
@@ -66,7 +66,7 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
 
 1. Start the app by running the command below in the clone location
 
-    ```bash
+    ```powershell
     uv run genai-chat
     ```
 
@@ -74,12 +74,12 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
 
 1. Alternatively, each lesson can be run in console mode
 
-    ```bash
+    ```powershell
     uv run step-5
     ```
 
     or a corresponding solution
 
-    ```bash
+    ```powershell
     uv run step-5-solution
     ```
