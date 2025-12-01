@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 class Authenticator:
     """
     Provides API keys for language services.
-    The value is static as retrieved from envirnoment variables.
+    The value is static as retrieved from environment variables.
     Could be extended to use a token service instead.
     """
 
