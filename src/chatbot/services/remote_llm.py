@@ -1,5 +1,4 @@
 import logging
-import os
 from langchain_openai import AzureChatOpenAI
 from pydantic import SecretStr
 from chatbot.config import config

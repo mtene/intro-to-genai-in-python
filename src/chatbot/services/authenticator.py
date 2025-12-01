@@ -12,6 +12,7 @@ class Authenticator:
     The value is static as retrieved from envirnoment variables.
     Could be extended to use a token service instead.
     """
+
     def __init__(self, auth_config: Dict[str, str]):
         self._auth_config = auth_config
 
