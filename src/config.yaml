@@ -8,7 +8,7 @@ api_key_authentication: &api_key_authentication_settings
 # configuration for a local LLM service, launched using Ollama
 local_llm: &local_llm_settings
   type: local
-  model: 'llama3.1:8b'
+  model: 'granite4:7b-a1b-h'
 
 # configuration for a remote LLM service, hosted in the cloud
 remote_llm: &remote_llm_settings
