@@ -70,16 +70,16 @@ Some options are given below, in ascending order of hardware requirements. You c
 Model                           | Active Params | Context Window | Input modality  | Structured Output   | Tool Calling  | Weights & Arch     | License           | Hardware Requirements  | Ollama Catalog Name
 ---                             |---            |---             |---              |---                  |---            |---                 |---                |---                     |---
 **Google Gemma 3 0.27B**        | 0.27B         | 32K            | Text-only       | Emulated            | Emulated      | Open / Open        | Apache 2.0-like   | CPU or GPU, 0.5GB VRAM | `gemma3:270m`
+**IBM Granite 4 0.35B**         | 0.35B         | 1000K          | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | CPU or GPU, 0.8GB VRAM | `granite4:350m-h`
 **Google Gemma 3 1B**           | 1B            | 32K            | Text-only       | Emulated            | Emulated      | Open / Open        | Apache 2.0-like   | CPU or GPU, 1GB VRAM   | `gemma3:1b`
-**Microsoft Phi-4 Mini 3.8B**   | 3.84B         | 128K           | Text-only       | Native*             | Native*       | Open / Open        | MIT               | CPU or GPU, 2.5GB VRAM | `phi4-mini:3.8b`
+**IBM Granite 4 1B**            | 1B            | 1000K          | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | CPU or GPU, 1.8GB VRAM | `granite4:1b-h`
+**Microsoft Phi-4 Mini 3.8B**   | 3.84B         | 128K           | Text-only       | Native\*            | Native\*      | Open / Open        | MIT               | CPU or GPU, 2.5GB VRAM | `phi4-mini:3.8b`
+**IBM Granite 4 3B**            | 3B            | 1000K          | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | CPU or GPU, 3.8GB VRAM | `granite4:3b-h`
 **IBM Granite 4 7B MoE**        | 1B            | 1000K          | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | GPU, 4.2GB VRAM        | `granite4:7b-a1b-h`
-**OLMo 2 7B**                   | 7B            | 4K             | Text-only       | Native              | Emulated      | Open / Open        | Apache 2.0-like   | GPU, 4.5GB VRAM        | `olmo2:7b`
 **Mistral 0.3 7B**              | 7B            | 32K            | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | GPU, 4.5GB VRAM        | `mistral:7b`
 **Meta LLaMA 3.1 8B**           | 8B            | 128K           | Text-only       | Native              | Native        | Open / Open        | Community license | GPU, 5GB VRAM          | `llama3.1:8b`
-**OLMo 2 13B**                  | 13B           | 4K             | Text-only       | Native              | Emulated      | Open / Open        | Apache 2.0-like   | GPU, 8GB VRAM          | `olmo2:13b`  
-**Google Gemma 3 4B**           | 4.3B          | 128K           | Text, Images    | Native              | Emulated      | Open / Open        | Apache 2.0-like   | GPU, 9GB VRAM          | `gemma3:4b`
-**Google Gemma 3 12B**          | 12B           | 128K           | Text, Images    | Native              | Emulated      | Open / Open        | Apache 2.0-like   | GPU, 12GB VRAM         | `gemma3:12b`
 **OpenAI GPT-OSS 20B MoE**      | 3.6B          | 128K           | Text-only       | Native              | Native        | Open / Closed      | Apache 2.0        | GPU, 14GB VRAM         | `gpt-oss:20b`
+**IBM Granite 4 32B MoE**       | 9B            | 1000K          | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | GPU, 19GB VRAM         | `granite4:32b-a9b-h`
 **Mistral Small 3.1 24B**       | 24B           | 128K           | Text, Images    | Native              | Native        | Open / Open        | Apache 2.0        | GPU, 20GB VRAM         | `mistral-small:24b`
 **OpenAI GPT-OSS 120B MoE**     | 5.1B          | 128K           | Text-only       | Native              | Native        | Open / Closed      | Apache 2.0        | GPU, 65GB VRAM         | `gpt-oss:120b`
 
