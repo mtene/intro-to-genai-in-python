@@ -62,9 +62,9 @@ Some examples suitable for this exercise:
 
 ## Under the hood
 
-Instead of diving into the detailed structure of the MCP protocol, it is sufficient to discuss the high-level overview of the commnication pattern.
+Instead of diving into the detailed structure of the MCP protocol, it is sufficient to discuss the high-level communication pattern.
 
-An MCP server can be hosted locally, on a private intranet or the public internet. A client connects to the endpoint (host and port) and sends a tool call request via a HTTP message. This can contain authentication information in the headers, while the body indicates the desired tool and the corresponding values for its arguments. The server executes the tool and returns the result as a HTTP reply. Any logging messages produced during tool execution also need to be communicated to the client via HTTP.
+An MCP server can be hosted locally, on a private intranet or the public internet. Remote servers typically communicate over http or websocket, while local servers may also simply use standard console I/O. Clients connect to the server endpoints (URL, composed of host, port and path) and send a tool call request via JSON-RPC messages, indicating the desired tool and corresponding values for its arguments. For http, the headers are populated with authentication information, if required. The server then executes the tool and returns the result in its reply. In addition, servers can also stream logs or status updates back to the client during execution, so that the client can track progress while waiting for the final output.
 
 ## Further reading
 
