@@ -1,8 +1,20 @@
+import logging
+from pathlib import Path
 from typing import override
 from chatbot.chatbot_base import BaseChatBot
 from chatbot.chat_context import ChatContext
-from chatbot.chat_history import ChatHistory, assistant_message, user_message
+from chatbot.chat_history import (
+    ChatHistory,
+    assistant_message,
+    user_message,
+    system_message,
+)
 from chatbot.services.llm import LLM
+from chatbot.services.vectordb import VectorDB
+from langchain_core.documents import Document
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+logger = logging.getLogger(__name__)
 
 
 # Chat bot implementation
@@ -12,6 +24,31 @@ class ChatBot(BaseChatBot):
     def __init__(self):
         self._llm = LLM()
         self._chat_history = ChatHistory()
+        # create vector store
+        self._vectordb = VectorDB()
+        # read the document content
+        doc_path = Path(__file__).parents[5] / "data" / "the_great_gatsby.txt"
+        doc_content = ""
+        with open(doc_path, encoding="utf-8") as f:
+            doc_content = f.read()
+        # split the content into chunks representing paragraphs
+        splitter = RecursiveCharacterTextSplitter(
+            separators=["\n"],
+            chunk_size=2000,
+            chunk_overlap=0,
+        )
+        doc_chunks = splitter.split_text(doc_content)
+        logger.info(f"Split {doc_path} into {len(doc_chunks)} chunks")
+        # ingest the chunks into the vector store
+        self._vectordb.add_documents(
+            [
+                Document(
+                    page_content=chunk,
+                    metadata={"document": doc_path, "paragraph": i + 1},
+                )
+                for i, chunk in enumerate(doc_chunks)
+            ]
+        )
 
     @override
     def get_answer(self, question: str, ctx: ChatContext) -> str:
@@ -22,9 +59,17 @@ class ChatBot(BaseChatBot):
         ctx.update_status("🧠 Thinking...")
         # record question in chat history
         self._chat_history.add_message(user_message(question))
-        # call the LLM with all historic messages
+        # search the vector store for the top 10 relevant chunks
+        relevant_chunks = self._vectordb.similarity_search(question, k=10)
+        logger.info(
+            f"Retrieved {len(relevant_chunks)} chunks relevant to the query:{''.join(f'\nChunk {doc.metadata["paragraph"]}: {doc.page_content[:30]}' for doc in relevant_chunks)}"
+        )
+        system_prompt = system_message(
+            f"Respond to the user ONLY based on the following content:\n{'\n'.join(doc.page_content for doc in relevant_chunks)}"
+        )
+        # call the LLM with the system prompt and all historic messages
         response = self._llm.invoke(
-            self._chat_history.messages, config=self.get_config(ctx)
+            [system_prompt] + self._chat_history.messages, config=self.get_config(ctx)
         )
         # extract the answer
         answer = str(response.content)

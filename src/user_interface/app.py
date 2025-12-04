@@ -10,6 +10,9 @@ from streamlit_chat import message as st_chat_message
 from user_interface.select_chatbot import list_chatbot_names, load_chatbot
 from chatbot.chat_context import ChatContext
 from chatbot.chat_history import user_message, assistant_message, ChatHistory, ChatRole
+from chatbot.utils.logging import configure_logging
+
+configure_logging()
 
 
 @dataclass

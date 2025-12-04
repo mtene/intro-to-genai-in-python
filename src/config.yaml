@@ -39,7 +39,7 @@ remote_embeddings: &remote_embeddings_settings
 local_vectordb: &local_vectordb_settings
   type: local
   # choose between: cosine, euclidean_distance
-  similarity: cosine
+  similarity: euclidean_distance
 
 ## App configuration settings
 

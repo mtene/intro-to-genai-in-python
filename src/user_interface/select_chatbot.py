@@ -24,11 +24,12 @@ def list_chatbot_names() -> List[str]:
 
 def load_chatbot(name: str) -> BaseChatBot | None:
     """Returns the given chatbot implementation"""
-    module_name = f"chatbot.lessons.{name}"
+    module_name = f"chatbot.lessons.{name}.chatbot"
     try:
         # import the chatbot instance from the lessons' __main__.py
-        module = importlib.import_module(f"{module_name}.__main__")
-        chatbot = getattr(module, "chatbot")
+        module = importlib.import_module(module_name)
+        chatbot_type = getattr(module, "ChatBot")
+        chatbot = chatbot_type()
         logger.info(f"Successfully loaded chatbot from {module_name}")
         return chatbot
     except Exception:
