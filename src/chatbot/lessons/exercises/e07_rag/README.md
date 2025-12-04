@@ -28,7 +28,7 @@ Notes:
 * OpenAI's text-embedding-ada-002 is an older model, outperformed by all the others on benchmarks, including those with smaller size.
 * Newer models support variable output dimension using Matryoshka Representation Learning (MRL).
 
-Despite its small size, **Nomic Text Embedddings** scores highly on benchmarks, making it currently the best choice to run locally even on modest hardware.
+Despite its small size, **Nomic Text Embedddings** scores highly on benchmarks, even outperforming **OpenAI text-embedding-3-small**. It is a great choice to run locally even on modest hardware.
 
 A key operation when populating the database is splitting the content into chunks. The size of each chunk has to be small enough to fit in the context window of the embedding model, but also big enough to be useful when observed as stand-alone content. While the optimal chunking strategy varies by document and application, rules-of-thumb include splitting by paragraph, page or section.
 
