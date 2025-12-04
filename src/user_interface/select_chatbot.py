@@ -26,7 +26,7 @@ def load_chatbot(name: str) -> BaseChatBot | None:
     """Returns the given chatbot implementation"""
     module_name = f"chatbot.lessons.{name}.chatbot"
     try:
-        # import the chatbot instance from the lessons' __main__.py
+        # import the chatbot from the lesson and instantiate it
         module = importlib.import_module(module_name)
         chatbot_type = getattr(module, "ChatBot")
         chatbot = chatbot_type()
