@@ -20,9 +20,9 @@ Consider a chatbot that takes a user request for text generation and creates an 
 
 There are many ways this system can be implemented and orchestrated as a graph. To start with, a sample definition of the [`GraphState`](state.py) and a possible implementation of the [`author`](author.py) node is given in the exercise code. The [`reviewer`](reviewer.py) and loop termination condition have mock implementations. This, in essence, leads to a single author pass without any checks.
 
-First, craft a few prompts and list your expectations, then use them to benchmark the performance of this initial graph. As you add modifications, repeat this process and note down if the metrics improve. As a bonus, automate the benchmarking process by using the instance of the chatbot in [`__main__.py`](__main__.py).
-
 The task is to complete the implementation of the nodes, by combining all the different techniques covered in the course so far: system prompts, structured outputs, perhaps even tools. Feel free to alter the architecture of the graph and add new nodes, if needed. There is no single best solution.
+
+As you work through this exercise, test your implementation with diverse prompts representing different text formats (emails, summaries, creative writing). Observe whether the reviewer provides useful feedback and whether the author incorporates it meaningfully. The command-line interface is helpful for iterative testing.
 
 ## LangGraph architecture
 

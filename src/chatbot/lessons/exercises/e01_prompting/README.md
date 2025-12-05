@@ -6,8 +6,8 @@
 
 By the end of this exercise, you should be able to:
 
-* Configure and prompt local and remote LLMs via the OpenAI API
-* Invoke an LLM with text prompts using LangChain's `ChatOpenAI`
+* Configure local and remote LLMs
+* Prompt the LLM
 * Understand how `temperature`, `top_p`, and `seed` parameters affect outputs
 * Explain the difference between deterministic and non-deterministic generation
 * Apply appropriate parameter settings for different use cases
