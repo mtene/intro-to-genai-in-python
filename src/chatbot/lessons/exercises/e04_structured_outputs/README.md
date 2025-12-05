@@ -4,11 +4,11 @@ For this exercise, update the [chatbot logic](chatbot.py) so that answers are no
 
 ## Motivation
 
-Dealing with natural-language inputs is tricky with traditional algorithms. LLMs excel at this, but they are also trained to output natural language. By configuring structured outputs, the LLM is instructed to respond in conformance to a specified JSON schema. This makes the responses straightforward to be processed by algorithmic code. The LLM, thus, becomes just another a function call, acting as a bridge between user input and application logic.
+Dealing with natural-language inputs is tricky with traditional algorithms. LLMs excel at this, but they are also trained to output natural language. By configuring structured outputs, the LLM is instructed to respond in conformance to a specified JSON schema. This makes the responses straightforward to process with algorithmic code. The LLM thus becomes just another function call, acting as a bridge between user input and application logic.
 
 ## How do I do it?
 
-In Python, it is natural to capture type constraints as [Pydantic](https://docs.pydantic.dev/latest/) models - classes with annotated fields, where validation is performed upon instantiation. Such a class, describing a `Person` is already provided at the top of the exercise code.
+In Python, it is natural to capture type constraints as [Pydantic](https://docs.pydantic.dev/latest/) models - classes with annotated fields, where validation is performed upon instantiation. Such a class describing a `Person` is already provided at the top of the exercise code.
 
 Libraries like LangChain use Pydantic's built-in serialization support to seamlessly configure structured outputs for LLMs. Study the docs on [`with_structured_output()`](https://python.langchain.com/docs/how_to/structured_output/).
 

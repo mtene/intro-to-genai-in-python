@@ -4,9 +4,9 @@ In this exercise, you will program the [chatbot](chatbot.py) to make use of the 
 
 ## Motivation
 
-Continuing on the theme of programmatic uses of GenAI, a popular feature is LLM tool use. They give the model capabilities to access new data sources or perform actions on behalf of the user.
+Continuing on the theme of programmatic uses of GenAI, a popular feature is LLM tool use. Tools give the model the capability to access new data sources or perform actions on behalf of the user.
 
-Tools can be vendor-provided, such as web search, or defined by application developers. In Python, the latter are functions with type-annotated parameters, as can be seen at the top of the exercise code (`convert_time` and `convert_currency`).
+Tools can be vendor-provided, such as web search, or defined by application developers. In Python, tools are functions with type-annotated parameters, as can be seen at the top of the exercise code (`convert_time` and `convert_currency`).
 
 LangChain provides a [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools) to equip an LLM with tools. With this in place, the model can include tool call requests in its responses. However, this only covers the first part of the workflow - in LangChain, calling the requested tools and returning the results is a [manual process](https://python.langchain.com/docs/how_to/tool_results_pass_to_model/) which is cumbersome and error prone.
 

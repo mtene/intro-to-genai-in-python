@@ -8,7 +8,7 @@ It is important to think of LLMs as stateless. They answer millions of requests 
 
 If the answer depends on previously discussed information, this has to be included as part of the query.
 
-In the exercises completed so far, all question-answer pairs were generated independent of each other. However, the need to reference a previous exchange arises frequently, for example, without chat history tracking:
+In the exercises completed so far, all question-answer pairs were generated independently of each other. However, the need to reference a previous exchange arises frequently. For example, without chat history tracking:
 
 ```plaintext
 User: What is a popular food in France?
@@ -24,7 +24,11 @@ The purpose of this exercise is to address this limitation by equipping the chat
 
 If you've inspected the UI, you've noticed that there is already code to keep track of the conversation history there. So why not pass that directly as an argument when querying the chatbot?
 
-This might seem like a good idea initially, but as applications evolve, it will quickly become a design limitation. The frontend (UI) and backend (chatbot) keep track of messages for very different purposes. The former needs to display a complete history of the messages the user is aware of, i.e. questions and answers exchanged in the current conversation. On the other hand, the chatbot may deal with additional messages, behind the scenes, e.g. a system prompt, tool call requests and results. The user is not aware of these and they should not be exposed to avoid confusion. Also, in order to limit the context length, avoid biases from old data and keep focus on what is relevant, it may be a good idea to limit LLM visibility to a sliding window of the N most recent messages (which can be easily achieved as a bonus for this exercise).
+This might seem like a good idea initially, but as applications evolve, it will quickly become a design limitation. The frontend (UI) and backend (chatbot) keep track of messages for very different purposes.
+
+The frontend needs to display a complete history of the messages the user is aware of, i.e. questions and answers exchanged in the current conversation. On the other hand, the chatbot may deal with additional messages behind the scenes, e.g. a system prompt, tool call requests and results. The user is not aware of these and they should not be exposed to avoid confusion.
+
+Additionally, to reduce the context length, avoid biases from old data and maintain focus on what is relevant, it may be beneficial to limit LLM visibility to a sliding window of the N most recent messages (which can be easily achieved as a bonus for this exercise).
 
 ## How do I do it?
 

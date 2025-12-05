@@ -14,13 +14,13 @@ The task is to complete the implementation of the nodes, by combining all the di
 
 ## Language graphs
 
-As we have seen before, the ReAct agent, predefined in LangGraph behaves according to the flow of information through the nodes (from `START` towards `END`) and along the edges, as shown in the diagram
+As we have seen before, the ReAct agent, predefined in LangGraph, behaves according to the flow of information through the nodes (from `START` towards `END`) and along the edges, as shown in the diagram
 
 ![Graph for a ReAct agent](/images/react_graph.png)
 
 ## Graph state
 
-Information is captured in a `State` class, which, for the graph above, simply contains the list of messages
+Information is captured in a `State` class which, for the graph above, simply contains the list of messages
 
 ```python
 class State(BaseModel):

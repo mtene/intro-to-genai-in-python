@@ -2,11 +2,11 @@
 
 This is a basic setup to confirm that the UI and framework code are working as expected and get you familiar with the overall structure of the code.
 
-The [chatbot logic](chatbot.py) for this exercise is just a dummy where the question is repeated back to the user after some waiting. The sleeps may seem pointless - they are there simply to showcase the status update notifications.
+The [chatbot logic](chatbot.py) for this exercise is just a dummy implementation that repeats the question back to the user after some waiting. The sleep delays may seem unnecessary, but they serve to demonstrate the status update notification feature.
 
 ## User interface
 
-The graphical user interface is defined using [`streamlit`](https://docs.streamlit.io/get-started) in [`src/user_interface/app.py`](/src/user_interface/app.py). It consists of a basic conversation pane and a selector for the chatbot implementation in use.
+The graphical user interface is defined using [`streamlit`](https://docs.streamlit.io/get-started) in [`src/user_interface/app.py`](/src/user_interface/app.py). It consists of a basic conversation pane and a selector for choosing which chatbot implementation to use.
 
 ![Chat UI](/images/ui.png)
 
@@ -22,11 +22,11 @@ or
 uv run solution-5
 ```
 
-This allows one to attach a debugger and step through the code or capture exceptions.
+This allows you to attach a debugger and step through the code or capture exceptions.
 
 ## Chatbot
 
-The different chatbot implementations implement the common interface [`BaseChatBot`](/src/chatbot/chatbot_base.py), with their specific behavior defined in `src/chatbot/lessons/*/chatbot.py`. In essence, the `get_answer` method receives the user question as a string and is expected to return the assistant's answer as a string.
+All chatbot implementations inherit from the common interface [`BaseChatBot`](/src/chatbot/chatbot_base.py), with their specific behavior defined in `src/chatbot/lessons/*/chatbot.py`. The core `get_answer` method receives the user question as a string and returns the assistant's answer as a string.
 
 ```python
 @override
@@ -34,7 +34,7 @@ def get_answer(self, question: str, ctx: ChatContext) -> str:
     pass
 ```
 
-The `ctx` argument is not relevant for the behavior. It is simply there to facilitate displaying progress updates to the UI.
+The `ctx` argument does not affect the chatbot's behavior. It is used solely for displaying progress updates to the UI.
 
 If the chatbot holds any state that needs to be initialized, then a constructor should be defined. It is assumed to take no arguments, since any necessary configuration is retrieved from [`chatbot.config`](/src/chatbot/config.py).
 
@@ -57,13 +57,13 @@ If you decide to use them, first follow due process to obtain credentials, then 
 
 ### Local LLMs
 
-Local LLMs are smaller and ideal for experimentation. These models are provided with open-sourced weights (semi-open) and sometimes open-sourced architecture (fully-open), allowing them to run entirely on your local machine without accessing the internet.
+Local LLMs are smaller and ideal for experimentation. These models have open-sourced weights (semi-open) and sometimes open-sourced architecture (fully-open), allowing them to run entirely on your local machine without accessing the internet.
 To run them, you need an orchestration framework, for example:
 
 * Ollama: Easiest to get started with, supports many models via CLI and API.
 * vLLM: Best for high-performance, multi-user, or server-based deployments.
 
-Choose the model based on the required capabilities of your application and available hardware (CPU or discrete GPU). As a rule of thumb, models with less than 5B parameters are meant for edge devices with limited resources (IoT, phones). They are very responsive but often fail at reasoning, facing difficulties in following instructions and a higher probability of producing hallucinated answers. Models between 5-8B will run acceptably on consumer-grade laptops with discrete graphics cards. Models between 8-15B need more powerful workstation GPUs, while sizes above 15B require cluster-grade GPUs.
+Choose the model based on the required capabilities of your application and available hardware (CPU or discrete GPU). As a rule of thumb, models with less than 5B parameters are meant for edge devices with limited resources (IoT, phones). They are very responsive but often struggle with reasoning, having difficulty following instructions and a higher probability of producing hallucinated answers. Models between 5-8B will run reasonably well on consumer-grade laptops with discrete graphics cards. Models between 8-15B need more powerful workstation GPUs, while sizes above 15B require cluster-grade GPUs.
 
 Some options are given below, in ascending order of hardware requirements. You can use them by pasting the Ollama catalog name in the `local_llm` settings from [`config.yaml`](/src/config.yaml).
 

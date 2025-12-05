@@ -30,7 +30,7 @@ The chosen solution has one major weakness - the [`author`](author.py) is given 
 
 In a more robust system, the state is extended with a `revised_text`. Then a decision needs to be made if it is an improvement over `text`, in which case `revised_text` becomes its replacement.
 
-This decision can be taken by the [`reviewer`](reviewer.py), by changing the type of their verdict into a 3-value enum: ACCEPT, REVISE, REJECT. Alternatively, a new `revision_approver` node can be introduced to make this binary decision and loop back to the author on regression. This is more robust, since a regression can now happen only if both `author` and `revision_approver` hallucinate. It also avoids making the reviewer more complex, as the distinction between REVISE and REJECT may be too subtle for small language models.
+This decision can be taken by the [`reviewer`](reviewer.py) by changing the type of their verdict into a 3-value enum: ACCEPT, REVISE, REJECT. Alternatively, a new `revision_approver` node can be introduced to make this binary decision and loop back to the author on regression. This is more robust, since a regression can now happen only if both `author` and `revision_approver` hallucinate. It also avoids making the reviewer more complex, as the distinction between REVISE and REJECT may be too subtle for small language models.
 
 ![More robust graph for author-reviewer agent](/images/author_reviewer_graph_v2.png)
 

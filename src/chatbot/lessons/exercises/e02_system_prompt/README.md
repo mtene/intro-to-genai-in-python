@@ -16,7 +16,7 @@ Typically, the system prompt contains some or all of the following elements:
 * relevant background information
 * examples
 
-This content is a key differentiator for the different agents in a multi-agent system. They often use the same underlying LLM, but the system prompt and the tools at their disposal makes them produce very different responses to the same user question.
+This content is a key differentiator for the different agents in a multi-agent system. They often use the same underlying LLM, but the system prompt and the tools at their disposal make them produce very different responses to the same user question.
 
 ## Just another chat message
 
