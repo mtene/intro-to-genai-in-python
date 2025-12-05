@@ -2,7 +2,7 @@
 
 A possible [solution](chatbot.py) makes the chatbot change roles depending on the type of user message.
 
-## System prompt definition
+## Implementation: System prompt definition
 
 If the system prompt is static, it can be defined once (at the global scope or in the constructor) and reused.
 
@@ -19,7 +19,7 @@ def get_answer(self, question: str, ctx: ChatContext) -> str:
 
 Note that the triple quotation marks signal the definition of a multiline string, as it is not uncommon for system prompts to be long.
 
-## Prompt templates
+## Alternative approach: Prompt templates
 
 When only a small fraction of the system prompt's content is dynamic, you can equip the LLM with a fixed [`langchain_core.prompts.ChatPromptTemplate`](https://python.langchain.com/api_reference/core/prompts/langchain_core.prompts.chat.ChatPromptTemplate.html) and provide a mapping (dictionary) with the content of the dynamic fields at invocation.
 

@@ -2,7 +2,7 @@
 
 The [solution](chatbot.py) to the exercise uses an LLM to answer user queries.
 
-## LLM initialization
+## Implementation: LLM initialization
 
 You would obtain the same behavior with the LLM constructed just before use, in `get_answer` and destroyed afterwards. However, this is unnecessarily wasteful and may slow down responses.
 
@@ -15,7 +15,7 @@ def __init__(self):
 
 The `_` prefix is just Python naming convention to signal that the field is for private use only and should not be inspected or modified from the outside. Unlike other languages (C++, C#, Java, etc.), Python syntax provides no privacy safeguards for class fields and methods.
 
-## LLM usage
+## Implementation: LLM usage
 
 The LLM is queried in `get_answer` by providing the list of messages currently in the conversation. This only includes the user query, for now, as we're not yet tracking chat history (to be tackled later)
 

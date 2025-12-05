@@ -1,6 +1,8 @@
 # Solution 5: Tool calling
 
-In the solution, we provide the [chatbot](chatbot.py) with a ReAct agent configured with our tools of interest
+In the solution, we provide the [chatbot](chatbot.py) with a ReAct agent configured with our tools of interest.
+
+## Implementation: ReAct agent setup
 
 ```python
 def __init__(self):

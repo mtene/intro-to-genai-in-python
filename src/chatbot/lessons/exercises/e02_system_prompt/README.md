@@ -6,7 +6,7 @@ In this exercise, we turn attention to the system prompt. It contains instructio
 
 Update the [chatbot logic](chatbot.py) with a system prompt. The instructions are up to you. As an example, try to make it respond like a friendly pirate.
 
-## Structure
+## System prompt structure
 
 Typically, the system prompt contains some or all of the following elements:
 

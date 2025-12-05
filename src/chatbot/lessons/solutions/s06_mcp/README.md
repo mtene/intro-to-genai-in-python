@@ -2,7 +2,7 @@
 
 In the solution, we connect the [chatbot](chatbot.py) to one local and two public Model Context Protocol (MCP) servers.
 
-## Local MCP tools
+## Implementation: Local MCP tools
 
 In [mcp_server.py](mcp_server.py) we implemented the currency exchange tool and registered it with the local MCP server:
 
@@ -14,7 +14,7 @@ def convert_currency(...):
 
 Note that the decorator contains the variable holding the MCP server object. This implies that we could have several local MCP servers, each with their own tool set.
 
-## MCP configuration
+## Implementation: MCP configuration
 
 The MCP client's configuration has been extended to include two remote servers, specified using their URL and `streamable_http` transport:
 

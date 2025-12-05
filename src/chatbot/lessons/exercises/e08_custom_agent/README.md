@@ -14,7 +14,7 @@ First, craft a few prompts and list your expectations, then use them to benchmar
 
 The task is to complete the implementation of the nodes, by combining all the different techniques covered in the course so far: system prompts, structured outputs, perhaps even tools. Feel free to alter the architecture of the graph and add new nodes, if needed. There is no single best solution.
 
-## Language graphs
+## LangGraph architecture
 
 As we have seen before, the ReAct agent, predefined in LangGraph, behaves according to the flow of information through the nodes (from `START` towards `END`) and along the edges, as shown in the diagram
 

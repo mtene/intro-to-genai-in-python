@@ -1,8 +1,10 @@
 # Solution 8: Custom agent
 
-One possible [solution](chatbot.py) to the [`author`](author.py)-[`reviewer`](reviewer.py) task wires them in a loop, as shown in the diagram
+One possible [solution](chatbot.py) to the [`author`](author.py)-[`reviewer`](reviewer.py) task wires them in a loop, as shown in the diagram.
 
 ![Graph for author-reviewer agent](/images/author_reviewer_graph.png)
+
+## Implementation: LangGraph design
 
 The initial state contains:
 

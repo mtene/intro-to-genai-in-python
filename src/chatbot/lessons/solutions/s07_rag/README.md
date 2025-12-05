@@ -2,6 +2,8 @@
 
 In the solution, we populate the vector store provided to the [chatbot](chatbot.py) with chunked documents, together with the corresponding embeddings.
 
+## Implementation: Document ingestion
+
 First, we load the target text from disk
 
 ```python

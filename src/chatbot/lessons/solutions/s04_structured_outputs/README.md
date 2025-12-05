@@ -2,7 +2,7 @@
 
 The [solution](chatbot.py) configures the LLM to create instances of the `Person` class.
 
-## Defining structured outputs
+## Implementation: Structured output configuration
 
 The `Person` class is defined as a Pydantic model, where each field has an associated type
 

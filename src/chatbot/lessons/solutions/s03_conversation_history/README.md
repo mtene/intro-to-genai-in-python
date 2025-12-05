@@ -2,7 +2,7 @@
 
 The [solution](chatbot.py) to the exercise equips the chatbot with a [`ChatHistory`](/src/chatbot/chat_history.py) object.
 
-## Chat history initialization
+## Implementation: Chat history initialization
 
 The chat history must persist between calls to `get_answer`, therefore, it needs to be kept as a field in the chatbot's state, initialized in the constructor
 
@@ -11,7 +11,7 @@ The chat history must persist between calls to `get_answer`, therefore, it needs
         self._chat_history = ChatHistory()
 ```
 
-## Chat history updates
+## Implementation: Chat history updates
 
 For each exchange, the user question and assistant reply are stored within
 
