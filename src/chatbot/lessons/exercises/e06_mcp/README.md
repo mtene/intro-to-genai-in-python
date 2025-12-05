@@ -1,14 +1,14 @@
 # Exercise 6: Model Context Protocol
 
-⏱️ **Estimated time:** 30 minutes
+⏱️ **Estimated time**: 30 minutes
 
 In this exercise, you will equip the [chatbot](chatbot.py) with 3rd party tools hosted on Model Context Protocol (MCP) servers.
 
 ## Motivation
 
-Giving agents access to tools augments their capabilities with new data sources and the ability to take actions. Self-defined tools limit this to the systems under our control or those with public APIs. What if we need to enable interaction with a black-box?
+Tools augment agent capabilities with new data sources and the ability to take actions. However, self-defined tools limit us to systems under our control or those with public APIs. What if we need to interact with a black-box system?
 
-The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro) solves this by standardizing the way tools are exposed for LLM use. Using it, a 3rd party can wrap proprietary functionality in tools that can be consumed by clients without knowledge of the internals - only the required arguments and type of the expected result.
+The [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro) solves this by standardizing how tools are exposed for LLM use. Third parties can wrap proprietary functionality in tools that clients can consume without knowing the internals - only the required arguments and expected result type.
 
 ## How do I do it?
 
@@ -64,11 +64,19 @@ Some examples suitable for this exercise:
 
 ## Under the hood
 
-Instead of diving into the detailed structure of the MCP protocol, it is sufficient to discuss the high-level communication pattern.
+Rather than diving into the detailed MCP protocol structure, let's focus on the high-level communication pattern:
 
 ![MCP Communication](/images/mcp.png)
 
-An MCP server can be hosted locally, on a private intranet or the public internet. Remote servers typically communicate over http or websocket, while local servers may additionally use standard console I/O. Clients connect to the server and send tool call requests via JSON-RPC messages, indicating the tool name and corresponding values for its arguments. For http, the headers are populated with authentication information, if required. The server then executes the tool and returns the result in its reply. In addition, servers can also stream logs or status updates back to the client during execution, so that the client can track progress while waiting for the final output.
+MCP servers can be hosted locally, on a private intranet, or on the public internet. Remote servers typically communicate over HTTP or WebSocket; local servers may additionally use standard console I/O.
+
+**Communication flow**:
+
+1. Clients connect to the server
+1. Clients send tool call requests via JSON-RPC messages (specifying the tool name and argument values)
+1. For HTTP, headers include authentication information if required
+1. The server executes the tool and returns results
+1. During execution, servers can stream logs or status updates so clients can track progress
 
 ## Further reading
 

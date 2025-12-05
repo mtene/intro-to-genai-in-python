@@ -1,6 +1,6 @@
 # Exercise 0: Introduction
 
-⏱️ **Estimated time:** 10 minutes
+⏱️ **Estimated time**: 10 minutes
 
 This is a basic setup to confirm that the UI and framework code are working as expected and get you familiar with the overall structure of the code.
 
@@ -38,14 +38,16 @@ def get_answer(self, question: str, ctx: ChatContext) -> str:
 
 The `ctx` argument does not affect the chatbot's behavior. It is used solely for displaying progress updates to the UI.
 
-If the chatbot holds any state that needs to be initialized, then a constructor should be defined. It is assumed to take no arguments, since any necessary configuration is retrieved from [`chatbot.config`](/src/chatbot/config.py).
+### Constructor
+
+If the chatbot is supposed to hold any state that needs to be initialized, define a constructor. The constructor takes no arguments because any necessary configuration is retrieved from [`chatbot.config`](/src/chatbot/config.py).
 
 ```python
 def __init__(self):
     pass
 ```
 
-Storing reusable services, like the LLM, as fields is a good idea to avoid unnecessary repeated setup.
+Store reusable services (like the LLM) as fields to avoid unnecessary repeated setup.
 
 ## Choice of language model
 
@@ -53,19 +55,31 @@ This decision depends on the level of complexity in your application. Some guide
 
 ### Remote LLMs
 
-These are the most powerful models, typically hosted on cloud infrastructure. Authentication is needed to access them (API key, tokens, etc.) and there are associated billing and legal / data IP implications.
+Remote LLMs are the most powerful models, typically hosted on cloud infrastructure. They require authentication (API keys, tokens, etc.) and come with billing and legal implications related to data IP.
 
-If you decide to use them, first follow due process to obtain credentials, then update [`config.yaml`](/src/config.yaml) with the necessary details and store any secret values in user environment variables before starting the app.
+To use remote LLMs:
+
+1. Follow due process to obtain credentials
+1. Update [`config.yaml`](/src/config.yaml) with the necessary details
+1. Store secret values in user environment variables before starting the app
 
 ### Local LLMs
 
-Local LLMs are smaller and ideal for experimentation. These models have open-sourced weights (semi-open) and sometimes open-sourced architecture (fully-open), allowing them to run entirely on your local machine without accessing the internet.
-To run them, you need an orchestration framework, for example:
+Local LLMs are smaller models ideal for experimentation. All models listed here have **open-sourced weights** (semi-open at minimum), enabling them to run entirely on your local machine without internet access.
+
+Many models also have **open-sourced architecture** (fully-open), providing complete transparency into the model design. Both semi-open and fully-open models can typically be fine-tuned, either through standard tools (e.g. Unsloth) or vendor-provided SDKs.
+
+Running local LLMs requires an orchestration framework, such as:
 
 * Ollama: Easiest to get started with, supports many models via CLI and API.
 * vLLM: Best for high-performance, multi-user, or server-based deployments.
 
-Choose the model based on the required capabilities of your application and available hardware (CPU or discrete GPU). As a rule of thumb, models with less than 5B parameters are meant for edge devices with limited resources (IoT, phones). They are very responsive but often struggle with reasoning, having difficulty following instructions and a higher probability of producing hallucinated answers. Models between 5-8B will run reasonably well on consumer-grade laptops with discrete graphics cards. Models between 8-15B need more powerful workstation GPUs, while sizes above 15B require cluster-grade GPUs.
+Choose a model based on your application's required capabilities and available hardware (CPU or discrete GPU):
+
+* **< 5B parameters**: designed for edge devices with limited resources (IoT, phones). Very responsive but often struggle with reasoning, have difficulty following instructions and produce more hallucinations.
+* **5-8B parameters**: run reasonably well on consumer-grade laptops with discrete graphics cards.
+* **8-15B parameters**: require more powerful workstation GPUs.
+* **> 15B parameters**: require cluster-grade GPUs.
 
 Some options are given below, in ascending order of hardware requirements. You can use them by pasting the Ollama catalog name in the `local_llm` settings from [`config.yaml`](/src/config.yaml).
 
@@ -85,14 +99,14 @@ Model                           | Active Params | Context Window | Input modalit
 **IBM Granite 4 32B MoE**       | 9B            | 1000K          | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | GPU, 19GB VRAM         | `granite4:32b-a9b-h`
 **OpenAI GPT-OSS 120B MoE**     | 5.1B          | 128K           | Text-only       | Native              | Native        | Open / Closed      | Apache 2.0        | GPU, 65GB VRAM         | `gpt-oss:120b`
 
-Notes:
+**Notes**:
 
-* `MoE` stands for mixture-of-experts, meaning that there are multiple specialized models in the bundle (hence the large number of total parameters), but only one of them is selected based on the query (active parameters).
-* The context window size, given in tokens (1 token = ~4 characters), dictates how long the query plus any associated info, such as conversation history, system prompts or relevant background, can be supplied to the model.
-* Technically, modality is specified separately for the LLM input and output. Here, we explicitly refer to the type of input data, since all the listed local models are text-only on the output. Generating images is a whole different topic, out of scope here.
-* Emulated support for a capability (structured outputs or tool calling) means that the model does not have built-in machinery for the feature, but may comply if clear instructions are included while prompting. However, this approach often requires custom code to parse the response, since libraries like LangGraph or LlamaIndex do not usually offer support, plus there are no strong guarantees that the model will comply.
-* Native support means that the model has innate ability to understand the constraints described in the prescribed JSON schema (or similar mechanism), with a strong guarantee to comply.
-* Model capabilities marked with `*` match what was advertised by the vendor, but practical testing shows they are unreliable, probably due to the way the model was trained / fine-tuned or the small number of parameters.
+* **MoE (Mixture-of-Experts)**: multiple specialized models in the bundle (explaining the large total parameter count), but only one is selected based on the query (active parameters).
+* **Context window**: measured in tokens (1 token ≈ 4 characters). Dictates the maximum combined length of query, conversation history, system prompts and relevant background information.
+* **Input modality**: refers to the type of input data the model accepts. All listed local models produce text-only output. Image generation is a separate topic beyond this tutorial's scope.
+* **Emulated support**: the model lacks built-in machinery for structured outputs or tool calling but may comply with clear prompting instructions. This approach often requires custom response parsing since libraries like LangGraph or LlamaIndex typically don't offer support. No strong guarantees of compliance.
+* **Native support**: the model has innate ability to understand JSON schema constraints (or similar mechanisms), with strong compliance guarantees.
+* **Capabilities marked with `*`**: advertised by the vendor but unreliable in practice, likely due to training / fine-tuning approaches or small parameter counts.
 
 To complete all tutorials, native support for both structured outputs and tool calling is needed. **IBM Granite 4 7B MoE** meets these criteria and is able to run at decently low latency on a consumer-grade laptop with a discrete GPU. Opt for **GPT-OSS 20B MoE** if your machine has better-than-average hardware.
 

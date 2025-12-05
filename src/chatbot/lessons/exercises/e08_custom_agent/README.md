@@ -1,6 +1,6 @@
 # Exercise 8: Custom agent
 
-⏱️ **Estimated time:** 60 minutes
+⏱️ **Estimated time**: 60 minutes
 
 In this exercise, you will define your own custom LangGraph agent as part of the [chatbot logic](chatbot.py).
 
@@ -60,15 +60,15 @@ Conditional edge logic is specified through special methods, that take the state
 
 ## Graph logic
 
-When a node executes, the values of fields in the state are used to generate modifications, which are returned as a dictionary. In the case of the `assistant` node from the graph above, `messages` is updated to include the LLM request and response.
+When a node executes, it inspects the current state and generates modifications, which are returned as a dictionary. For example, the `assistant` node from the graph above updates `messages` to include the LLM request and response:
 
 ```python
 return {"messages": state.messages + [llm_request, llm_response]}
 ```
 
-Note that the unmodified state fields, if any, are simply omitted in the return.
+Unmodified state fields are simply omitted from the return value. Some fields may have custom reduction functions that combine the old value with the node's returned value. For example, in LangChain's [`MessagesState`](https://deepwiki.com/langchain-ai/langchain-academy/3.1-stategraph-and-messagesstate), the `messages` field uses an `add_messages` reduction that appends new messages to the list.
 
-Some fields may have custom reduction operations associated. This is a function that is called with the old value and what the node returns under the corresponding dictionary key to produce the update. For example, in LangChain's [`MessagesState`](https://deepwiki.com/langchain-ai/langchain-academy/3.1-stategraph-and-messagesstate) the `messages` field is annotated with an `add_messages` reduction, which appends the value corresponding to `"messages"` in the result to the list. This is convenient, as the node result only needs to contain `{"messages": [llm_request, llm_response]}`, but sacrifices flexibility for other types of operations - there is no longer a way for a node to remove messages (e.g. for context pruning). Also, callers unaware of this will get duplicated messages. Therefore, it is likely less confusing to avoid custom reductions and use the default replacement behavior.
+While convenient (nodes only return `{"messages": [llm_request, llm_response]}`), this sacrifices flexibility. For example, a node cannot easily remove messages (e.g., for context pruning). Also, nodes that were designed without the reduction in mind will return the full list of messages and cause duplication. Therefore, avoiding custom reductions and using the default replacement behavior is often less confusing.
 
 The possibilities of how a given node's logic can be implemented are endless. They can use algorithms, call LLMs, consult web services / file systems / databases or even invoke their own nested agents. This makes graphs very versatile for advanced AI application development, with the trade-off of implementation and maintenance complexity. This can be mitigated, in part, by using a modular code structure with type annotations, making use of classes split among separate files.
 

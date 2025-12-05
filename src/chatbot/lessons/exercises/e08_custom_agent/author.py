@@ -27,8 +27,8 @@ Rules:
 - Identify the **minimum requirements explicitly stated or implied by the query**.
 - Ignore the ambiguous parts of the query - NEVER assume or invent new criteria
 - Apply the feedback to satisfy them, without introducing unrelated changes
-- Preserve the original meaning, tone, and style as much as possible.
-- Respond with the revised text **only** — no quotation marks, explanations, or extra commentary.
+- Preserve the original meaning, tone and style as much as possible.
+- Respond with the revised text **only** - no quotation marks, explanations, or extra commentary.
 - If the feedback is ambiguous, resolve it minimally while keeping the text aligned with the query.
 - Stop editing once the requirements and feedback are fully addressed.
 """),

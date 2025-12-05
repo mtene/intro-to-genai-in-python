@@ -1,6 +1,6 @@
 # Exercise 2: System prompt
 
-⏱️ **Estimated time:** 10 minutes
+⏱️ **Estimated time**: 10 minutes
 
 In this exercise, we turn attention to the system prompt. It contains instructions for the LLM, dictating its behavior when tackling user queries. These do not come from the user, they are set by the developers to fit the scope and goals of the application.
 
@@ -22,9 +22,9 @@ This content is a key differentiator for the different agents in a multi-agent s
 
 ## Just another chat message
 
-The system prompt is bundled together with the other chat messages in the LLM call. The distinguishing factor is the special [`SYSTEM`](/src/chatbot/chat_history.py) role assigned to it.
+The system prompt is bundled with other chat messages in the LLM call. What distinguishes it is the special [`SYSTEM`](/src/chatbot/chat_history.py) role assigned to it.
 
-When prompting LLMs the order information is provided matters, as the "attention span" of the model is limited, especially for models with small active parameter counts. As a rule of thumb, the most important information must appear first. This is why the system prompt should be passed to the LLM before all the other chat messages.
+**Message ordering matters.** When prompting LLMs, information order is critical because the model's "attention span" is limited, especially for models with fewer active parameters. The most important information should appear first, which is why the system prompt should precede all other chat messages.
 
 ## Further reading
 

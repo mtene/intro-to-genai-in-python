@@ -4,7 +4,7 @@ The [solution](chatbot.py) to the exercise equips the chatbot with a [`ChatHisto
 
 ## Implementation: Chat history initialization
 
-The chat history must persist between calls to `get_answer`, therefore, it needs to be kept as a field in the chatbot's state, initialized in the constructor
+The chat history must persist between calls to `get_answer`. Store it as a field in the chatbot's state, initialized in the constructor:
 
 ```python
     def __init__(self):
@@ -30,7 +30,9 @@ The addition of chat history tracking makes the chatbot stateful, an important s
 
 ## Verification
 
-After a few exchanges, ask the chatbot to translate its first answer to another language. If you've also implemented the pruning of the chat history to the last 5 exchanges, you will observe that the chatbot will translate its 2nd answer in a conversation with 6 exchanges. This will surprise the user, but is a rare occurrence in most practical scenarios. The gains in robustness and avoiding LLM errors due to exceeding the maximum LLM context size are likely worth it. The optimal length of the sliding window of historical messages is application specific.
+After a few exchanges, ask the chatbot to translate its first answer to another language.
+
+If you've implemented pruning to keep only the last 5 exchanges, the chatbot will translate its second answer in a conversation with 6 exchanges (since the first was pruned). While this may surprise users, it's rare in practice. The gains in robustness and avoiding context-size errors outweigh this drawback. The optimal sliding window length is application-specific.
 
 🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e03_conversation_history/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e04_structured_outputs/README.md)
 ---|---|---

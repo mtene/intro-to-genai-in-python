@@ -1,14 +1,14 @@
 # Exercise 3: Tracking conversation history
 
-⏱️ **Estimated time:** 20 minutes
+⏱️ **Estimated time**: 20 minutes
 
 In this exercise, you will make the [chatbot logic](chatbot.py) able to track the user questions and corresponding answers between multiple calls.
 
 ## Motivation
 
-It is important to think of LLMs as stateless. They answer millions of requests from different users and are, therefore, not designed to retain individual session information (this is not absolutely true, as some caching is in place for performance reasons, but this should be transparent to you). Therefore, it would be perfectly valid to hand-craft a conversation history, including replies from the assistant, tool calls and results - the LLM will happily continue that thread as if it was created organically.
+LLMs are fundamentally stateless. They process millions of requests from different users and are not designed to retain individual session information. Some caching exists for performance, but this is transparent to you while prompting.
 
-If the answer depends on previously discussed information, this has to be included as part of the query.
+This statelessness means you can hand-craft a conversation history - including assistant replies, tool calls and results - the LLM will continue the thread as if it unfolded organically. When an answer depends on previously discussed information, that context must be included with the query.
 
 In the exercises completed so far, all question-answer pairs were generated independently of each other. However, the need to reference a previous exchange arises frequently. For example, without chat history tracking:
 

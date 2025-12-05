@@ -1,6 +1,6 @@
 # Exercise 7: Retrieval Augmented Generation
 
-⏱️ **Estimated time:** 35 minutes
+⏱️ **Estimated time**: 35 minutes
 
 In this exercise, you will extend the query sent to the [chatbot](chatbot.py) with relevant information from a vector store.
 
@@ -12,9 +12,11 @@ Large Language Models (LLMs) have been trained on publicly-available data. Howev
 
 ![RAG process](/images/rag.png)
 
-The relevance of the retrieved results is crucial to success. Since queries are expressed in natural language, the search should take linguistic and contextual aspects into account, rather than focus on specific keywords. Therefore, instead of traditional SQL databases, we will use vector stores which are able to perform semantic search. In order to do this, text needs to be transformed into a vector of floating-point numbers, corresponding to coordinates in a high-dimensional space, called embeddings. This representation allows computing relevance via linear algebra operations, such as distances or angles.
+The relevance of retrieved results is crucial for RAG success. Since queries are expressed in natural language, search should consider linguistic and contextual aspects rather than just keywords. This is why we use **vector stores** for semantic search instead of traditional SQL databases.
 
-Embeddings are computed by models trained specifically for this purpose. Like LLMs, these models are distinguished by their number of parameters, context lengths and (CPU or GPU) hardware requirements. If their weights are made publicly available, orchestrators like Ollama or vLLM can be used to run them on local hardware. Proprietary models, such as those provided by OpenAI, are hosted in the cloud and accessed through endpoints after providing authentication credentials.
+Semantic search works by transforming text into **embeddings** - vectors of floating-point numbers representing coordinates in high-dimensional space. This representation enables computing relevance through linear algebra operations like distances and angles.
+
+**Embedding models** are trained specifically to generate embeddings. Like LLMs, they vary by parameter count, context length and hardware requirements. Models with publicly available weights can run locally using orchestrators like Ollama or vLLM. Proprietary models (such as those from OpenAI) are cloud-hosted and accessed via authenticated endpoints.
 
  **Embedding Model**                | **Active Params** | **Context Window** | **Embedding Dimension** | **Weights & Arch**       | **License**       | **Hardware Requirements** | **Ollama Catalog Name** |
 ---                                 |---                |---                 |---                      |---                       |---                |---                        |---                      |

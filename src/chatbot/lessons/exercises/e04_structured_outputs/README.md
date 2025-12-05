@@ -1,6 +1,6 @@
 # Exercise 4: Structured outputs
 
-⏱️ **Estimated time:** 20 minutes
+⏱️ **Estimated time**: 20 minutes
 
 For this exercise, update the [chatbot logic](chatbot.py) so that answers are no longer free-text. Instead we want the LLM to output an object describing a person, according to the class defined at the top of the file.
 
@@ -16,9 +16,9 @@ Libraries like LangChain use Pydantic's built-in serialization support to seamle
 
 ## Under the hood
 
-LangChain, LangGraph and LlamaIndex are libraries designed to abstract away the details of how structured output schema is sent to the LLM and responses are retrieved. Nevertheless, it is instructive to understand this process.
+Libraries like LangChain, LangGraph and LlamaIndex abstract away the details of sending structured output schemas to the LLM and retrieving responses. However, understanding this process is instructive.
 
-In the [OpenAI API](https://platform.openai.com/docs/api-reference/chat/create?api-mode=chat), requests to the LLM feature a `response_format` field which controls the output format. If unspecified, it defaults to `text` format
+In the [OpenAI API](https://platform.openai.com/docs/api-reference/chat/create?api-mode=chat), LLM requests include a `response_format` field that controls output format. When unspecified, it defaults to `text`:
 
 ```json
 "response_format": {

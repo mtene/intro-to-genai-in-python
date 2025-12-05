@@ -24,15 +24,27 @@ These two nodes are called in a loop with up to 3 iterations, which can end earl
 
 ## Verification
 
-Send queries for short post-its, telegrams, letters or postcards and observe the interaction. With small LLMs, the behavior of the reviewer usually falls into two categories: it either accepts the text in the first turn or keeps asking for revisions, often making up additional criteria, despite the rules set out in the system prompt. This is due to the limited reasoning capabilities of small models, making them prone to ignore instructions or hallucinate.
+Send queries for short post-its, telegrams, letters, or postcards and observe the interaction.
+
+With small language models, the reviewer typically exhibits one of two behaviors:
+
+1. Accepts the text on the first turn
+1. Keeps requesting revisions, often inventing additional criteria despite the system prompt rules
+
+This inconsistency stems from small models' limited reasoning capabilities, making them prone to ignoring instructions or hallucinating.
 
 ## Further improvement
 
-The chosen solution has one major weakness - the [`author`](author.py) is given the ability to directly overwrite the text in the state. Any hallucinations will cause regressions, therefore there is no guarantee that the level of quality increases monotonically with each iteration.
+**Major weakness**: the [`author`](author.py) can directly overwrite the state's text. Any hallucinations cause regressions - there's no guarantee quality improves monotonically with each iteration.
 
-In a more robust system, the state is extended with a `revised_text`. Then a decision needs to be made if it is an improvement over `text`, in which case `revised_text` becomes its replacement.
+**More robust approach**: extend the state with `revised_text`. Before replacing `text`, verify that `revised_text` represents an improvement.
 
-This decision can be taken by the [`reviewer`](reviewer.py) by changing the type of their verdict into a 3-value enum: ACCEPT, REVISE, REJECT. Alternatively, a new `revision_approver` node can be introduced to make this binary decision and loop back to the author on regression. This is more robust, since a regression can now happen only if both `author` and `revision_approver` hallucinate. It also avoids making the reviewer more complex, as the distinction between REVISE and REJECT may be too subtle for small language models.
+**Implementation options** include:
+
+1. **3-value reviewer verdict**: change the [`reviewer`](reviewer.py) verdict to a 3-value enum (ACCEPT, REVISE, REJECT)
+1. **Dedicated revision approver**: add a `revision_approver` node, which loops back to the author on regression
+
+The second approach is more robust, since regression requires both `author` and `revision_approver` to hallucinate. It also keeps the reviewer simpler, avoiding the subtle distinction between REVISE and REJECT that challenges small language models.
 
 ![More robust graph for author-reviewer agent](/images/author_reviewer_graph_v2.png)
 

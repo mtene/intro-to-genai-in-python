@@ -1,6 +1,6 @@
 # Exercise 5: Tool calling
 
-⏱️ **Estimated time:** 25 minutes
+⏱️ **Estimated time**: 25 minutes
 
 In this exercise, you will program the [chatbot](chatbot.py) to make use of the tools defined at the top of the file.
 
@@ -10,9 +10,9 @@ Continuing on the theme of programmatic uses of GenAI, a popular feature is LLM 
 
 Tools can be vendor-provided, such as web search, or defined by application developers. In Python, tools are functions with type-annotated parameters, as can be seen at the top of the exercise code (`convert_time` and `convert_currency`).
 
-LangChain provides a [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools) to equip an LLM with tools. With this in place, the model can include tool call requests in its responses. However, this only covers the first part of the workflow - in LangChain, calling the requested tools and returning the results is a [manual process](https://python.langchain.com/docs/how_to/tool_results_pass_to_model/) which is cumbersome and error prone.
+LangChain's [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools) method equips an LLM with tools, allowing the model to include tool call requests in its responses. However, this only covers the first part of the workflow - calling the requested tools and returning results remains a [manual process](https://python.langchain.com/docs/how_to/tool_results_pass_to_model/), cumbersome and error-prone.
 
-LangGraph, which is a Python package built on top of LangChain, provides a predefined agent to conveniently handle the whole process of LLM tool calling, [`create_react_agent()`](https://langchain-ai.github.io/langgraph/reference/agents/#langgraph.prebuilt.chat_agent_executor.create_react_agent). ReAct stands for reasoning-acting, a term introduced in this [paper](https://arxiv.org/abs/2210.03629). The diagram of this agent (or any other graph created with LangGraph) can be created for visualization via
+LangGraph, which is a Python package built on top of LangChain, provides [`create_react_agent()`](https://langchain-ai.github.io/langgraph/reference/agents/#langgraph.prebuilt.chat_agent_executor.create_react_agent) to conveniently handle the entire LLM tool-calling workflow. ReAct (reasoning-acting) refers to a pattern introduced in this [paper](https://arxiv.org/abs/2210.03629). You can visualize the architecture of any LangGraph agent with:
 
 ```python
 chatbot._graph.get_graph(xray=True).draw_mermaid_png(output_file_path="graph.png")
@@ -20,7 +20,7 @@ chatbot._graph.get_graph(xray=True).draw_mermaid_png(output_file_path="graph.png
 
 ![Graph for a ReAct agent](/images/react_graph.png)
 
-Tool call requests and text outputs are not technically mutually exclusive in an LLM response, yet most models will behave as if they were. This behavior is exploited by the agent; it presents the tools to the LLM and invokes it in a loop, resolving tool calls and appending the results to the conversation until no additional tool requests are received and the final answer is reached.
+While tool call requests and text outputs aren't technically mutually exclusive in an LLM response, most models behave as if they are. The ReAct agent exploits this behavior: it presents tools to the LLM and invokes it in a loop, resolving tool calls and appending results to the conversation until no additional tool requests are received and the final answer emerges.
 
 ## Under the hood
 
