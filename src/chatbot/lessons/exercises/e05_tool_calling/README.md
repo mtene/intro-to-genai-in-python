@@ -2,6 +2,16 @@
 
 ⏱️ **Estimated time**: 25 minutes
 
+## Learning Objectives
+
+By the end of this exercise, you should be able to:
+
+* Define Python functions as LLM tools with proper type annotations
+* Use LangGraph's `create_react_agent()` to build tool-calling workflows
+* Visualize and understand LangGraph agent architectures
+
+## Overview
+
 In this exercise, you will program the [chatbot](chatbot.py) to make use of the tools defined at the top of the file.
 
 ## Motivation

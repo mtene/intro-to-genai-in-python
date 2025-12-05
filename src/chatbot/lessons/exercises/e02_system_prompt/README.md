@@ -2,6 +2,16 @@
 
 ⏱️ **Estimated time**: 10 minutes
 
+## Learning Objectives
+
+By the end of this exercise, you should be able to:
+
+* Write effective system prompts that guide LLM behavior
+* Include various system prompt component such as role, mission, steps, rules and examples
+* Understand the difference between system messages and user messages
+
+## Overview
+
 In this exercise, we turn attention to the system prompt. It contains instructions for the LLM, dictating its behavior when tackling user queries. These do not come from the user, they are set by the developers to fit the scope and goals of the application.
 
 Update the [chatbot logic](chatbot.py) with a system prompt. The instructions are up to you. As an example, try to make it respond like a friendly pirate.

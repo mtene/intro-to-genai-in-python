@@ -2,6 +2,18 @@
 
 ⏱️ **Estimated time**: 35 minutes
 
+## Learning Objectives
+
+By the end of this exercise, you should be able to:
+
+* Understand the RAG (Retrieval Augmented Generation) pattern and its benefits
+* Explain how vector embeddings enable semantic search
+* Build and populate a vector store
+* Implement document chunking and embedding strategies
+* Integrate retrieved context into LLM prompts
+
+## Overview
+
 In this exercise, you will extend the query sent to the [chatbot](chatbot.py) with relevant information from a vector store.
 
 ## Motivation

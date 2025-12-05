@@ -2,6 +2,18 @@
 
 ⏱️ **Estimated time**: 15 minutes
 
+## Learning Objectives
+
+By the end of this exercise, you should be able to:
+
+* Configure and prompt local and remote LLMs via the OpenAI API
+* Invoke an LLM with text prompts using LangChain's `ChatOpenAI`
+* Understand how `temperature`, `top_p`, and `seed` parameters affect outputs
+* Explain the difference between deterministic and non-deterministic generation
+* Apply appropriate parameter settings for different use cases
+
+## Overview
+
 In this exercise, you will make the [chatbot logic](chatbot.py) use the LLM to answer user queries.
 
 To achieve this, inspect the LLM classes in [`src/chatbot/services`](/src/chatbot/services) and the configuration file [`src/config.yaml`](/src/config.yaml). This configuration file allows you to choose which LLM is used and with what parameters.

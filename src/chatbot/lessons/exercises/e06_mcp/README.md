@@ -2,6 +2,17 @@
 
 ⏱️ **Estimated time**: 30 minutes
 
+## Learning Objectives
+
+By the end of this exercise, you should be able to:
+
+* Understand the purpose and architecture of the Model Context Protocol (MCP)
+* Set up and connect to MCP servers from Python applications
+* Integrate 3rd party MCP tools into LangGraph agents
+* Explain the client-server communication flow in MCP
+
+## Overview
+
 In this exercise, you will equip the [chatbot](chatbot.py) with 3rd party tools hosted on Model Context Protocol (MCP) servers.
 
 ## Motivation

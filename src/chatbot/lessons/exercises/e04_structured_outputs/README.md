@@ -2,6 +2,18 @@
 
 ⏱️ **Estimated time**: 20 minutes
 
+## Learning Objectives
+
+By the end of this exercise, you should be able to:
+
+* Configure LLMs to output structured data conforming to a JSON schema
+* Define Pydantic models to represent structured outputs
+* Use LangChain's `with_structured_output()` method
+* Understand how structured outputs bridge natural language and application logic
+* Recognize when to use structured outputs vs free-text responses
+
+## Overview
+
 For this exercise, update the [chatbot logic](chatbot.py) so that answers are no longer free-text. Instead we want the LLM to output an object describing a person, according to the class defined at the top of the file.
 
 ## Motivation

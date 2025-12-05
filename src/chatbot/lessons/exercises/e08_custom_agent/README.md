@@ -2,6 +2,16 @@
 
 ⏱️ **Estimated time**: 60 minutes
 
+## Learning Objectives
+
+By the end of this exercise, you should be able to:
+
+* Design and implement custom LangGraph agents from scratch
+* Define graph state, nodes and edges for multi-step workflows
+* Combine multiple techniques (structured outputs, system prompts, tools) in agent nodes
+
+## Overview
+
 In this exercise, you will define your own custom LangGraph agent as part of the [chatbot logic](chatbot.py).
 
 ## Task description

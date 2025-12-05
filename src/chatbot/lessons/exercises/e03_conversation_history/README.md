@@ -2,6 +2,17 @@
 
 ⏱️ **Estimated time**: 20 minutes
 
+## Learning Objectives
+
+By the end of this exercise, you should be able to:
+
+* Explain why LLMs are stateless and what this means for applications
+* Implement conversation history tracking using the `ChatHistory` class
+* Manage state in the chatbot by storing history between method calls
+* Implement a sliding window to prevent context overflow
+
+## Overview
+
 In this exercise, you will make the [chatbot logic](chatbot.py) able to track the user questions and corresponding answers between multiple calls.
 
 ## Motivation

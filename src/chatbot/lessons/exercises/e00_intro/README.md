@@ -2,6 +2,18 @@
 
 ⏱️ **Estimated time**: 10 minutes
 
+## Learning Objectives
+
+By the end of this exercise, you should be able to:
+
+* Navigate the project structure and understand the chatbot framework
+* Run the Streamlit UI and command-line interfaces
+* Understand the chatbot interface and how exercises are organized
+* Choose an appropriate local LLM based on hardware requirements
+* Distinguish between semi-open and fully-open models
+
+## Overview
+
 This is a basic setup to confirm that the UI and framework code are working as expected and get you familiar with the overall structure of the code.
 
 The [chatbot logic](chatbot.py) for this exercise is just a dummy implementation that repeats the question back to the user after some waiting. The sleep delays may seem unnecessary, but they serve to demonstrate the status update notification feature.
