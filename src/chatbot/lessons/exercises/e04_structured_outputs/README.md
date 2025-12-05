@@ -1,5 +1,7 @@
 # Exercise 4: Structured outputs
 
+⏱️ **Estimated time:** 20 minutes
+
 For this exercise, update the [chatbot logic](chatbot.py) so that answers are no longer free-text. Instead we want the LLM to output an object describing a person, according to the class defined at the top of the file.
 
 ## Motivation

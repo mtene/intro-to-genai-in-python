@@ -1,5 +1,7 @@
 # Exercise 8: Custom agent
 
+⏱️ **Estimated time:** 60 minutes
+
 In this exercise, you will define your own custom LangGraph agent as part of the [chatbot logic](chatbot.py).
 
 ## Task description

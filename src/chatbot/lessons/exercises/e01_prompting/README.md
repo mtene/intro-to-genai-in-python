@@ -1,5 +1,7 @@
 # Exercise 1: Text prompting
 
+⏱️ **Estimated time:** 15 minutes
+
 In this exercise, you will make the [chatbot logic](chatbot.py) use the LLM to answer user queries.
 
 To achieve this, inspect the LLM classes in [`src/chatbot/services`](/src/chatbot/services) and the configuration file [`src/config.yaml`](/src/config.yaml). This configuration file allows you to choose which LLM is used and with what parameters.

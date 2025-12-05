@@ -1,5 +1,7 @@
 # Exercise 3: Tracking conversation history
 
+⏱️ **Estimated time:** 20 minutes
+
 In this exercise, you will make the [chatbot logic](chatbot.py) able to track the user questions and corresponding answers between multiple calls.
 
 ## Motivation

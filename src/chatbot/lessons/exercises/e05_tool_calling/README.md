@@ -1,5 +1,7 @@
 # Exercise 5: Tool calling
 
+⏱️ **Estimated time:** 25 minutes
+
 In this exercise, you will program the [chatbot](chatbot.py) to make use of the tools defined at the top of the file.
 
 ## Motivation

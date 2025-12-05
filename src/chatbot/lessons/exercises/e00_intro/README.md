@@ -1,5 +1,7 @@
 # Exercise 0: Introduction
 
+⏱️ **Estimated time:** 10 minutes
+
 This is a basic setup to confirm that the UI and framework code are working as expected and get you familiar with the overall structure of the code.
 
 The [chatbot logic](chatbot.py) for this exercise is just a dummy implementation that repeats the question back to the user after some waiting. The sleep delays may seem unnecessary, but they serve to demonstrate the status update notification feature.
@@ -92,7 +94,7 @@ Notes:
 * Native support means that the model has innate ability to understand the constraints described in the prescribed JSON schema (or similar mechanism), with a strong guarantee to comply.
 * Model capabilities marked with `*` match what was advertised by the vendor, but practical testing shows they are unreliable, probably due to the way the model was trained / fine-tuned or the small number of parameters.
 
-To complete all tutorials, native support for both structured outputs and tool calling is needed. **IBM Granite 4 7B MoE** meets these criteria and is able to run at decently low latency on a consumer-grade laptop with a discrete GPU. Opt for **GPT-OSS 20B MoE**, if your machine has better-than average hardware.
+To complete all tutorials, native support for both structured outputs and tool calling is needed. **IBM Granite 4 7B MoE** meets these criteria and is able to run at decently low latency on a consumer-grade laptop with a discrete GPU. Opt for **GPT-OSS 20B MoE** if your machine has better-than-average hardware.
 
 🏠 [Overview](/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e01_prompting/README.md)
 ---|---

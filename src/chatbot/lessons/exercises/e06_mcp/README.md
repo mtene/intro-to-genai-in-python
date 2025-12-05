@@ -1,5 +1,7 @@
 # Exercise 6: Model Context Protocol
 
+⏱️ **Estimated time:** 30 minutes
+
 In this exercise, you will equip the [chatbot](chatbot.py) with 3rd party tools hosted on Model Context Protocol (MCP) servers.
 
 ## Motivation
