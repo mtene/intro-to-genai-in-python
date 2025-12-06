@@ -26,15 +26,11 @@ mcp_config = {
         "command": sys.executable,
         "args": [str(Path(__file__).parent / "mcp_server.py")],
     },
-    # connects to two remote MCP servers using http communication
+    # connects to a remote MCP server using http communication
     "microsoft_learn" : {
         "url": "https://learn.microsoft.com/api/mcp",
         "transport": "streamable_http",
     },
-    "time_tools": {
-        "url": "https://time.mcp.inevitable.fyi/mcp",
-        "transport": "streamable_http",
-        }
 }
 ```
 

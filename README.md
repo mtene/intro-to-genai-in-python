@@ -14,6 +14,8 @@ Model Context Protocol (MCP) | 📖 [Exercise](/src/chatbot/lessons/exercises/e0
 Retrieval Augmented Generation (RAG) | 📖 [Exercise](/src/chatbot/lessons/exercises/e07_rag/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s07_rag/README.md)
 Custom agent | 📖 [Exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s08_custom_agent/README.md)
 
+All of the above include automated test suites to verify and benchmark the implementation. For details, read the [Testing Guide](/src/chatbot/testing/README.md).
+
 A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided, so that the lessons can solely focus on the chatbot logic.
 
 ![Chat UI](/images/ui.png)

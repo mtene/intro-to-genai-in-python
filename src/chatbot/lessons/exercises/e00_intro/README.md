@@ -9,6 +9,7 @@ By the end of this exercise, you should be able to:
 * Navigate the project structure and understand the chatbot framework
 * Run the Streamlit UI and command-line interfaces
 * Understand the chatbot interface and how exercises are organized
+* Use the `/test` command to validate chatbot implementations
 * Choose an appropriate local LLM based on hardware requirements
 * Distinguish between semi-open and fully-open models
 
@@ -60,6 +61,20 @@ def __init__(self):
 ```
 
 Store reusable services (like the LLM) as fields to avoid unnecessary repeated setup.
+
+## Testing
+
+Each exercise and solution includes an automated test suite that validates your implementation. To run tests, launch the console interface and use the `/test` command:
+
+```powershell
+uv run exercise-1
+
+>>> /test
+```
+
+The test suite will evaluate your chatbot against predefined test cases, checking for expected keywords, response length, and other criteria. This provides immediate feedback on whether your implementation meets the requirements.
+
+For comprehensive documentation on writing custom tests, understanding evaluation metrics, and best practices, see the [Testing Guide](/src/chatbot/testing/README.md).
 
 ## Choice of language model
 

@@ -28,7 +28,7 @@ class MCPClient:
         return [
             StructuredTool.from_function(
                 func=lambda *args, tool=tool, **kwargs: asyncio.run(
-                    tool.arun({"args": args, **kwargs})
+                    tool.arun(args=args, **kwargs)
                 ),
                 name=tool.name,
                 description=tool.description,

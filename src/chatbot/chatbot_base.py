@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
 import inspect
+import importlib.util
 from pathlib import Path
 from langchain_core.runnables import RunnableConfig
 from chatbot.chat_context import ChatContext
+from chatbot.testing.test_suite import TestSuite
 
 
 class BaseChatBot(ABC):
@@ -32,6 +34,30 @@ class BaseChatBot(ABC):
             callbacks=[ctx],
             recursion_limit=100,
         )
+
+    def reset(self) -> None:
+        """
+        Reset chatbot to initial state.
+        Subclasses must implement this to clear any stateful components.
+        """
+        pass
+
+    def get_test_suite(self) -> TestSuite | None:
+        """Automatically discover and load test suite from tests.py in the same directory."""
+        chatbot_path = Path(inspect.getfile(self.__class__))
+        tests_path = chatbot_path.parent / "tests.py"
+
+        if not tests_path.exists():
+            return None
+
+        spec = importlib.util.spec_from_file_location("tests", tests_path)
+        if not spec or not spec.loader:
+            return None
+
+        tests_module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(tests_module)
+
+        return getattr(tests_module, "TEST_SUITE", None)
 
     @abstractmethod
     def get_answer(self, question: str, ctx: ChatContext) -> str:

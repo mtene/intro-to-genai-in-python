@@ -68,10 +68,7 @@ With this in-place, the tool name should appear in a log message at the console 
 
 The power of MCP lies in reusing tools defined by others. To leverage this, extend the MCP configuration to connect to public MCP servers on the internet using `streamable_http` transport. Be mindful that tools allow an LLM to execute code controlled externally, which could be exploited for malicious purposes. Therefore, only use MCP servers from reputable vendors and take proactive steps to minimize the attack surface (e.g. hosting the app in a container or VM with limited privileges).
 
-Some examples suitable for this exercise:
-
-* Microsoft Learn MCP: `https://learn.microsoft.com/api/mcp`
-* Time utilities MCP: `https://time.mcp.inevitable.fyi/mcp`
+For this exercise, we will use the Microsoft Learn MCP server `https://learn.microsoft.com/api/mcp`.
 
 ## Under the hood
 

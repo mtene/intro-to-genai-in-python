@@ -59,3 +59,6 @@ class ChatHistory:
     def add_message(self, message: ChatMessage) -> None:
         """Appends a message to the back of the chat history"""
         self.messages.append(message)
+
+    def clear(self) -> None:
+        self.messages.clear()

@@ -30,10 +30,6 @@ class ChatBot(BaseChatBot):
                 "url": "https://learn.microsoft.com/api/mcp",
                 "transport": "streamable_http",
             },
-            "time_tools": {
-                "url": "https://time.mcp.inevitable.fyi/mcp",
-                "transport": "streamable_http",
-            },
         }
         mcp_client = MCPClient(mcp_config)
         # gather the MCP tools

@@ -13,7 +13,7 @@ from chatbot.chat_history import ChatMessage
 class ChatContext(BaseCallbackHandler):
     """Can be used to post status update messages to the UI"""
 
-    def __init__(self, status_update_func: Callable[[str], None]):
+    def __init__(self, status_update_func: Callable[[str], None] | None = None):
         self._status_update_func = status_update_func
         self._tool_call_registry: Dict[UUID, str] = {}
         self._lock = Lock()
@@ -89,7 +89,8 @@ class ChatContext(BaseCallbackHandler):
 
     def update_status(self, message: str) -> None:
         """Updates status with the provided message"""
-        self._status_update_func(message)
+        if self._status_update_func:
+            self._status_update_func(message)
 
     @staticmethod
     def from_config(config: RunnableConfig) -> Callable[[str], None]:

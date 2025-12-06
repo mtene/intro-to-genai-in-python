@@ -1,6 +1,6 @@
 from chatbot.utils.console import console
-from .chatbot import ChatBot
 from chatbot.utils.logging import configure_logging
+from .chatbot import ChatBot
 
 
 def main():
