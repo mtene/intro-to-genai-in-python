@@ -2,6 +2,8 @@
 
 The [solution](chatbot.py) to the exercise uses an LLM to answer user queries.
 
+Run the [tests](tests.py) in the console and verify that they all pass. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Implementation: LLM initialization
 
 You would obtain the same behavior with the LLM constructed just before use, in `get_answer` and destroyed afterwards. However, this is unnecessarily wasteful and may slow down responses.

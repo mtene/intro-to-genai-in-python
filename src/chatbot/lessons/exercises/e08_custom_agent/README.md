@@ -14,6 +14,8 @@ By the end of this exercise, you should be able to:
 
 In this exercise, you will define your own custom LangGraph agent as part of the [chatbot logic](chatbot.py).
 
+Run the [tests](tests.py) in the console to track progress and extend them with your own. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Task description
 
 Consider a chatbot that takes a user request for text generation and creates an adversarial pair of agents, namely an `author` and `reviewer`, working together to improve the generated text according to the user's stated needs. The author performs modifications based on feedback from the reviewer, who acts as gatekeeper to the process, accepting or sending the text back for revision.

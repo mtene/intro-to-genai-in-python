@@ -2,6 +2,8 @@
 
 The [solution](chatbot.py) to the exercise equips the chatbot with a [`ChatHistory`](/src/chatbot/chat_history.py) object.
 
+Run the [tests](tests.py) in the console and verify that they all pass. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Implementation: Chat history initialization
 
 The chat history must persist between calls to `get_answer`. Store it as a field in the chatbot's state, initialized in the constructor:

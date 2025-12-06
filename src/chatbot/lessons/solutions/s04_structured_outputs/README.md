@@ -2,6 +2,8 @@
 
 The [solution](chatbot.py) configures the LLM to create instances of the `Person` class.
 
+Run the [tests](tests.py) in the console and verify that they all pass. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Implementation: Structured output configuration
 
 The `Person` class is defined as a Pydantic model, where each field has an associated type

@@ -16,6 +16,8 @@ In this exercise, we turn attention to the system prompt. It contains instructio
 
 Update the [chatbot logic](chatbot.py) with a system prompt. The instructions are up to you. As an example, try to make it respond like a friendly pirate.
 
+Run the [tests](tests.py) in the console to track progress and extend them with your own. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## System prompt structure
 
 Typically, the system prompt contains some or all of the following elements:

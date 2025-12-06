@@ -18,6 +18,8 @@ In this exercise, you will make the [chatbot logic](chatbot.py) use the LLM to a
 
 To achieve this, inspect the LLM classes in [`src/chatbot/services`](/src/chatbot/services) and the configuration file [`src/config.yaml`](/src/config.yaml). This configuration file allows you to choose which LLM is used and with what parameters.
 
+Run the [tests](tests.py) in the console to track progress and extend them with your own. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions.
+
 ## LLM selection
 
 The language models used in this app must be compatible with the [OpenAI API](https://platform.openai.com/docs/api-reference/chat/create?api-mode=chat). Since this is the industry standard, most model vendors have implemented support.

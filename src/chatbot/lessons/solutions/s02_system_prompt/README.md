@@ -2,6 +2,8 @@
 
 A possible [solution](chatbot.py) makes the chatbot change roles depending on the type of user message.
 
+Run the [tests](tests.py) in the console and verify that they all pass. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Implementation: System prompt definition
 
 If the system prompt is static, it can be defined once (at the global scope or in the constructor) and reused.

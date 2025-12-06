@@ -2,6 +2,8 @@
 
 In the solution, we provide the [chatbot](chatbot.py) with a ReAct agent configured with our tools of interest.
 
+Run the [tests](tests.py) in the console and verify that they all pass. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Implementation: ReAct agent setup
 
 ```python

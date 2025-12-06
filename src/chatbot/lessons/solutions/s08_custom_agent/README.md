@@ -4,6 +4,8 @@ One possible [solution](chatbot.py) to the [`author`](author.py)-[`reviewer`](re
 
 ![Graph for author-reviewer agent](/images/author_reviewer_graph.png)
 
+Run the [tests](tests.py) in the console and verify that they all pass. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Implementation: LangGraph design
 
 The initial state contains:

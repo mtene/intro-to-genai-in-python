@@ -16,6 +16,8 @@ By the end of this exercise, you should be able to:
 
 In this exercise, you will extend the query sent to the [chatbot](chatbot.py) with relevant information from a vector store.
 
+Run the [tests](tests.py) in the console to track progress and extend them with your own. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Motivation
 
 Large Language Models (LLMs) have been trained on publicly-available data. However vast this training data may be, it will still not be sufficient to accurately answer queries on highly-specialized domain-specific aspects. In order to bridge this gap, the query can be accompanied by relevant extracts from a curated corpus of knowledge stored in a database. This process is referred to as Retrieval Augmented Generation (RAG).

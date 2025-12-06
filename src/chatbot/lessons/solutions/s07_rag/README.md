@@ -2,6 +2,8 @@
 
 In the solution, we populate the vector store provided to the [chatbot](chatbot.py) with chunked documents, together with the corresponding embeddings.
 
+Run the [tests](tests.py) in the console and verify that they all pass. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Implementation: Document ingestion
 
 First, we load the target text from disk

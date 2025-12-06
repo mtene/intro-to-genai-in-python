@@ -2,6 +2,8 @@
 
 In the solution, we connect the [chatbot](chatbot.py) to one local and one public Model Context Protocol (MCP) servers.
 
+Run the [tests](tests.py) in the console and verify that they all pass. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Implementation: Local MCP tools
 
 In [mcp_server.py](mcp_server.py) we implemented the currency exchange tool and registered it with the local MCP server:

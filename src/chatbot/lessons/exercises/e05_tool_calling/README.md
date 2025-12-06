@@ -14,6 +14,8 @@ By the end of this exercise, you should be able to:
 
 In this exercise, you will program the [chatbot](chatbot.py) to make use of the tools defined at the top of the file.
 
+Run the [tests](tests.py) in the console to track progress and extend them with your own. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Motivation
 
 Continuing on the theme of programmatic uses of GenAI, a popular feature is LLM tool use. Tools give the model the capability to access new data sources or perform actions on behalf of the user.

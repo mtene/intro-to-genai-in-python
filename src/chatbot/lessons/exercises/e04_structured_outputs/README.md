@@ -16,6 +16,8 @@ By the end of this exercise, you should be able to:
 
 For this exercise, update the [chatbot logic](chatbot.py) so that answers are no longer free-text. Instead we want the LLM to output an object describing a person, according to the class defined at the top of the file.
 
+Run the [tests](tests.py) in the console to track progress and extend them with your own. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Motivation
 
 Dealing with natural-language inputs is tricky with traditional algorithms. LLMs excel at this, but they are also trained to output natural language. By configuring structured outputs, the LLM is instructed to respond in conformance to a specified JSON schema. This makes the responses straightforward to process with algorithmic code. The LLM thus becomes just another function call, acting as a bridge between user input and application logic.

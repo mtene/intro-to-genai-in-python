@@ -15,6 +15,8 @@ By the end of this exercise, you should be able to:
 
 In this exercise, you will make the [chatbot logic](chatbot.py) able to track the user questions and corresponding answers between multiple calls.
 
+Run the [tests](tests.py) in the console to track progress and extend them with your own. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+
 ## Motivation
 
 LLMs are fundamentally stateless. They process millions of requests from different users and are not designed to retain individual session information. Some caching exists for performance, but this is transparent to you while prompting.
