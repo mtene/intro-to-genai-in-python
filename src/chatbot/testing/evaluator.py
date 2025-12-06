@@ -54,7 +54,7 @@ class ChatbotEvaluator:
             successful = sum(1 for r in self.results if r["success"])
             avg_time = sum(r["execution_time"] for r in self.results) / total
             rich_console.print(
-                f"Results: {successful} / {total} passed ({successful / total * 100:.1f}%) | Avg time: {avg_time:.2f}s"
+                f"Testing summary: {successful} / {total} passed ({successful / total * 100:.1f}%) | Avg time: {avg_time:.2f}s"
             )
         return success
 
