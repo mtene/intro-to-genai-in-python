@@ -135,7 +135,7 @@ Model                           | Active Params | Context Window | Input modalit
 * **Native support**: the model has innate ability to understand JSON schema constraints (or similar mechanisms), with strong compliance guarantees.
 * **Capabilities marked with `*`**: advertised by the vendor but unreliable in practice, likely due to training / fine-tuning approaches or small parameter counts.
 
-To complete all tutorials, native support for both structured outputs and tool calling is needed. **IBM Granite 4 7B MoE** meets these criteria and is able to run at decently low latency on a consumer-grade laptop with a discrete GPU. Opt for **GPT-OSS 20B MoE** if your machine has better-than-average hardware.
+To complete all tutorials, native support for both structured outputs and tool calling is needed. **IBM Granite 4 7B MoE** meets these criteria and is able to run at decently low latency on a consumer-grade laptop with a discrete GPU. Opt for **OpenAI GPT-OSS 20B MoE** if your machine has better-than-average hardware.
 
 🏠 [Overview](/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e01_prompting/README.md)
 ---|---
