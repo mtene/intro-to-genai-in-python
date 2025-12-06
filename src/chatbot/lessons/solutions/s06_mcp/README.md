@@ -1,6 +1,6 @@
 # Solution 6: Model Context Protocol
 
-In the solution, we connect the [chatbot](chatbot.py) to one local and two public Model Context Protocol (MCP) servers.
+In the solution, we connect the [chatbot](chatbot.py) to one local and one public Model Context Protocol (MCP) servers.
 
 ## Implementation: Local MCP tools
 
@@ -16,7 +16,7 @@ Note that the decorator contains the variable holding the MCP server object. Thi
 
 ## Implementation: MCP configuration
 
-The MCP client's configuration has been extended to include two remote servers, specified using their URL and `streamable_http` transport:
+The MCP client's configuration has been extended to include a remote server, specified using their URL and `streamable_http` transport:
 
 ```python
 mcp_config = {
