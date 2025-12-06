@@ -18,8 +18,13 @@ TEST_CASES = [
         expected_keywords=["yes"],
     ),
     TestCase(
-        id="mcp_search",
-        question="What are used for CI/CD in Azure DevOps?",
+        id="Time_conversion",
+        question="What is 4 PM Oslo time in New York?",
+        expected_keywords=["10"],
+    ),
+    TestCase(
+        id="microsoft_search",
+        question="What is the equivalent of GitHub Actions in Azure DevOps?",
         expected_keywords=["pipelines"],
     ),
 ]

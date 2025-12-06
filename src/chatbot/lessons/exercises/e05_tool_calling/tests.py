@@ -19,8 +19,8 @@ TEST_CASES = [
     ),
     TestCase(
         id="time_conversion",
-        question="What is 10 AM Oslo time in New York?",
-        expected_keywords=["4"],
+        question="What is 4 PM Oslo time in New York?",
+        expected_keywords=["10"],
     ),
 ]
 

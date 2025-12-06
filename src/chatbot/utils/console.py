@@ -20,10 +20,9 @@ def handle_test_command(chatbot: BaseChatBot, rich_console: Console):
         return
 
     evaluator = ChatbotEvaluator(chatbot)
-    results = evaluator.run_test_suite(test_suite)
-    evaluator.print_summary()
-    evaluator.check_passing_criteria(results, test_suite.passing_criteria)
+    evaluator.run_test_suite(test_suite, rich_console)
 
+    rich_console.print("[dim]Resetting chatbot state[/dim]")
     chatbot.reset()
 
 

@@ -8,12 +8,12 @@ By the end of this exercise, you should be able to:
 
 * Understand the purpose and architecture of the Model Context Protocol (MCP)
 * Set up and connect to MCP servers from Python applications
-* Integrate 3rd party MCP tools into LangGraph agents
+* Integrate MCP tools into LangGraph agents
 * Explain the client-server communication flow in MCP
 
 ## Overview
 
-In this exercise, you will equip the [chatbot](chatbot.py) with 3rd party tools hosted on Model Context Protocol (MCP) servers.
+In this exercise, you will equip the [chatbot](chatbot.py) with tools hosted on Model Context Protocol (MCP) servers.
 
 ## Motivation
 
@@ -54,7 +54,7 @@ if __name__ == "__main__":
     mcp_server.run(transport="stdio")
 ```
 
-Your first task is to populate the local server with one or more tools and register them by using the `@mcp_server.tool` decorator. Use, for example, the currency conversion tool from the previous exercise.
+Your first task is to populate the local server with one or more tools and register them by using the `@mcp_server.tool` decorator.
 
 ```python
 @mcp_server.tool
@@ -62,7 +62,7 @@ def sum_tool(a: int, b: int) -> int:
     return a + b 
 ```
 
-With this in-place, the tool name should appear in a log message at the console during chatbot construction.
+Use, for example, the currency and time conversion tools from the previous exercise. Afterwards, the tool names should appear in a log message at the console during chatbot construction.
 
 ## Remote MCP server
 

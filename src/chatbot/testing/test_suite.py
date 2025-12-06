@@ -1,7 +1,3 @@
-"""
-Data structures for chatbot test suites.
-"""
-
 from dataclasses import dataclass, field
 from typing import List
 

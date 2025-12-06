@@ -2,12 +2,13 @@ import asyncio
 from langchain_core.tools import StructuredTool
 
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from typing import Dict, Any
+from langchain.tools import BaseTool
+from typing import Dict, Any, List
 
 
 class MCPClient:
     """
-    Connects to one or more MCP servers, as specied in the configuration dictionary.
+    Connects to one or more MCP servers, as specified in the configuration dictionary.
     Example:
         mcp_config = {
             "mcp_tools": {
@@ -22,14 +23,12 @@ class MCPClient:
     def __init__(self, config: Dict[str, Any]):
         self._client = MultiServerMCPClient(config)
 
-    def get_tools(self):
+    def get_tools(self) -> List[BaseTool]:
         tools = asyncio.run(self._client.get_tools())
         # StructuredTool can only be called async, so define a wrapper
         return [
             StructuredTool.from_function(
-                func=lambda *args, tool=tool, **kwargs: asyncio.run(
-                    tool.arun(args=args, **kwargs)
-                ),
+                func=lambda tool=tool, **kwargs: asyncio.run(tool.arun(kwargs)),
                 name=tool.name,
                 description=tool.description,
                 args_schema=getattr(tool, "args_schema", None),
