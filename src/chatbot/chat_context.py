@@ -6,6 +6,7 @@ from langchain_core.callbacks import BaseCallbackHandler
 from langchain_core.callbacks.manager import CallbackManager
 from langchain_core.runnables import RunnableConfig
 from langchain_core.outputs import LLMResult
+from langchain_core.messages import ToolMessage
 from chatbot.config import config
 from chatbot.chat_history import ChatMessage
 
@@ -38,16 +39,20 @@ class ChatContext(BaseCallbackHandler):
         tool_name = serialized.get("name", "tool")
         with self._lock:
             self._tool_call_registry[run_id] = tool_name
-        self.update_status(f"🔨 Calling {tool_name}({input_str.strip('{}')})")
+        max_output = 100
+        args_str = input_str.strip('{}')
+        args_str = f"{args_str[:max_output]}...[{len(args_str) - max_output} more]" if len(args_str) > max_output else args_str
+        self.update_status(f"🔨 Calling {tool_name}({args_str})")
 
     @override
-    def on_tool_end(self, output: str, *, run_id: UUID, **kwargs) -> None:
+    def on_tool_end(self, output: Any, *, run_id: UUID, **kwargs) -> None:
         """Updates status on tool call end"""
-        if not self._verbose:
-            return
         with self._lock:
             tool_name = self._tool_call_registry.pop(run_id, "tool")
-        self.update_status(f"✅ {tool_name} returned: {output}")
+        max_output = 100
+        result_str = str(output.content) if isinstance(output, ToolMessage) else str(output)
+        result_str = f"{result_str[:max_output]}...[{len(result_str) - max_output} more]" if len(result_str) > max_output else result_str
+        self.update_status(f"📦 {tool_name} returned: {result_str}")
 
     @override
     def on_tool_error(
