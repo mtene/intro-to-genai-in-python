@@ -127,10 +127,17 @@ TEST_SUITE = TestSuite(test_cases=TEST_CASES, passing_criteria=PASSING_CRITERIA,
 
 ## Further Reading
 
-* [DeepEval](https://github.com/confident-ai/deepeval) - Evaluation framework for LLM applications
-* [RAGAS](https://github.com/explodinggradients/ragas) - RAG assessment framework
-* [LangSmith](https://docs.smith.langchain.com/) - LangChain's evaluation and observability platform
-* [OpenAI Evals](https://github.com/openai/evals) - Framework for evaluating LLMs
+[How to Test GenAI Applications When There's No Correct Answer](https://medium.com/@brunelli.stefano.eu/how-to-test-genai-applications-when-theres-no-correct-answer-with-real-use-cases-26caf0ef9ac1) explores strategies for writing effective tests for non-deterministic LLM applications with real-world use cases.
+
+[DeepEval](https://github.com/confident-ai/deepeval) is an evaluation framework for LLM applications that provides metrics for assessing response quality, factual accuracy, hallucination detection and RAG performance.
+
+[OpenAI Evals](https://github.com/openai/evals) offers an open-source framework for evaluating LLMs with pre-built test suites, custom evaluation templates and community-contributed benchmarks.
+
+[RAGAS](https://github.com/explodinggradients/ragas) provides specialized metrics for evaluating Retrieval Augmented Generation systems, including context precision, context recall, faithfulness and answer relevance.
+
+[OpenLLMetry](https://github.com/traceloop/openllmetry) is an open-source observability SDK for LLM applications built on OpenTelemetry, enabling distributed tracing and performance monitoring in production.
+
+[LangSmith](https://docs.smith.langchain.com/) is LangChain's commercial platform for evaluation, debugging and observability, offering features like prompt versioning, dataset management and collaborative testing workflows.
 
 🏠 [Overview](/README.md) | ◀️ [Introduction](/src/chatbot/lessons/exercises/e00_intro/README.md)
 ---|---

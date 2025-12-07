@@ -8,7 +8,7 @@ By the end of this exercise, you should be able to:
 
 * Configure local and remote LLMs
 * Prompt the LLM
-* Understand how `temperature`, `top_p`, and `seed` parameters affect outputs
+* Understand how `temperature`, `top_p` and `seed` parameters affect outputs
 * Explain the difference between deterministic and non-deterministic generation
 * Apply appropriate parameter settings for different use cases
 
@@ -32,7 +32,7 @@ For local LLMs, Ollama provides OpenAI API compatibility, translating requests b
 
 **Remote LLMs** use authentication via a fixed secret key configured through a user environment variable (see [`RemoteLLM`](/src/chatbot/services/remote_llm.py)). More advanced authentication mechanisms (such as token services) are out of scope, but could easily be implemented by extending the [`Authenticator`](/src/chatbot/services/authenticator.py).
 
-## Further reading
+## LLM behavior tuning
 
 You can use the following parameters to control the LLM's behavior during prompting:
 
@@ -50,9 +50,13 @@ You can use the following parameters to control the LLM's behavior during prompt
 
 **Note**: not all models expose the `seed` parameter. Some models provide a `top_k` parameter (restricting sampling to the top k most likely tokens), which is not part of the [OpenAI API](https://platform.openai.com/docs/api-reference/chat/create?api-mode=chat) standard.
 
-For more info see this [article](https://towardsai.net/p/machine-learning/understanding-llm-sampling-top-k-top-p-and-temperature). This [OpenAI post](https://community.openai.com/t/cheat-sheet-mastering-temperature-and-top-p-in-chatgpt-api/172683) gives practical guidance on what values to use for different applications.
+## Further reading
 
-Also study the [`ChatOpenAI`](https://python.langchain.com/api_reference/openai/chat_models/langchain_openai.chat_models.base.ChatOpenAI.html#langchain_openai.chat_models.base.ChatOpenAI) class in LangChain to understand the different ways LLMs can be configured and called.
+[Understanding LLM Sampling: Top-k, Top-p, and Temperature](https://towardsai.net/p/machine-learning/understanding-llm-sampling-top-k-top-p-and-temperature) provides detailed explanations of how sampling parameters affect LLM output quality and randomness.
+
+[Cheat Sheet: Mastering Temperature and Top-p in ChatGPT API](https://community.openai.com/t/cheat-sheet-mastering-temperature-and-top-p-in-chatgpt-api/172683) offers practical guidance on choosing parameter values for different application types.
+
+[ChatOpenAI API Reference](https://python.langchain.com/api_reference/openai/chat_models/langchain_openai.chat_models.base.ChatOpenAI.html#langchain_openai.chat_models.base.ChatOpenAI) documents the LangChain class for configuring and calling OpenAI-compatible LLMs with various parameters.
 
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e00_intro/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s01_prompting/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e02_system_prompt/README.md)
 ---|---|---|---

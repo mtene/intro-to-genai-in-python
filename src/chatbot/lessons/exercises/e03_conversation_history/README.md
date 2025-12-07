@@ -49,5 +49,9 @@ Additionally, to reduce the context length, avoid biases from old data and maint
 
 Inspect the [`ChatHistory`](/src/chatbot/chat_history.py) class and you can also take inspiration from how it is used in the [UI](/src/user_interface/app.py).
 
+## Further reading
+
+[AI Agent Memory Types: Complete Guide for Developers](https://mljourney.com/ai-agent-memory-types-complete-guide-for-developers/) explores different memory architectures for AI agents, including short-term, long-term, episodic and semantic memory patterns.
+
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e02_system_prompt/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s03_conversation_history/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e04_structured_outputs/README.md)
 ---|---|---|---

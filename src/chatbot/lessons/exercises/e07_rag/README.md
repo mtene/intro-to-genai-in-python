@@ -67,9 +67,15 @@ system_prompt = system_message(
 
 ## Further reading
 
-Chunking, the distance metric used and result filtering are all essential for an effective RAG strategy. Each of these aspects have many subtleties that need to be refined for the dataset and application at hand.
+[RAG 101: Chunking Strategies](https://towardsdatascience.com/rag-101-chunking-strategies-fdc6f6c2aaec/) explores various chunking approaches including fixed-size, recursive, semantic and agentic strategies for optimizing retrieval accuracy.
 
-By their nature, RAG systems always perform semantic search on the user query and send the results to the LLM. This might not be desirable when the user has a short follow-up remark such as "Try again with value 10" or "Thanks!", as the retrieved content will not be relevant and may bias the model towards hallucination. An alternative approach is to wrap the vector store into a tool. This can lead to the other extreme, where the model does not exercise the tool when it should have, which can be mitigated, in part, by adding explicit instructions to the system prompt.
+[Comparing Similarity Searches: Distance Metrics in Vector Stores](https://medium.com/@stepkurniawan/comparing-similarity-searches-distance-metrics-in-vector-stores-rag-model-f0b3f7532d6f) explains the differences between cosine similarity, Euclidean distance and dot product, with guidance on choosing the right metric for your embeddings.
+
+[Best Practices for RAG](https://medium.com/@marcharaoui/chapter-5-best-practices-for-rag-7770fce8ac81) covers result filtering, re-ranking strategies and techniques for improving retrieval quality in production systems.
+
+[8 RAG Architectures You Should Know](https://humanloop.com/blog/rag-architectures) provides a comprehensive overview of different RAG patterns including naive RAG, agentic RAG with tool-wrapped retrieval, corrective RAG and multi-query approaches, with their respective trade-offs.
+
+[RAG Evaluation: Best Practices and Metrics](https://www.evidentlyai.com/llm-guide/rag-evaluation) demonstrates how to measure RAG system performance using metrics like context precision, context recall, faithfulness and answer relevance.
 
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e06_mcp/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s07_rag/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md)
 ---|---|---|---

@@ -26,7 +26,7 @@ These two nodes are called in a loop with up to 3 iterations, which can end earl
 
 ## Verification
 
-Send queries for short post-its, telegrams, letters, or postcards and observe the interaction.
+Send queries for short post-its, telegrams, letters or postcards and observe the interaction.
 
 With small language models, the reviewer typically exhibits one of two behaviors:
 

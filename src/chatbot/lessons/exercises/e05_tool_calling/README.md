@@ -9,6 +9,7 @@ By the end of this exercise, you should be able to:
 * Define Python functions as LLM tools with proper type annotations
 * Use LangGraph's `create_react_agent()` to build tool-calling workflows
 * Visualize and understand LangGraph agent architectures
+* Tweak LLM tool calling behavior using parameters
 
 ## Overview
 
@@ -20,7 +21,7 @@ Run the [tests](tests.py) in the console to track progress and extend them with 
 
 Continuing on the theme of programmatic uses of GenAI, a popular feature is LLM tool use. Tools give the model the capability to access new data sources or perform actions on behalf of the user.
 
-Tools can be vendor-provided, such as web search, or defined by application developers. In Python, tools are functions with type-annotated parameters, as can be seen at the top of the exercise code (`convert_time` and `convert_currency`).
+Tools can be vendor-provided, such as web search or defined by application developers. In Python, tools are functions with type-annotated parameters, as can be seen at the top of the exercise code (`convert_time` and `convert_currency`).
 
 LangChain's [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools) method equips an LLM with tools, allowing the model to include tool call requests in its responses. However, this only covers the first part of the workflow - calling the requested tools and returning results remains a [manual process](https://python.langchain.com/docs/how_to/tool_results_pass_to_model/), cumbersome and error-prone.
 
@@ -112,12 +113,16 @@ The result is returned via the special response message shown below, where the `
 
 These entries are recorded alongside regular messages in the conversation. They are distinguished by the special `TOOL` role, present in the definition of [`ChatRole`](/src/chatbot/chat_history.py).
 
-## Further reading
+## LLM tool calling behavior tuning
 
 The behavior of the LLM when choosing to call tools can be controlled through two parameters:
 
 * `tool_choice`, which can be the default `auto` (0 or more tools) or `none` (0 tools), `required` (1 or more tools), `forced` (where the list of tools that must be called is specified)
-* `parallel_tool_calls` which is `true` if the LLM is allowed to request multiple tool calls per exchange, or `false` to force a maximum of 1
+* `parallel_tool_calls` which is `true` if the LLM is allowed to request multiple tool calls per exchange or `false` to force a maximum of 1
+
+## Further reading
+
+[Beyond Brittle: Building Resilient LLM Tool Calls](https://www.linkedin.com/pulse/beyond-brittle-building-resilient-llm-tool-calls-limin-ma-yuzpc/) covers error handling strategies for LLM tool calls, including retry logic, fallback mechanisms and validation patterns for production systems.
 
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e04_structured_outputs/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s05_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e06_mcp/README.md)
 ---|---|---|---

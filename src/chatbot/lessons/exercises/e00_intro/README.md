@@ -72,9 +72,9 @@ uv run exercise-1
 >>> /test
 ```
 
-The test suite will evaluate your chatbot against predefined test cases, checking for expected keywords, response length, and other criteria. This provides immediate feedback on whether your implementation meets the requirements.
+The test suite will evaluate your chatbot against predefined test cases, checking for expected keywords, response length and other criteria. This provides immediate feedback on whether your implementation meets the requirements.
 
-For comprehensive documentation on writing custom tests, understanding evaluation metrics, and best practices, see the [Testing Guide](/src/chatbot/testing/README.md).
+For comprehensive documentation on writing custom tests, understanding evaluation metrics and best practices, see the [Testing Guide](/src/chatbot/testing/README.md).
 
 ## Choice of language model
 
@@ -99,7 +99,7 @@ Many models also have **open-sourced architecture** (fully-open), providing comp
 Running local LLMs requires an orchestration framework, such as:
 
 * Ollama: Easiest to get started with, supports many models via CLI and API.
-* vLLM: Best for high-performance, multi-user, or server-based deployments.
+* vLLM: Best for high-performance, multi-user or server-based deployments.
 
 Choose a model based on your application's required capabilities and available hardware (CPU or discrete GPU):
 
@@ -136,6 +136,10 @@ Model                           | Active Params | Context Window | Input modalit
 * **Capabilities marked with `*`**: advertised by the vendor but unreliable in practice, likely due to training / fine-tuning approaches or small parameter counts.
 
 To complete all tutorials, native support for both structured outputs and tool calling is needed. **IBM Granite 4 7B MoE** meets these criteria and is able to run at decently low latency on a consumer-grade laptop with a discrete GPU. Opt for **OpenAI GPT-OSS 20B MoE** if your machine has better-than-average hardware.
+
+## Further reading
+
+[AI Engineering Pitfalls](https://huyenchip.com/2025/01/16/ai-engineering-pitfalls.html) discusses the thought process behind deciding if GenAI is the right fit for an application, covering common pitfalls and when to avoid LLM-based solutions.
 
 🏠 [Overview](/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e01_prompting/README.md)
 ---|---

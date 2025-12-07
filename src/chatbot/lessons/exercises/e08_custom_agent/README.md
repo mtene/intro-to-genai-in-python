@@ -84,5 +84,9 @@ While convenient (nodes only return `{"messages": [llm_request, llm_response]}`)
 
 The possibilities of how a given node's logic can be implemented are endless. They can use algorithms, call LLMs, consult web services / file systems / databases or even invoke their own nested agents. This makes graphs very versatile for advanced AI application development, with the trade-off of implementation and maintenance complexity. This can be mitigated, in part, by using a modular code structure with type annotations, making use of classes split among separate files.
 
+## Further reading
+
+[Choose a Design Pattern for Your Agentic AI System](https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system) explores various agent design patterns including reflection, planning, multi-agent collaboration and tool-use patterns for building production agentic systems.
+
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e07_rag/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s08_custom_agent/README.md)
 ---|---|---

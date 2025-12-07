@@ -78,7 +78,7 @@ Rather than diving into the detailed MCP protocol structure, let's focus on the 
 
 ![MCP Communication](/images/mcp.png)
 
-MCP servers can be hosted locally, on a private intranet, or on the public internet. Remote servers typically communicate over HTTP or WebSocket; local servers may additionally use standard console I/O.
+MCP servers can be hosted locally, on a private intranet or on the public internet. Remote servers typically communicate over HTTP or WebSocket; local servers may additionally use standard console I/O.
 
 **Communication flow**:
 
@@ -90,7 +90,9 @@ MCP servers can be hosted locally, on a private intranet, or on the public inter
 
 ## Further reading
 
-MCP clients and server implementations make use of asynchronous programming. This allows input-output-bound operations to execute concurrently without blocking the execution loop. This aspect is abstracted away in the exercise code via the `MCPClient` wrapper. Knowledge and experience with [`async`](https://realpython.com/async-io-python/) is, nonetheless, essential for production-grade applications.
+[Async IO in Python: A Complete Walkthrough](https://realpython.com/async-io-python/) provides comprehensive coverage of asynchronous programming in Python, essential for understanding MCP client and server implementations in production environments.
+
+[Tool Calling is Broken Without MCP Server Composition](https://hackteam.io/blog/tool-calling-is-broken-without-mcp-server-composition/) explains why tool overload degrades LLM performance and demonstrates composition patterns for organizing tools across multiple MCP servers.
 
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e05_tool_calling/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s06_mcp/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e07_rag/README.md)
 ---|---|---|---

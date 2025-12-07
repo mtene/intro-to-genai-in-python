@@ -40,7 +40,7 @@ The system prompt is bundled with other chat messages in the LLM call. What dist
 
 ## Further reading
 
-Check out this [material](https://learnprompting.org/docs/introduction) on prompt engineering.
+[Learn Prompting: Introduction to Prompt Engineering](https://learnprompting.org/docs/introduction) provides comprehensive tutorials on prompt engineering techniques, including system prompt design, few-shot learning and advanced prompting strategies.
 
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e01_prompting/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s02_system_prompt/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e03_conversation_history/README.md)
 ---|---|---|---
