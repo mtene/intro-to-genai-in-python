@@ -42,7 +42,11 @@ class ChatbotEvaluator:
         # Show per-test summary if multiple repetitions
         if test_suite.repetitions > 1:
             for test_case in test_suite.test_cases:
-                successes = sum(1 for result in self.results if result["test_id"] == test_case.id and result["success"])
+                successes = sum(
+                    1
+                    for result in self.results
+                    if result["test_id"] == test_case.id and result["success"]
+                )
                 rich_console.print(
                     f"⭐ Test [yellow]{test_case.id}[/yellow]: {successes} / {test_suite.repetitions} runs passed ({successes / test_suite.repetitions * 100:.0f}%)"
                 )

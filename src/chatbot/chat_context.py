@@ -39,9 +39,11 @@ class ChatContext(BaseCallbackHandler):
         tool_name = serialized.get("name", "tool")
         with self._lock:
             self._tool_call_registry[run_id] = tool_name
+
         max_output = 100
-        args_str = input_str.strip('{}')
-        args_str = f"{args_str[:max_output]}...[{len(args_str) - max_output} more]" if len(args_str) > max_output else args_str
+        args_str = input_str.strip("{}")
+        if len(args_str) > max_output:
+            args_str = f"{args_str[:max_output]}...[{len(args_str) - max_output} more]"
         self.update_status(f"🔨 Calling {tool_name}({args_str})")
 
     @override
@@ -49,9 +51,15 @@ class ChatContext(BaseCallbackHandler):
         """Updates status on tool call end"""
         with self._lock:
             tool_name = self._tool_call_registry.pop(run_id, "tool")
+
         max_output = 100
-        result_str = str(output.content) if isinstance(output, ToolMessage) else str(output)
-        result_str = f"{result_str[:max_output]}...[{len(result_str) - max_output} more]" if len(result_str) > max_output else result_str
+        result_str = (
+            str(output.content) if isinstance(output, ToolMessage) else str(output)
+        )
+        if len(result_str) > max_output:
+            result_str = (
+                f"{result_str[:max_output]}...[{len(result_str) - max_output} more]"
+            )
         self.update_status(f"📦 {tool_name} returned: {result_str}")
 
     @override
