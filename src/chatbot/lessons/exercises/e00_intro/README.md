@@ -72,7 +72,7 @@ uv run exercise-1
 >>> /test
 ```
 
-The test suite will evaluate your chatbot against predefined test cases, checking for expected keywords, response length and other criteria. This provides immediate feedback on whether your implementation meets the requirements.
+The test suite will evaluate your chatbot against predefined prompts and checking for expected keywords. This provides immediate feedback on whether your implementation meets the requirements.
 
 For comprehensive documentation on writing custom tests, understanding evaluation metrics and best practices, see the [Testing Guide](/src/chatbot/testing/README.md).
 
