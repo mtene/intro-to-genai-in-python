@@ -57,14 +57,7 @@ Study the [`LocalVectorDB`](/src/chatbot/services/local_vectordb.py) class and n
 
 Your task is to read the target text document, split it into chunks using LangChain's [`RecursiveCharacterTextSplitter`](https://docs.langchain.com/oss/python/integrations/splitters/recursive_text_splitter) and ingest them as a list of [`Document`](https://reference.langchain.com/python/langchain_core/documents/#langchain_core.documents.base.Document) into the vector store by calling `add_documents` with optional metadata that can e.g. identify the chunk number.
 
-Semantic search is performed before inference, where the top 10 results, by relevance, are presented to the LLM via the system prompt:
-
-```python
-relevant_chunks = self._vectordb.similarity_search(question, k=10)
-system_prompt = system_message(
-    f"Respond to the user ONLY based on the following content:\n{'\n'.join(doc.page_content for doc in relevant_chunks)}"
-)
-```
+Then, perform semantic search based on the query, retrieving the most relevant text chunks, and include them as part of the conversation passed to the LLM. You have the choice between storing them in a system prompt or augmenting the user query itself. It is generally best to avoid including RAG context in the conversation history, as that will increase its size unnecessarily and bias the LLM during future queries.
 
 ## Further reading
 

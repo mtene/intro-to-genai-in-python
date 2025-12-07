@@ -7,7 +7,6 @@ from chatbot.chat_history import (
     ChatHistory,
     assistant_message,
     user_message,
-    system_message,
 )
 from chatbot.services.llm import LLM
 from chatbot.services.vectordb import VectorDB

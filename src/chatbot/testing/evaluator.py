@@ -43,7 +43,6 @@ class ChatbotEvaluator:
                 result["repetition"] = repetition + 1
                 self.results.append(result)
 
-
         # Show per-test summary
         for test_case in test_suite.test_cases:
             successes = sum(

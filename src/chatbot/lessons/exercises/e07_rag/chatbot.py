@@ -6,7 +6,6 @@ from chatbot.chat_history import (
     ChatHistory,
     assistant_message,
     user_message,
-    system_message,
 )
 from chatbot.services.llm import LLM
 from chatbot.services.vectordb import VectorDB
@@ -29,7 +28,7 @@ class ChatBot(BaseChatBot):
         self._vectordb = VectorDB()
         # TODO: read the document content from Path(__file__).parents[5] / "data" / "the_great_gatsby.txt"
         # TODO: split the content into chunks representing paragraphs
-        # use langchain_text_splitters.RecursiveCharacterTextSplitter
+        # e.g. using langchain_text_splitters.RecursiveCharacterTextSplitter
         # TODO: ingest the chunks into the vector store
         # create a list of langchain_core.documents.Document and pass it to self._vectordb.add_documents
 
@@ -45,27 +44,17 @@ class ChatBot(BaseChatBot):
         Can use ctx to emit status updates, which will be displayed in the UI.
         """
         ctx.update_status("🧠 Thinking...")
-        # search the vector store for the top 10 relevant chunks
-        relevant_chunks = self._vectordb.similarity_search(question, k=10)
-        logger.info(
-            f"Retrieved {len(relevant_chunks)} chunks relevant to the query:{''.join(f'\nChunk {doc.metadata["paragraph"]}: {doc.page_content[:30]}' for doc in relevant_chunks)}"
-        )
-        # augment the user question with the retrieved context
-        augmented_question = f"""Answer the user query using ONLY the information in the numbered paragraphs below.
-You MUST cite which paragraph number(s) you used in your answer (e.g., "According to paragraph 3...").
-
-{"\n\n".join(f"{doc.metadata['paragraph']}. {doc.page_content}" for doc in relevant_chunks)}
-
-User query: {question}"""
-        # call the LLM with the augmented question and all historic messages
+        # TODO: fetch relevant chunks to the query from the vector store
+        # record question in chat history
+        self._chat_history.add_message(user_message(question))
+        # call the LLM with all historic messages
+        # TODO: include the chunks in the messages passed to the LLM
         response = self._llm.invoke(
-            self._chat_history.messages + [augmented_question],
-            config=self.get_config(ctx),
+            self._chat_history.messages, config=self.get_config(ctx)
         )
         # extract the answer
         answer = str(response.content)
-        # record original question and answer in chat history
-        self._chat_history.add_message(user_message(question))
+        # record answer in chat history
         self._chat_history.add_message(assistant_message(answer))
 
         return answer
