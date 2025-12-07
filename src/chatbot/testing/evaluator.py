@@ -19,6 +19,10 @@ class ChatbotEvaluator:
     def run_test_suite(self, test_suite: TestSuite, rich_console: Console) -> bool:
         """Run all test cases from a TestSuite and return results."""
 
+        if not test_suite.test_cases or test_suite.repetitions <= 0:
+            rich_console.print("⚠️  [yellow]No tests to run![/yellow]")
+            return False
+
         self.results = []
         for repetition in range(test_suite.repetitions):
             for test_idx, test_case in enumerate(test_suite.test_cases):
@@ -39,33 +43,28 @@ class ChatbotEvaluator:
                 result["repetition"] = repetition + 1
                 self.results.append(result)
 
-        # Show per-test summary if multiple repetitions
-        if test_suite.repetitions > 1:
-            for test_case in test_suite.test_cases:
-                successes = sum(
-                    1
-                    for result in self.results
-                    if result["test_id"] == test_case.id and result["success"]
-                )
-                rich_console.print(
-                    f"⭐ Test [yellow]{test_case.id}[/yellow]: {successes} / {test_suite.repetitions} runs passed ({successes / test_suite.repetitions * 100:.0f}%)"
-                )
 
-        # Show global summary of results
-        if not self.results:
-            success = False
-            rich_console.print("⚠️ [yellow]No results were found![/yellow]")
-        else:
-            success = self._check_passing_criteria(
-                test_suite.passing_criteria, rich_console
+        # Show per-test summary
+        for test_case in test_suite.test_cases:
+            successes = sum(
+                1
+                for result in self.results
+                if result["test_id"] == test_case.id and result["success"]
             )
-
-            total = len(self.results)
-            successful = sum(1 for r in self.results if r["success"])
-            avg_time = sum(r["execution_time"] for r in self.results) / total
             rich_console.print(
-                f"🎯 Testing summary: {successful} / {total} passed ({successful / total * 100:.1f}%) | Avg time: {avg_time:.2f}s"
+                f"⭐ Test [yellow]{test_case.id}[/yellow]: {successes} / {test_suite.repetitions} runs passed ({successes / test_suite.repetitions * 100:.0f}%)"
             )
+
+        # Show global summary
+        success = self._check_passing_criteria(
+            test_suite.passing_criteria, rich_console
+        )
+        total = len(self.results)
+        successful = sum(1 for r in self.results if r["success"])
+        avg_time = sum(r["execution_time"] for r in self.results) / total
+        rich_console.print(
+            f"🎯 Testing summary: {successful} / {total} passed ({successful / total * 100:.1f}%) | Avg time: {avg_time:.2f}s"
+        )
 
         # Reset chatbot state after all tests complete
         rich_console.print("[dim]Chatbot state reset[/dim]")

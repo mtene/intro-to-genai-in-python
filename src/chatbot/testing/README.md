@@ -65,8 +65,6 @@ The framework uses three typed data structures:
 Each exercise and solution has a `tests.py` file where tests are defined as follows:
 
 ```python
-from chatbot.testing.test_suite import TestSuite, TestCase, PassingCriteria
-
 # Define test cases
 TEST_CASES = [
     TestCase(

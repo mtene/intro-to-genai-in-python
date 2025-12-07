@@ -28,7 +28,7 @@ LangChain's [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/
 LangGraph, which is a Python package built on top of LangChain, provides [`create_react_agent()`](https://langchain-ai.github.io/langgraph/reference/agents/#langgraph.prebuilt.chat_agent_executor.create_react_agent) to conveniently handle the entire LLM tool-calling workflow. ReAct (reasoning-acting) refers to a pattern introduced in this [paper](https://arxiv.org/abs/2210.03629). You can visualize the architecture of any LangGraph agent with:
 
 ```python
-chatbot._graph.get_graph(xray=True).draw_mermaid_png(output_file_path="graph.png")
+_graph.get_graph(xray=True).draw_mermaid_png(output_file_path="graph.png")
 ```
 
 ![Graph for a ReAct agent](/images/react_graph.png)
