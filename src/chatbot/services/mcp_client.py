@@ -2,7 +2,7 @@ import asyncio
 from langchain_core.tools import StructuredTool
 
 from langchain_mcp_adapters.client import MultiServerMCPClient
-from langchain.tools import BaseTool
+from langchain_core.tools import BaseTool
 from typing import Dict, Any, List
 
 
