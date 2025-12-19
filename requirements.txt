@@ -377,7 +377,7 @@ tzdata==2025.2
     # via
     #   pandas
     #   python-genai-intro
-urllib3==2.5.0
+urllib3==2.6.2
     # via requests
 uvicorn==0.38.0
     # via
