@@ -192,7 +192,7 @@ multidict==6.7.0
     #   yarl
 mypy-extensions==1.1.0
     # via typing-inspect
-narwhals==2.13.0
+narwhals==2.14.0
     # via altair
 numpy==2.3.5
     # via
