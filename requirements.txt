@@ -276,7 +276,7 @@ python-dotenv==1.2.1
     # via
     #   fastmcp
     #   pydantic-settings
-python-multipart==0.0.20
+python-multipart==0.0.21
     # via mcp
 pytz==2025.2
     # via pandas
