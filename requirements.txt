@@ -7,7 +7,7 @@ aiohttp==3.13.2
     # via langchain-community
 aiosignal==1.4.0
     # via aiohttp
-altair==5.5.0
+altair==6.0.0
     # via streamlit
 annotated-types==0.7.0
     # via pydantic
