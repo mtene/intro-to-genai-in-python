@@ -423,7 +423,7 @@ starlette==0.50.0
     # via
     #   mcp
     #   sse-starlette
-streamlit==1.50.0
+streamlit==1.52.2
     # via
     #   python-genai-intro
     #   streamlit-chat
