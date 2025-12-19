@@ -32,7 +32,7 @@ beartype==0.22.8
     #   py-key-value-shared
 blinker==1.9.0
     # via streamlit
-cachetools==6.2.2
+cachetools==6.2.4
     # via
     #   py-key-value-aio
     #   streamlit
