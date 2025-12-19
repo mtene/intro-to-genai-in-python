@@ -156,7 +156,7 @@ langchain-mcp-adapters==0.2.1
     # via python-genai-intro
 langchain-openai==1.1.6
     # via python-genai-intro
-langchain-text-splitters==1.0.0
+langchain-text-splitters==1.1.0
     # via
     #   langchain-classic
     #   python-genai-intro
