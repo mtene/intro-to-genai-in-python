@@ -3,7 +3,7 @@ name = "python-genai-intro"
 version = "0.1.0"
 description = "Introduction to programming Gen-AI applications in Python"
 authors = [{ name = "Matei Tene", email = "matei.tene@gmail.com" }]
-requires-python = ">=3.13,<4.0.0"
+requires-python = ">=3.10,<4.0.0"
 readme = "README.md"
 dependencies = [
     "streamlit~=1.50.0",
