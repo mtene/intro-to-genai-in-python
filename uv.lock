@@ -614,7 +614,7 @@ wheels = [
 
 [[package]]
 name = "faiss-cpu"
-version = "1.13.0"
+version = "1.13.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy", version = "2.2.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.11'" },
@@ -2605,7 +2605,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "faiss-cpu", specifier = "~=1.13.0" },
+    { name = "faiss-cpu", specifier = "~=1.13.1" },
     { name = "fastmcp", specifier = "~=2.13.0" },
     { name = "langchain", specifier = "~=1.1.0" },
     { name = "langchain-community", specifier = "~=0.4.0" },
