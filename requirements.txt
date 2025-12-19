@@ -152,7 +152,7 @@ langchain-core==1.2.3
     #   langgraph-checkpoint
     #   langgraph-prebuilt
     #   python-genai-intro
-langchain-mcp-adapters==0.1.14
+langchain-mcp-adapters==0.2.1
     # via python-genai-intro
 langchain-openai==1.1.6
     # via python-genai-intro
