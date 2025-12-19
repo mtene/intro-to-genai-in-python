@@ -357,7 +357,7 @@ toml==0.10.2
     # via streamlit
 tomli==2.3.0 ; python_full_version < '3.11'
     # via cyclopts
-tornado==6.5.2
+tornado==6.5.4
     # via streamlit
 tqdm==4.67.1
     # via openai
