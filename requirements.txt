@@ -69,7 +69,7 @@ dnspython==2.8.0
     # via email-validator
 docstring-parser==0.17.0
     # via cyclopts
-docutils==0.22.3
+docutils==0.22.4
     # via rich-rst
 email-validator==2.3.0
     # via pydantic
