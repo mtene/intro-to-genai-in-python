@@ -225,7 +225,7 @@ pathable==0.4.4
     # via jsonschema-path
 pathvalidate==3.3.1
     # via py-key-value-aio
-pillow==11.3.0
+pillow==12.0.0
     # via streamlit
 platformdirs==4.5.0
     # via fastmcp
