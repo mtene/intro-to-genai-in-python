@@ -169,7 +169,7 @@ langchain-classic==1.0.0
     # via langchain-community
 langchain-community==0.4.1
     # via python-genai-intro
-langchain-core==1.2.3
+langchain-core==1.2.5
     # via
     #   langchain-classic
     #   langchain-community
