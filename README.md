@@ -62,7 +62,13 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
 
     * or [downloading](https://github.com/ollama/ollama/releases/tag/v0.13.0) and installing somewhere accessible e.g. `%APPDATA%`.
 
-1. Use uv to setup the dependencies by running the following command at the git clone location
+1. Use uv to create a Python virtual environment at the git clone location
+
+    ```powershell
+    uv venv --python 3.13.3
+    ```
+
+    and install the dependencies
 
     ```powershell
     uv sync
