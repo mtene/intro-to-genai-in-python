@@ -47,7 +47,7 @@ class ChatBot(BaseChatBot):
             [
                 Document(
                     page_content=chunk,
-                    metadata={"document": doc_path, "paragraph": i + 1},
+                    metadata={"document": str(doc_path), "paragraph": i + 1},
                 )
                 for i, chunk in enumerate(doc_chunks)
             ]

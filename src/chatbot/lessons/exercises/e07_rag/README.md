@@ -53,7 +53,7 @@ A key operation when populating the database is splitting the content into chunk
 
 ## How do I do it?
 
-Study the [`LocalVectorDB`](/src/chatbot/services/local_vectordb.py) class and notice that it is based on Meta's FAISS. Other options for local vector databases include ChromaDB and Milvus. Also notice the usage of the embeddings model, which will get called on each chunk ingested into the database, as well as on each user query before performing semantic search. The similarity metric is configurable - Euclidean and cosine distance being popular choices.
+Study the [`LocalVectorDB`](/src/chatbot/services/local_vectordb.py) class and notice that it is based on the Chroma database. Other options for local vector databases include Milvus and Meta's FAISS. Also notice the usage of the embeddings model, which will get called on each chunk ingested into the database, as well as on each user query before performing semantic search. The similarity metric is configurable - Euclidean and cosine distance being popular choices.
 
 Your task is to read the target text document, split it into chunks using LangChain's [`RecursiveCharacterTextSplitter`](https://docs.langchain.com/oss/python/integrations/splitters/recursive_text_splitter) and ingest them as a list of [`Document`](https://reference.langchain.com/python/langchain_core/documents/#langchain_core.documents.base.Document) into the vector store by calling `add_documents` with optional metadata that can e.g. identify the chunk number.
 

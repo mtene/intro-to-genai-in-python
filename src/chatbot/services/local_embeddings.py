@@ -1,4 +1,4 @@
-from langchain_community.embeddings import OllamaEmbeddings
+from langchain_ollama import OllamaEmbeddings
 from chatbot.config import config
 
 
