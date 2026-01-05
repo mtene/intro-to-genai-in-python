@@ -1,3 +1,4 @@
+import chromadb.config
 from langchain_chroma import Chroma
 from .embeddings import Embeddings
 from chatbot.config import config, VectorDBSimilarityType
@@ -31,5 +32,6 @@ class LocalVectorDB(Chroma):
         super().__init__(
             embedding_function=embeddings_service,
             collection_metadata=collection_metadata,
+            client_settings=chromadb.config.Settings(anonymized_telemetry=False),
             **kwargs,
         )
