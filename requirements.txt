@@ -169,7 +169,7 @@ langchain-classic==1.0.0
     # via langchain-community
 langchain-community==0.4.1
     # via python-genai-intro
-langchain-core==1.2.3
+langchain-core==1.2.5
     # via
     #   langchain-classic
     #   langchain-community
@@ -209,7 +209,7 @@ markdown-it-py==4.0.0
     # via rich
 markupsafe==3.0.3
     # via jinja2
-marshmallow==3.26.2
+marshmallow==4.2.0
     # via dataclasses-json
 mcp==1.25.0
     # via
