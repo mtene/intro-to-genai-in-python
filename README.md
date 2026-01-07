@@ -40,13 +40,7 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
     > winget install --id astral-sh.uv --scope user
     > ```
 
-    * using pip
-    >
-    > ```powershell
-    > pip install uv
-    > ```
-
-    * executing the [installation steps](https://docs.astral.sh/uv/getting-started/installation/#installation-methods) via powershell
+    * or executing the [installation steps](https://docs.astral.sh/uv/getting-started/installation/#installation-methods) via powershell
     >
     > ```powershell
     > powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
@@ -57,10 +51,10 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
     * using winget
     >
     > ```powershell
-    > winget install --id Ollama.Ollama --version 0.13.0 --scope user
+    > winget install --id Ollama.Ollama --scope user
     > ```
 
-    * or [downloading](https://github.com/ollama/ollama/releases/tag/v0.13.0) and installing somewhere accessible e.g. `%APPDATA%`.
+    * or [downloading](https://github.com/ollama/ollama/releases) and installing somewhere accessible e.g. `%APPDATA%`.
 
 1. Use uv to create a Python virtual environment at the git clone location
 
