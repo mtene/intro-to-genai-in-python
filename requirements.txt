@@ -545,7 +545,7 @@ tzdata==2025.3
     # via
     #   pandas
     #   python-genai-intro
-urllib3==2.6.0
+urllib3==2.6.3
     # via
     #   kubernetes
     #   requests
