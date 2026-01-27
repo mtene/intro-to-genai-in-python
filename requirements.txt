@@ -323,7 +323,7 @@ prometheus-client==0.23.1
     # via
     #   opentelemetry-exporter-prometheus
     #   pydocket
-protobuf==6.33.2
+protobuf==7.34.0rc1
     # via
     #   googleapis-common-protos
     #   onnxruntime
@@ -393,7 +393,7 @@ python-dotenv==1.2.1
     #   uvicorn
 python-json-logger==4.0.0
     # via pydocket
-python-multipart==0.0.21
+python-multipart==0.0.22
     # via mcp
 pytz==2025.2
     # via pandas
