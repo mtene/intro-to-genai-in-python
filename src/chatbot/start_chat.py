@@ -1,55 +1,14 @@
 import logging
-import os
 import requests
-import subprocess
-import socket
-from typing import List, Dict
 from chatbot.config import config, ServiceType
+from chatbot.utils.processes import run_on_this_process
 
 logger = logging.getLogger(__name__)
-_processes: Dict[str, subprocess.Popen | None] = {}
-
-
-def is_port_open(host: str, port: int) -> bool:
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        return sock.connect_ex((host, port)) == 0
-
-
-def run_on_separate_process(
-    name: str,
-    cmd: List[str],
-    host: str,
-    port: int,
-    env: Dict[str, str] = os.environ.copy(),
-) -> None:
-    # check if not already running
-    if not is_port_open(host, port):
-        logger.info(f"Running new process `{name}` with command: {' '.join(cmd)}")
-        _processes[name] = subprocess.Popen(
-            cmd, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-        )
-
-
-def run_on_this_process(cmd: List[str], env: Dict[str, str] = os.environ.copy()) -> int:
-    logger.info(f"Running command: {' '.join(cmd)}")
-    try:
-        return subprocess.call(cmd, env=env)
-    except KeyboardInterrupt:
-        logger.warning("Interrupted by user. Shutting down...")
-        return 130
 
 
 def stop_chat_services():
-    # stop the separate processes we started
-    for name, process in _processes.items():
-        if process and process.poll() is None:
-            logger.info(f"Terminating process '{name}'...")
-            process.terminate()
-            try:
-                process.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                logger.warning(f"Process '{name}' did not exit in time. Killing...")
-                process.kill()
+    # stop any processes we spawned
+    pass
 
 
 def start_chat_services():

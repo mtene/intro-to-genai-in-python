@@ -26,6 +26,7 @@ class Config:
             self._llm_config: Dict[str, Any] = config["llm_config"]
             self._embeddings_config: Dict[str, Any] = config["embeddings_config"]
             self._vectordb_config: Dict[str, Any] = config["vectordb_config"]
+            self._observability_config: Dict[str, Any] = config["observability_config"]
             self._log_level: str = config["log_level"]
 
     def get_llm_type(self) -> ServiceType:
@@ -45,6 +46,9 @@ class Config:
 
     def get_vectordb_config(self) -> Dict[str, Any]:
         return self._vectordb_config.copy()
+
+    def get_observability_endpoint(self) -> str:
+        return self._observability_config["endpoint"]
 
     def get_log_level(self) -> str:
         return self._log_level

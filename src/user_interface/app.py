@@ -1,3 +1,4 @@
+import atexit
 import threading
 import time
 from queue import Queue
@@ -11,6 +12,7 @@ from user_interface.select_chatbot import list_chatbot_names, load_chatbot
 from chatbot.chat_context import ChatContext
 from chatbot.chat_history import user_message, assistant_message, ChatHistory, ChatRole
 from chatbot.utils.logging import configure_logging
+from chatbot.utils.telemetry import Telemetry
 
 configure_logging()
 
@@ -78,6 +80,13 @@ if "chatbot" not in st.session_state:
     all_chatbot_names = list_chatbot_names()
     selected_chatbot_name = all_chatbot_names[0]
     st.session_state.chatbot = load_chatbot(selected_chatbot_name)
+# telemetry object for observability
+if "telemetry" not in st.session_state:
+    telemetry = Telemetry(service_name="python-genai-intro")
+    telemetry.start()
+    st.session_state["telemetry"] = telemetry
+    atexit.register(telemetry.stop)
+
 # flag that is True while the chatbot is generating the answer
 if "awaiting_answer" not in st.session_state:
     st.session_state.awaiting_answer = False

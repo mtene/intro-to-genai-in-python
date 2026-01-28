@@ -13,6 +13,7 @@ Tool calling | 📖 [Exercise](/src/chatbot/lessons/exercises/e05_tool_calling/R
 Model Context Protocol (MCP) | 📖 [Exercise](/src/chatbot/lessons/exercises/e06_mcp/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s06_mcp/README.md)
 Retrieval Augmented Generation (RAG) | 📖 [Exercise](/src/chatbot/lessons/exercises/e07_rag/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s07_rag/README.md)
 Custom agent | 📖 [Exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s08_custom_agent/README.md)
+Observability | 📖 [Exercise](/src/chatbot/lessons/exercises/e09_observability/README.md)
 
 All of the above include automated test suites to verify and benchmark the implementation. For details, read the [Testing Guide](/src/chatbot/testing/README.md).
 

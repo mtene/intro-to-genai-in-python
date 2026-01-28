@@ -52,6 +52,10 @@ local_vectordb: &local_vectordb_settings
 # - fatal
 log_level: info
 
+# endpoint to send OpenTelemetry traces to e.g. Jaeger
+observability_config:
+  endpoint: http://localhost:4318/v1/traces
+
 # choose one of the predefined LLM service configs from above:
 # - local_llm_settings  - a locally-hosted service
 # - remote_llm_settings - a cloud-hosted service

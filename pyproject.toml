@@ -20,6 +20,10 @@ dependencies = [
     "pyyaml>=6.0.3,<6.1.0",
     "rich>=14.1.0,<14.2.0",
     "tzdata>=2025.3,<2026.0",
+    "opentelemetry-sdk>=1.39.1,<1.40.0",
+    "opentelemetry-exporter-otlp>=1.39.1,<1.40.0",
+    "opentelemetry-instrumentation-langchain>=0.51.1,<0.52.0",
+    "opentelemetry-instrumentation-openai-v2>=2.3b0,<2.4.0",
 ]
 
 [dependency-groups]
