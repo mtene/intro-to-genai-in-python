@@ -8,7 +8,7 @@ By the end of this exercise, you should be able to:
 
 * Explain what kind of data can be observed from application telemetry
 * Visualize telemetry traces as a timeline
-* Drill down into individual prompts and extract metadata
+* Drill down into individual prompts and inspect metadata
 
 ## Overview
 
