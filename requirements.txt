@@ -238,7 +238,7 @@ narwhals==2.14.0
     # via altair
 nodeenv==1.10.0
     # via pyright
-numpy==2.4.0
+numpy==2.4.1
     # via
     #   chromadb
     #   langchain-chroma
@@ -323,7 +323,7 @@ prometheus-client==0.23.1
     # via
     #   opentelemetry-exporter-prometheus
     #   pydocket
-protobuf==6.33.2
+protobuf==6.33.4
     # via
     #   googleapis-common-protos
     #   onnxruntime
@@ -393,7 +393,7 @@ python-dotenv==1.2.1
     #   uvicorn
 python-json-logger==4.0.0
     # via pydocket
-python-multipart==0.0.21
+python-multipart==0.0.22
     # via mcp
 pytz==2025.2
     # via pandas
