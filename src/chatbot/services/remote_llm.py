@@ -23,6 +23,7 @@ class RemoteLLM(AzureChatOpenAI):
         super().__init__(
             api_key=SecretStr("dummy"),
             api_version=service_config["api_version"],
+            model=service_config["model"],
             azure_deployment=service_config["model"],
             azure_endpoint=service_config["endpoint"],
             default_headers=service_config["extra_headers"],

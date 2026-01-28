@@ -32,7 +32,7 @@ class Telemetry:
                 f"Could not reach observability endpoint {endpoint}, traces disabled"
             )
             return
-        logger.info(f"Streaming traces to observability endpoint {endpoint}")
+        logger.info(f"Streaming traces to observability endpoint {endpoint} for service {self._service_name}")
 
         provider = TracerProvider(
             resource=Resource.create({"service.name": self._service_name})
