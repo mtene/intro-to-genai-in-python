@@ -28,20 +28,20 @@ As you work through this exercise, test your implementation with diverse prompts
 
 ## LangGraph architecture
 
-As we have seen before, the ReAct agent, predefined in LangGraph, behaves according to the flow of information through the nodes (from `START` towards `END`) and along the edges, as shown in the diagram
+As we have seen before, LangGraph agent behavior is driven by the flow of information through the nodes (from `START` towards `END`) and along the edges. For this exercise, we are building the graph shown in the diagram below:
 
-![Graph for a ReAct agent](/images/react_graph.png)
+![Graph for author-reviewer agent](/images/author_reviewer_graph.png)
 
 ## Graph state
 
-Information is captured in a `State` class which, for the graph above, simply contains the list of messages
+Information is captured in a `GraphState` class which, in its simplest form, contains the list of messages
 
 ```python
-class State(BaseModel):
+class GraphState(BaseModel):
     messages: List[ChatMessage]
 ```
 
-`State` can inherit from any typed class, such as `TypedDict` or Pydantic's `BaseModel`.
+This should be extended to hold any additional data that needs to be considered for the agent's decision making. `GraphState` can inherit from any typed class, such as `TypedDict` or Pydantic's `BaseModel`.
 
 ## Graph construction
 
