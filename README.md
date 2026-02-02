@@ -41,11 +41,7 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
     > winget install --id astral-sh.uv --scope user
     > ```
 
-    * or executing the [installation steps](https://docs.astral.sh/uv/getting-started/installation/#installation-methods) via powershell
-    >
-    > ```powershell
-    > powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-    > ```
+    * or executing the [installation steps](https://docs.astral.sh/uv/getting-started/installation/#installation-methods)
 
 1. Install Ollama server, which will be used to launch local language models - options include:
 
