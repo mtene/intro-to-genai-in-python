@@ -350,7 +350,7 @@ prometheus-client==0.23.1
     # via
     #   opentelemetry-exporter-prometheus
     #   pydocket
-protobuf==6.33.4
+protobuf==6.33.5
     # via
     #   googleapis-common-protos
     #   onnxruntime
