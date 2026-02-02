@@ -3,5 +3,6 @@ __pycache__/
 .langgraph_api
 *.orig
 .venv/
+venv/
 .vs/
 .vscode/
