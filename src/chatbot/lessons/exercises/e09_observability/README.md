@@ -33,6 +33,13 @@ As your LLM‑powered application grows more complex, it becomes increasingly im
 
 Each chatbot implementation explored so far in the course has the capability to export OpenTelemetry traces to an external endpoint, given by the `observability_config` setting in [`config.yaml`](/src/config.yaml).
 
+First, study the `Telemetry` class, defined in [`telemetry.py`](/chatbot/utils/telemetry.py) and observe its usage as a [context manager](https://www.pythontutorial.net/advanced-python/python-context-managers/) in the `__main__.py` file of any of the chatbot implementations:
+
+```python
+with Telemetry(service_name=Path(__file__).parent.name):
+    console(ChatBot)
+```
+
 To collect and visualize traces in this exercise, we will use [Jaeger](https://www.jaegertracing.io/download), a popular open‑source distributed tracing system. You can either download and run the binary or use [`podman`](https://podman.io/) to start it in a container:
 
 ```powershell
