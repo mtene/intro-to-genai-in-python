@@ -24,6 +24,9 @@ dependencies = [
     "opentelemetry-exporter-otlp>=1.39.1,<1.40.0",
     "opentelemetry-instrumentation-langchain>=0.51.1,<0.52.0",
     "opentelemetry-instrumentation-openai-v2>=2.3b0,<2.4.0",
+    "opentelemetry-instrumentation-chromadb>=0.52.2,<0.53.0",
+    "opentelemetry-instrumentation-requests>=0.60b1,<0.70",
+    "opentelemetry-instrumentation-httpx>=0.60b1,<0.70",
 ]
 
 [dependency-groups]

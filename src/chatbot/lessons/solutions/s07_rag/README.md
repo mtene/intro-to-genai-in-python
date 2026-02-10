@@ -84,7 +84,7 @@ Thus, the chatbot's state is prepared for a future call.
 ## Verification
 
 Ask questions about the document and observe which chunks are being retrieved and how the model interprets the content.
-Try different embedding models and LLMs, local and remote, and assess how the quality of the response changes.
+Try different embedding models and LLMs, local and remote and assess how the quality of the response changes.
 
 🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e07_rag/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md)
 ---|---|---

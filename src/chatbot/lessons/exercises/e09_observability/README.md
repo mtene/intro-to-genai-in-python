@@ -56,15 +56,81 @@ In this setup, chatbot traces are streamed via HTTP requests to port `4318` on t
 
 ![Trace visualization in Jaeger](/images/observability.png)
 
-Each horizontal bar represents a span, corresponding to one operation in your application - such as constructing the prompt, retrieving documents, or calling the LLM. By selecting a span, you can inspect metadata such as:
+Each horizontal bar represents a span, corresponding to one operation in your application - such as constructing the prompt, retrieving documents or calling the LLM. By selecting a span, you can inspect metadata such as:
 
 * the full prompt and context sent to the model
 * token usage (input/output)
 * model configuration (temperature, max tokens, model version)
-* intermediate operations such as retrieval, rewriting, filtering, or tool calls
+* intermediate operations such as retrieval, rewriting, filtering or tool calls
 * timing for each step in the process
 
-This information is also available when errors occur and can be invaluable when debugging unexpected output, diagnosing latency spikes, or tracking down excessive token usage.
+This information is also available when errors occur and can be invaluable when debugging unexpected output, diagnosing latency spikes or tracking down excessive token usage.
+
+## Under the hood
+
+The [`Telemetry`](src/chatbot/utils/telemetry.py:27-47) class takes a selective instrumentation approach, installing only the telemetry providers needed for the specific frameworks used in this codebase. This involves:
+
+1. **Manual provider setup**: Creating an OpenTelemetry `TracerProvider` with a service name resource attribute that identifies the specific chatbot implementation being traced.
+
+2. **OTLP HTTP exporter**: Using `OTLPSpanExporter` configured to send traces via HTTP to the observability endpoint. The exporter uses `BatchSpanProcessor` to efficiently batch spans before transmission, reducing network overhead.
+
+3. **Targeted instrumentation**: Only instrumenting the libraries actually used in the application:
+
+```python
+LangchainInstrumentor().instrument()
+OpenAIInstrumentor().instrument()
+```
+
+This approach requires manually selecting the specific instrumentation packages to be installed (e.g. `opentelemetry-instrumentation-langchain` and `opentelemetry-instrumentation-openai-v2`), but keeps the dependency tree minimal and gives explicit control over which frameworks are instrumented.
+
+### Alternative: OpenLLMetry
+
+[OpenLLMetry](https://github.com/traceloop/openllmetry) offers a simpler setup that automatically instruments multiple LLM frameworks and vector databases with minimal configuration. With OpenLLMetry, the `Telemetry` class could be simplified to:
+
+```python
+from traceloop.sdk import Traceloop
+
+class Telemetry:
+    def __init__(self, service_name: str):
+        self._service_name = service_name
+        self._started = False
+
+    def start(self) -> None:
+        if self._started:
+            return
+        endpoint = config.get_observability_endpoint()
+        if not is_endpoint_reachable(endpoint):
+            return
+
+        Traceloop.init(
+            app_name=self._service_name,
+            api_endpoint=endpoint
+        )
+        self._started = True
+
+    def stop(self) -> None:
+        # OpenLLMetry handles shutdown automatically
+        pass
+```
+
+This single `Traceloop.init()` call automatically instruments LangChain, OpenAI and other supported frameworks without needing to install or invoke separate instrumentors.
+
+The trade-off between these approaches centers on three aspects:
+
+* **Convenience**: OpenLLMetry auto-detects frameworks and instruments them with a single call. The selective approach requires explicitly invoking each instrumentor.
+* **Dependencies**: OpenLLMetry pulls instrumentation packages for numerous providers (Anthropic, Bedrock, Cohere, Pinecone, Qdrant and others), even if unused. The selective approach only installs what is needed.
+* **Control**: The selective approach provides explicit visibility into which frameworks are instrumented. OpenLLMetry operates implicitly through auto-detection.
+
+### How automatic instrumentation works
+
+The instrumentors use OpenTelemetry's [monkey patching](https://en.wikipedia.org/wiki/Monkey_patch) technique to automatically wrap framework methods with tracing code. This means:
+
+* No changes to application code are required beyond the initial `instrument()` call
+* Spans are automatically created for LLM calls, embeddings, retrievals and other operations
+* Context propagation happens automatically across async boundaries
+* Token usage, prompts and responses are captured as span attributes
+
+The instrumentation captures semantic conventions defined by the [OpenTelemetry Semantic Conventions for AI](https://opentelemetry.io/docs/specs/semconv/gen-ai/), ensuring consistent attribute naming across different tracing implementations.
 
 ## Further reading
 

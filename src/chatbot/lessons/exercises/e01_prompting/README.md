@@ -52,7 +52,7 @@ You can use the following parameters to control the LLM's behavior during prompt
 
 ## Further reading
 
-[Understanding LLM Sampling: Top-k, Top-p, and Temperature](https://towardsai.net/p/machine-learning/understanding-llm-sampling-top-k-top-p-and-temperature) provides detailed explanations of how sampling parameters affect LLM output quality and randomness.
+[Understanding LLM Sampling: Top-k, Top-p and Temperature](https://towardsai.net/p/machine-learning/understanding-llm-sampling-top-k-top-p-and-temperature) provides detailed explanations of how sampling parameters affect LLM output quality and randomness.
 
 [Cheat Sheet: Mastering Temperature and Top-p in ChatGPT API](https://community.openai.com/t/cheat-sheet-mastering-temperature-and-top-p-in-chatgpt-api/172683) offers practical guidance on choosing parameter values for different application types.
 
