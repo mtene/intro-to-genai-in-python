@@ -65,7 +65,7 @@ colorama==0.4.6 ; os_name == 'nt' or sys_platform == 'win32'
     #   uvicorn
 coloredlogs==15.0.1
     # via onnxruntime
-cryptography==46.0.3
+cryptography==46.0.5
     # via
     #   authlib
     #   pyjwt
@@ -185,7 +185,7 @@ kubernetes==33.1.0
     # via chromadb
 langchain-chroma==1.1.0
     # via python-genai-intro
-langchain-core==1.2.6
+langchain-core==1.2.11
     # via
     #   langchain-chroma
     #   langchain-mcp-adapters
@@ -361,7 +361,7 @@ pathable==0.4.4
     # via jsonschema-path
 pathvalidate==3.3.1
     # via py-key-value-aio
-pillow==11.3.0
+pillow==12.1.1
     # via streamlit
 platformdirs==4.5.1
     # via fastmcp
@@ -526,7 +526,7 @@ starlette==0.50.0
     # via
     #   mcp
     #   sse-starlette
-streamlit==1.50.0
+streamlit==1.54.0
     # via
     #   python-genai-intro
     #   streamlit-chat
