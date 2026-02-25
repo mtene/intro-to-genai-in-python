@@ -206,7 +206,7 @@ langchain-text-splitters==1.1.0
     # via python-genai-intro
 langgraph==1.0.5
     # via python-genai-intro
-langgraph-checkpoint==3.0.1
+langgraph-checkpoint==4.0.0
     # via
     #   langgraph
     #   langgraph-prebuilt
