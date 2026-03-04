@@ -7,9 +7,10 @@
 By the end of this exercise, you should be able to:
 
 * Define Python functions as LLM tools with proper type annotations
-* Use LangGraph's `create_react_agent()` to build tool-calling workflows
+* Use LangChain's `create_agent()` to build tool-calling workflows
 * Visualize and understand LangGraph agent architectures
 * Tweak LLM tool calling behavior using parameters
+* **Bonus:** Replace manual conversation history with LangGraph's checkpointer
 
 ## Overview
 
@@ -25,15 +26,19 @@ Tools can be vendor-provided, such as web search or defined by application devel
 
 LangChain's [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools) method equips an LLM with tools, allowing the model to include tool call requests in its responses. However, this only covers the first part of the workflow - calling the requested tools and returning results remains a [manual process](https://python.langchain.com/docs/how_to/tool_results_pass_to_model/), cumbersome and error-prone.
 
-LangGraph, which is a Python package built on top of LangChain, provides [`create_react_agent()`](https://langchain-ai.github.io/langgraph/reference/agents/#langgraph.prebuilt.chat_agent_executor.create_react_agent) to conveniently handle the entire LLM tool-calling workflow. ReAct (reasoning-acting) refers to a pattern introduced in this [paper](https://arxiv.org/abs/2210.03629). You can visualize the architecture of any LangGraph agent with:
+LangChain provides [`create_agent()`](https://docs.langchain.com/oss/python/langchain/agents/) to conveniently handle the entire LLM tool-calling workflow. ReAct (reasoning-acting) refers to a pattern introduced in this [paper](https://arxiv.org/abs/2210.03629). You can visualize the architecture of any LangGraph agent with:
 
 ```python
-_graph.get_graph(xray=True).draw_mermaid_png(output_file_path="graph.png")
+_agent.get_graph(xray=True).draw_mermaid_png(output_file_path="graph.png")
 ```
 
 ![Graph for a ReAct agent](/images/react_graph.png)
 
 While tool call requests and text outputs aren't technically mutually exclusive in an LLM response, most models behave as if they are. The ReAct agent exploits this behavior: it presents tools to the LLM and invokes it in a loop, resolving tool calls and appending results to the conversation until no additional tool requests are received and the final answer emerges.
+
+## Conversation State Management
+
+In this exercise, you'll continue using the `ChatHistory` approach from Exercise 3 to manage conversation state. The agent will receive all historical messages and automatically handle the tool call loop, but you're still responsible for adding user questions and assistant responses to the chat history.
 
 ## Under the hood
 
@@ -123,6 +128,26 @@ The behavior of the LLM when choosing to call tools can be controlled through tw
 ## Further reading
 
 [Beyond Brittle: Building Resilient LLM Tool Calls](https://www.linkedin.com/pulse/beyond-brittle-building-resilient-llm-tool-calls-limin-ma-yuzpc/) covers error handling strategies for LLM tool calls, including retry logic, fallback mechanisms and validation patterns for production systems.
+
+## Bonus Challenge: Automatic Memory with Checkpointer
+
+For an extra challenge, you can replace manual `ChatHistory` tracking with LangGraph's **checkpointer** feature. The `MemorySaver` checkpointer stores all messages (user messages, assistant responses, tool calls, and tool results) in memory, keyed by a `thread_id`.
+
+**How it works:**
+
+* Each conversation has a unique `thread_id` (hint: use `uuid.uuid4()`)
+* Pass only the new message when calling the agent (not the entire history!)
+* The checkpointer automatically loads previous messages and saves new ones
+* To reset the conversation, generate a new `thread_id`
+
+**What you'll need:**
+
+* Import `MemorySaver` from `langgraph.checkpoint.memory`
+* Import `HumanMessage` from `langchain_core.messages`
+* Pass the `checkpointer` parameter when creating the agent
+* Include `thread_id` in the config when invoking the agent (use the `"configurable"` key)
+
+This is simpler and more robust than manual conversation history management, and it's the recommended approach in LangGraph. If you implement this bonus, you get rid of the `ChatHistory` field.
 
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e04_structured_outputs/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s05_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e06_mcp/README.md)
 ---|---|---|---

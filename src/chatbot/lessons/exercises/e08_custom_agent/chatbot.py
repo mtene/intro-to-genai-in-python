@@ -39,10 +39,10 @@ class ChatBot(BaseChatBot):
     """Uses an LLM with a custom graph"""
 
     def __init__(self):
-        self._graph = self._build_graph()
+        self._agent = self._build_agent()
         self._chat_history = ChatHistory()
 
-    def _build_graph(self) -> CompiledStateGraph[GraphState]:
+    def _build_agent(self) -> CompiledStateGraph[GraphState]:
         """Builds a custom graph"""
         graph_builder = StateGraph(GraphState)
         # define nodes
@@ -77,7 +77,7 @@ class ChatBot(BaseChatBot):
             messages=self._chat_history.messages, feedback="create the first draft"
         )
         # invoke the graph on the state with the context
-        final_state = self._graph.invoke(initial_state, config=self.get_config(ctx))
+        final_state = self._agent.invoke(initial_state, config=self.get_config(ctx))
         # extract the answer from the text field of the final state
         answer = final_state["text"]
         # record answer in chat history

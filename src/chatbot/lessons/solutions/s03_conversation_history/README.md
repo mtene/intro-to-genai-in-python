@@ -36,5 +36,19 @@ After a few exchanges, ask the chatbot to translate its first answer to another 
 
 If you've implemented pruning to keep only the last 5 exchanges, the chatbot will translate its second answer in a conversation with 6 exchanges (since the first was pruned). While this may surprise users, it's rare in practice. The gains in robustness and avoiding context-size errors outweigh this drawback. The optimal sliding window length is application-specific.
 
+## Further reading
+
+### Manual vs. Automatic Memory Management
+
+This exercise demonstrates **manual history management** - explicitly tracking and passing messages to the LLM. This approach is important for understanding the fundamentals of how conversation state works.
+
+In later exercises, you'll use agent frameworks that provide **built-in memory management systems**. For example, LangGraph's checkpointer automatically handles conversation state using a `thread_id`, eliminating the need for manual `ChatHistory` tracking.
+
+Production systems typically use these framework-level abstractions, but understanding manual management first helps you:
+
+* Appreciate what frameworks do behind the scenes
+* Debug memory-related issues more effectively
+* Implement custom memory strategies when needed
+
 🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e03_conversation_history/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e04_structured_outputs/README.md)
 ---|---|---

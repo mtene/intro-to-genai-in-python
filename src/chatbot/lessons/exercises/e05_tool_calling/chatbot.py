@@ -59,14 +59,17 @@ class ChatBot(BaseChatBot):
     """Uses an LLM with tools"""
 
     def __init__(self):
-        # TODO: study langgraph.prebuilt.create_react_agent
-        # https://dev.to/chatgptnexus/2025011823-09-11-article-3a60
-        self._graph = LLM()
+        # TODO: study langchain.agents.create_agent
+        # https://reference.langchain.com/python/langchain/agents/factory/create_agent
+        # TODO: create an agent with tools (convert_time, convert_currency)
+        self._agent = LLM() 
+        # Bonus TODO: replace with in-memory checkpointer
         self._chat_history = ChatHistory()
 
     @override
     def reset(self) -> None:
         """Reset chatbot to initial state"""
+        # Bonus TODO: replace with changing thread_id for in-memory checkpointer
         self._chat_history.clear()
 
     @override
@@ -76,17 +79,19 @@ class ChatBot(BaseChatBot):
         Can use ctx to emit status updates, which will be displayed in the UI.
         """
         ctx.update_status("🧠 Thinking...")
+
         # record question in chat history
+        # Bonus TODO: remove in favor of in-memory checkpointer
         self._chat_history.add_message(user_message(question))
-        # call the LLM with all historic messages
-        # bonus: include ctx as a config argument to get tool call status updates
-        response = self._graph.invoke(
+        # call the agent with all historic messages
+        response = self._agent.invoke(
             self._chat_history.messages, config=self.get_config(ctx)
         )
-        # extract the answer
-        # TODO: this will be slightly different, see the response format for the LangGraph agent
+        # TODO: extract the answer from the response
+        # Hint: the agent will return {"messages": [...]} - get the last message's content
         answer = str(response.content)
         # record answer in chat history
+        # Bonus TODO: remove in favor of in-memory checkpointer
         self._chat_history.add_message(assistant_message(answer))
 
         return answer
