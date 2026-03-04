@@ -33,6 +33,10 @@ def __init__(self):
     mcp_tools = mcp_client.get_tools()
 ```
 
+## Conversation State Management
+
+This exercise uses LangGraph's **checkpointer** pattern for automatic conversation history management instead of the manual `ChatHistory` approach previously employed when calling the LLM directly. The `MemorySaver` checkpointer automatically stores and retrieves all messages using a `thread_id`, eliminating the need for manual `ChatHistory` tracking.
+
 ## Local MCP server
 
 The MCP connection configuration contains a local server which will be started in a separate process. Communication will happen via console messages (standard I/O).

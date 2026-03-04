@@ -183,10 +183,13 @@ keyring==25.7.0
     # via py-key-value-aio
 kubernetes==33.1.0
     # via chromadb
+langchain==1.2.10
+    # via python-genai-intro
 langchain-chroma==1.1.0
     # via python-genai-intro
 langchain-core==1.2.11
     # via
+    #   langchain
     #   langchain-chroma
     #   langchain-mcp-adapters
     #   langchain-ollama
@@ -205,7 +208,9 @@ langchain-openai==1.1.6
 langchain-text-splitters==1.1.0
     # via python-genai-intro
 langgraph==1.0.10
-    # via python-genai-intro
+    # via
+    #   langchain
+    #   python-genai-intro
 langgraph-checkpoint==4.0.1
     # via
     #   langgraph
@@ -399,6 +404,7 @@ pydantic==2.12.5
     # via
     #   chromadb
     #   fastmcp
+    #   langchain
     #   langchain-core
     #   langgraph
     #   langsmith

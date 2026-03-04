@@ -1,13 +1,16 @@
 import logging
 import sys
+import uuid
 from pathlib import Path
 from typing import override
+from langchain_core.messages import HumanMessage
+from langchain.agents import create_agent
+from langgraph.checkpoint.memory import MemorySaver
+from langgraph.graph.state import CompiledStateGraph
 from chatbot.chatbot_base import BaseChatBot
 from chatbot.chat_context import ChatContext
-from chatbot.chat_history import ChatHistory, assistant_message, user_message
 from chatbot.services.llm import LLM
 from chatbot.services.mcp_client import MCPClient
-from langgraph.prebuilt import create_react_agent
 
 logger = logging.getLogger(__name__)
 
@@ -41,13 +44,17 @@ class ChatBot(BaseChatBot):
                 f"Available MCP tools:{''.join(f'\n\t{tool.name}' for tool in mcp_tools)}"
             )
         # create an agent that will use the tools
-        self._graph = create_react_agent(model=LLM(), tools=mcp_tools)
-        self._chat_history = ChatHistory()
+        # MemorySaver checkpointer automatically manages conversation history
+        self._agent: CompiledStateGraph = create_agent(
+            model=LLM(), tools=mcp_tools, checkpointer=MemorySaver()
+        )
+        self._thread_id = str(uuid.uuid4())
 
     @override
     def reset(self) -> None:
         """Reset chatbot to initial state"""
-        self._chat_history.clear()
+        # Generate new thread ID to start fresh conversation
+        self._thread_id = str(uuid.uuid4())
 
     @override
     def get_answer(self, question: str, ctx: ChatContext) -> str:
@@ -56,17 +63,18 @@ class ChatBot(BaseChatBot):
         Can use ctx to emit status updates, which will be displayed in the UI.
         """
         ctx.update_status("🧠 Thinking...")
-        # record question in chat history
-        self._chat_history.add_message(user_message(question))
-        # call the LLM with all historic messages
+        # Call the agent with new message
+        # Checkpointer automatically loads previous messages and saves new ones
         # also pass ctx so that the agent can publish status updates on tool calls to the UI
-        response = self._graph.invoke(
-            {"messages": self._chat_history.messages}, config=self.get_config(ctx)
+        response = self._agent.invoke(
+            {"messages": [HumanMessage(content=question)]},
+            config={
+                **self.get_config(ctx),
+                "configurable": {"thread_id": self._thread_id},
+            },
         )
         # extract the answer
         # multiple messages may have been generated, the last one is the final response
         answer = str(response["messages"][-1].content)
-        # record answer in chat history
-        self._chat_history.add_message(assistant_message(answer))
 
         return answer
