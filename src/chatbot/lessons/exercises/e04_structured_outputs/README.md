@@ -24,9 +24,12 @@ Dealing with natural-language inputs is tricky with traditional algorithms. LLMs
 
 ## How do I do it?
 
-In Python, it is natural to capture type constraints as [Pydantic](https://docs.pydantic.dev/latest/) models - classes with annotated fields, where validation is performed upon instantiation. Such a class describing a `Person` is already provided at the top of the exercise code.
+OpenAI were the first to introduce the concept of constraining LLM output via Json schemas. While powerful, the format is verbose and its typing system is slightly different to traditional programming.
 
-Libraries like LangChain use Pydantic's built-in serialization support to seamlessly configure structured outputs for LLMs. Study the docs on [`with_structured_output()`](https://python.langchain.com/docs/how_to/structured_output/).
+In Python, it is natural to capture type constraints as [Pydantic](https://docs.pydantic.dev/latest/) models - classes with type annotated fields, where validation is performed upon instantiation. Such a class describing a `Person` is already provided at the top of the exercise code.
+
+Pydantic's built-in serialization to Json schema 
+handles the translation, allowing us to seamlessly configure structured outputs for LLMs. Study the docs on [`with_structured_output()`](https://python.langchain.com/docs/how_to/structured_output/).
 
 ## Under the hood
 
