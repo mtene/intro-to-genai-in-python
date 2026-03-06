@@ -22,7 +22,7 @@ Run the [tests](tests.py) in the console to track progress and extend them with 
 
 Continuing on the theme of programmatic uses of GenAI, a popular feature is LLM tool use. Tools give the model the capability to access new data sources or perform actions on behalf of the user.
 
-Tools can be vendor-provided, such as web search or defined by application developers. In Python, tools are functions with type-annotated parameters, as can be seen at the top of the exercise code (`convert_time` and `convert_currency`).
+Tools can be vendor-provided, such as web search or sandboxed code execution, or, more commonly, defined by application developers. In Python, tools are functions with type-annotated parameters, as can be seen at the top of the exercise code (`convert_time` and `convert_currency`).
 
 LangChain's [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools) method equips an LLM with tools, allowing the model to include tool call requests in its responses. However, this only covers the first part of the workflow - calling the requested tools and returning results remains a [manual process](https://python.langchain.com/docs/how_to/tool_results_pass_to_model/), cumbersome and error-prone.
 
