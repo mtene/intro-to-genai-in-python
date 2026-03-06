@@ -145,12 +145,12 @@ For an extra challenge, you can replace `ChatHistory` with LangGraph's **checkpo
 **What you'll need:**
 
 * Import `MemorySaver` from `langgraph.checkpoint.memory`
-* Import `HumanMessage` from `langchain_core.messages`
 * Pass the `checkpointer` parameter when creating the agent
 * Include `thread_id` in the config when invoking the agent (use the `"configurable"` key)
 * Change the value of `thread_id` in `reset()`
+* Remove the `ChatHistory` field and explicit message management. Simply pass the new user message when invoking the LLM.
 
-This is simpler and more robust than manual conversation history management, and it's the recommended approach in LangGraph. If you implement this bonus, you get rid of the `ChatHistory` field and explicit message management.
+This is simpler and more robust than manual conversation history management, and it's the recommended approach in LangGraph.
 
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e04_structured_outputs/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s05_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e06_mcp/README.md)
 ---|---|---|---
