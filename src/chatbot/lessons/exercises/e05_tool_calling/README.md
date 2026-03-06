@@ -40,7 +40,7 @@ While tool call requests and text outputs aren't technically mutually exclusive 
 
 ## Conversation State Management
 
-In this exercise, you'll continue using the `ChatHistory` approach from Exercise 3 to manage conversation state. The agent will receive all historical messages and automatically handle the tool call loop, but you're still responsible for adding user questions and assistant responses to the chat history.
+In this exercise, you can continue using the `ChatHistory` tracking approach seen earlier to manage conversation state. This provides the agent with all historical messages as context, but you're still responsible for explicitly adding user questions and assistant responses.
 
 ## Under the hood
 
@@ -133,7 +133,7 @@ The behavior of the LLM when choosing to call tools can be controlled through tw
 
 ## Bonus Challenge: Automatic Memory with Checkpointer
 
-For an extra challenge, you can replace manual `ChatHistory` tracking with LangGraph's **checkpointer** feature. The `MemorySaver` checkpointer stores all messages (user messages, assistant responses, tool calls, and tool results) in memory, keyed by a `thread_id`.
+For an extra challenge, you can replace `ChatHistory` with LangGraph's **checkpointer** feature. The `MemorySaver` checkpointer stores all messages (user messages, assistant responses, tool calls, and tool results) in memory, keyed by a `thread_id`.
 
 **How it works:**
 
@@ -148,8 +148,9 @@ For an extra challenge, you can replace manual `ChatHistory` tracking with LangG
 * Import `HumanMessage` from `langchain_core.messages`
 * Pass the `checkpointer` parameter when creating the agent
 * Include `thread_id` in the config when invoking the agent (use the `"configurable"` key)
+* Change the value of `thread_id` in `reset()`
 
-This is simpler and more robust than manual conversation history management, and it's the recommended approach in LangGraph. If you implement this bonus, you get rid of the `ChatHistory` field.
+This is simpler and more robust than manual conversation history management, and it's the recommended approach in LangGraph. If you implement this bonus, you get rid of the `ChatHistory` field and explicit message management.
 
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e04_structured_outputs/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s05_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e06_mcp/README.md)
 ---|---|---|---
