@@ -14,7 +14,7 @@ def __init__(self):
     self._thread_id = str(uuid.uuid4())
 ```
 
-The agent sets up a [`langchain_core.prompts.ChatPromptTemplate`](https://python.langchain.com/api_reference/core/prompts/langchain_core.prompts.chat.ChatPromptTemplate.html) internally (though you can provide your own). It creates its own LLM instance and equips it with tools via LangChain's [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools). Like with structured outputs, the original `llm` object remains unmodified and returns free-text responses when invoked.
+The agent sets up a [`langchain_core.prompts.ChatPromptTemplate`](https://python.langchain.com/api_reference/core/prompts/langchain_core.prompts.chat.ChatPromptTemplate.html) internally (though you can provide your own). It configures the provided LLM instance to use tools via LangChain's [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools). As with structured outputs, the original `llm` object remains unmodified and continues to return free-text responses when invoked.
 
 The `MemorySaver` checkpointer automatically manages conversation history, storing all messages (including tool calls and results) keyed by `thread_id`.
 
