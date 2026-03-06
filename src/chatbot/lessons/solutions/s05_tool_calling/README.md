@@ -24,7 +24,7 @@ The agent is used as below
 @override
 def get_answer(self, question: str, ctx: ChatContext) -> str:
     response = self._agent.invoke(
-        {"messages": [HumanMessage(content=question)]},
+        {"messages": [user_message(content=question)]},
         config={
             **self.get_config(ctx),
             "configurable": {"thread_id": self._thread_id}
@@ -34,6 +34,8 @@ def get_answer(self, question: str, ctx: ChatContext) -> str:
 ```
 
 Notice we pass only the **new message**, not the entire history. The checkpointer automatically loads previous messages using the `thread_id` and saves all new messages (including tool calls and results) after execution.
+
+`user_message()` is just a helper function that constructs a LangChain `HumanMessage` with the provided content.
 
 To clear the conversation, simply generate a new `thread_id` in the `reset()` method:
 
