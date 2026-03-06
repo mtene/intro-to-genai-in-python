@@ -26,7 +26,9 @@ Tools can be vendor-provided, such as web search or sandboxed code execution, or
 
 LangChain's [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools) method equips an LLM with tools, allowing the model to include tool call requests in its responses. However, this only covers the first part of the workflow - calling the requested tools and returning results remains a [manual process](https://python.langchain.com/docs/how_to/tool_results_pass_to_model/), cumbersome and error-prone.
 
-LangChain provides [`create_agent()`](https://docs.langchain.com/oss/python/langchain/agents/) to conveniently handle the entire LLM tool-calling workflow. ReAct (reasoning-acting) refers to a pattern introduced in this [paper](https://arxiv.org/abs/2210.03629). You can visualize the architecture of any LangGraph agent with:
+LangChain provides [`create_agent()`](https://docs.langchain.com/oss/python/langchain/agents/) to conveniently handle the entire LLM tool-calling workflow. The agent follows the ReAct (reasoning-acting) pattern, as introduced in this [paper](https://arxiv.org/abs/2210.03629).
+
+For clarity, you can visualize its architecture or that of any LangGraph agent with:
 
 ```python
 _agent.get_graph(xray=True).draw_mermaid_png(output_file_path="graph.png")
