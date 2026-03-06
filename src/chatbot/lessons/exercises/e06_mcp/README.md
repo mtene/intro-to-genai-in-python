@@ -35,7 +35,7 @@ def __init__(self):
 
 ## Conversation State Management
 
-This exercise uses LangGraph's **checkpointer** pattern for automatic conversation history management instead of the manual `ChatHistory` approach previously employed when calling the LLM directly. The `MemorySaver` checkpointer automatically stores and retrieves all messages using a `thread_id`, eliminating the need for manual `ChatHistory` tracking.
+This exercise uses LangGraph's **checkpointer** pattern for automatic conversation history management instead of the manual `ChatHistory` approach previously employed when calling the LLM directly. The `MemorySaver` checkpointer automatically stores and retrieves all messages using a `thread_id`, eliminating the need to explicitly add the user query and agent response.
 
 ## Local MCP server
 
