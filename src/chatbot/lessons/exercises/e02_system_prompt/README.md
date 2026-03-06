@@ -7,7 +7,7 @@
 By the end of this exercise, you should be able to:
 
 * Write effective system prompts that guide LLM behavior
-* Include various system prompt component such as role, mission, steps, rules and examples
+* Include various system prompt components such as role, mission, steps, rules and examples
 * Understand the difference between system messages and user messages
 
 ## Overview
