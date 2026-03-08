@@ -1,4 +1,4 @@
-# Solution 8: Custom agent
+# Solution: Custom agent
 
 One possible [solution](chatbot.py) to the [`author`](author.py)-[`reviewer`](reviewer.py) task wires them in a loop, as shown in the diagram.
 

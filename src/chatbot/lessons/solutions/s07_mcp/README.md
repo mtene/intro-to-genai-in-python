@@ -1,4 +1,4 @@
-# Solution 6: Model Context Protocol
+# Solution: Model Context Protocol
 
 In the solution, we connect the [chatbot](chatbot.py) to one local and one public Model Context Protocol (MCP) servers.
 
@@ -42,5 +42,5 @@ If the connection to the MCP servers is successful, all available tools will be 
 
 Ask questions about Microsoft software, the current time or currency conversions and verify that the tools get called by observing the status updates.
 
-🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e06_mcp/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e07_rag/README.md)
+🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md)
 ---|---|---

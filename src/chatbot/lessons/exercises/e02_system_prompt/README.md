@@ -1,4 +1,4 @@
-# Exercise 2: System prompt
+# Exercise: System prompt
 
 ⏱️ **Estimated time**: 10 minutes
 

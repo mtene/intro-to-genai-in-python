@@ -1,4 +1,4 @@
-# Exercise 6: Model Context Protocol
+# Exercise: Model Context Protocol
 
 ⏱️ **Estimated time**: 30 minutes
 
@@ -98,5 +98,5 @@ MCP servers can be hosted locally, on a private intranet or on the public intern
 
 [Tool Calling is Broken Without MCP Server Composition](https://hackteam.io/blog/tool-calling-is-broken-without-mcp-server-composition/) explains why tool overload degrades LLM performance and demonstrates composition patterns for organizing tools across multiple MCP servers.
 
-🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e05_tool_calling/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s06_mcp/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e07_rag/README.md)
+🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s07_mcp/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md)
 ---|---|---|---

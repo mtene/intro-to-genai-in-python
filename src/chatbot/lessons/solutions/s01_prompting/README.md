@@ -1,4 +1,4 @@
-# Solution 1: Text prompting
+# Solution: Text prompting
 
 The [solution](chatbot.py) to the exercise uses an LLM to answer user queries.
 

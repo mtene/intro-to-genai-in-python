@@ -1,4 +1,4 @@
-# Exercise 5: Tool calling
+# Exercise: Tool calling
 
 ⏱️ **Estimated time**: 25 minutes
 
@@ -152,5 +152,5 @@ For an extra challenge, you can replace `ChatHistory` with LangGraph's **checkpo
 
 This is simpler and more robust than manual conversation history management, and it's the recommended approach in LangGraph.
 
-🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e04_structured_outputs/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s05_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e06_mcp/README.md)
+🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e05_structured_outputs/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s06_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md)
 ---|---|---|---
