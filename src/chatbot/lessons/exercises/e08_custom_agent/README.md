@@ -90,5 +90,5 @@ The possibilities of how a given node's logic can be implemented are endless. Th
 
 ---
 
-🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s08_custom_agent/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e09_observability/README.md)
+🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s08_custom_agent/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e09_deep_agent/README.md)
 ---|---|---|---

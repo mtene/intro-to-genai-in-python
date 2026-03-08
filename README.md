@@ -13,7 +13,8 @@ Structured outputs | 📖 [Exercise](/src/chatbot/lessons/exercises/e05_structur
 Tool calling | 📖 [Exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s06_tool_calling/README.md)
 Model Context Protocol (MCP) | 📖 [Exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s07_mcp/README.md)
 Custom agent | 📖 [Exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s08_custom_agent/README.md)
-Observability | 📖 [Exercise](/src/chatbot/lessons/exercises/e09_observability/README.md)
+DeepAgents CLI | 📖 [Exercise](/src/chatbot/lessons/exercises/e09_deep_agent/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s09_deep_agent/README.md)
+Observability | 📖 [Exercise](/src/chatbot/lessons/exercises/e10_observability/README.md)
 
 All of the above include automated test suites to verify and benchmark the implementation. For details, read the [Testing Guide](/src/chatbot/testing/README.md).
 

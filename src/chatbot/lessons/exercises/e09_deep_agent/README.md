@@ -1,0 +1,270 @@
+# Exercise: DeepAgents CLI
+
+⏱️ **Estimated time**: 45 minutes
+
+## Learning Objectives
+
+By the end of this exercise, you should be able to:
+
+* Understand what how LangChain DeepAgents compared to the custom defined agents encountered in a previous lesson
+* Define skills following the [agentskills.io](https://agentskills.io) specification
+* Build agents with custom skills, planning and task delegation capabilities
+* Observe how the agent handles file operations and multi-step workflows
+
+## Model Requirements
+
+**DeepAgents requires capable models** for planning and routing:
+
+* **< 8B parameters:** Will fail - models hallucinate instead of following the framework
+* **8-20B parameters:** May understand but struggle to execute (describe actions instead of performing them)
+* **20-70B parameters:** Works on simple tasks, may struggle with complex multi-skill planning
+* **> 70B parameters:** Recommended - high success rate (e.g., Llama 3.3:70B, GPT-4, Claude 3.5+)
+
+From testing, GPT-OSS 20B is the smallest local LLM that works with DeepAgents. For best results, switch to a remote LLM in `src/config.yaml`:
+
+```yaml
+llm_config:
+  <<: *remote_llm_settings  # Change from local_llm_settings
+```
+
+Ensure your remote endpoint is configured and credentials are set as environment variables.
+
+## Overview
+
+In this exercise, you will create a **Study Guide Generator Agent** that helps students learn by creating flashcards and quiz questions from educational content.
+
+Unlike previously, where you defined tools as Python functions, DeepAgents uses **skills** defined in natural language. Skills are typically defined in markdown files that are:
+
+* Easy to share and version control
+* Understandable by both humans and agents
+* Independent of implementation language
+
+**Why skills over tools?** Traditional tools (Python `@tool` or MCP) send full definitions with every API call (10 tools × ~1000 tokens = 10,000 tokens per call). Skills use a two-phase approach: the main agent sees only short descriptions (~50 tokens each) for routing, then loads full instructions only when executing that skill as a subagent. Even though this implies multiple exchanges with the LLM, it saves precious context window space, enabling agents to stay effective with 50+ skills instead of just 5-10 tools.
+
+Run the [tests](tests.py) in the console to track progress.
+
+## Motivation
+
+### The Rise of CLI Agents
+
+AI is transforming command-line interfaces from simple command executors into intelligent assistants. Modern CLI agents like GitHub Copilot CLI, [Aider](https://aider.chat/), and [Claude Code](https://claude.ai/code) can understand intent, plan autonomously, access codebase context, and execute multi-step operations safely.
+
+This shift - from "tell me the command" to "do it for me intelligently" - represents the future of developer tools.
+
+### From Custom Graphs to DeepAgents
+
+Previously, you built a custom agent with an author-reviewer loop. While powerful, that agent had limitations:
+
+* Fixed structure (always author → reviewer)
+* No file system access
+* No automatic planning for complex tasks
+* Embedded in application code
+
+[LangChain DeepAgents](https://docs.langchain.com/oss/python/deepagents/overview) extends the custom agent pattern with:
+
+* **Planning**: Agents break down complex tasks into steps
+* **File operations**: Agents can read, write, and organize files
+* **Skills**: Modular capabilities defined in markdown
+* **Persistence**: Built on LangGraph's state management
+* **CLI-first design**: Meant to be run from the terminal
+
+## What You'll Build
+
+A study guide generator with two skills:
+
+1. **generate-flashcards** - Creates Q&A flashcards from educational material
+1. **create-quiz-questions** - Generates multiple choice quiz questions
+
+## SKILL.md File Format
+
+Skills are defined using the [agentskills.io](https://agentskills.io) specification. Each skill is a directory containing a `SKILL.md` file with:
+
+### Structure
+
+```markdown
+---
+name: skill-name
+description: Clear description of when the agent should use this skill
+---
+
+# Human-Readable Skill Title
+
+## Purpose
+What this skill accomplishes
+
+## Instructions
+1. Step-by-step guide for the agent
+1. Be specific about inputs and outputs
+1. Include any important details
+
+## Output Format
+Show examples of the expected output
+
+## Quality Guidelines
+* Tips for producing good results
+* Best practices
+```
+
+### Example: emoji-decorator
+
+An example skill [`emoji-decorator`](skills/emoji-decorator/SKILL.md) is provided.
+
+**Try it out:**
+
+```plaintext
+>>> Add some emojis to this text: I love learning about DeepAgents!
+```
+
+The agent will use the emoji-decorator skill to enhance your text. Study this skill's SKILL.md file to understand the format before creating your own!
+
+## Your Tasks
+
+### Task 1: Inspect the Chatbot (chatbot.py)
+
+Study the [chatbot logic](chatbot.py), noting the creating and use of DeepAgents:
+
+* the LLM and path to the skills directory is specified at construction
+* `load_skills_from_dir()` loads skills using native Python Path operations (avoids Windows path issues)
+* skills are passed as `subagents=` (pre-loaded SubAgent dicts) to `create_deep_agent()`
+* `LocalShellBackend` with `virtual_mode=True` restricts file access to the lessons directory for security
+* virtual paths starting with `/` are used (e.g., `/exercises/e09_deep_agent/README.md`)
+* `config=self.get_config(ctx)` is passed when invoking to enable status updates
+* the agent returns a dictionary with a `"messages"` key
+
+### Task 2: Create the generate-flashcards Skill
+
+In `skills/generate-flashcards/SKILL.md`, create a skill that:
+
+* Extracts key concepts from educational content
+* Creates question-answer pairs
+* Formats them as markdown flashcards
+* Generates 10 flashcards by default
+
+**Output format suggestion:**
+
+```markdown
+# Flashcards for [Topic]
+
+## Card 1
+Q: [Question about a concept]
+A: [Clear, concise answer]
+
+## Card 2
+Q: [Another question]
+A: [Another answer]
+```
+
+### Task 3: Create the create-quiz-questions Skill
+
+In `skills/create-quiz-questions/SKILL.md`, create a skill that:
+
+* Analyzes educational content
+* Generates multiple choice questions
+* Provides 4 options (A-D) per question
+* Includes the correct answer and explanation
+* Creates 5 questions by default
+
+**Output format suggestion:**
+
+```markdown
+# Quiz for [Topic]
+
+## Question 1
+[Question text]
+
+A: [Option A]
+B: [Option B]
+C: [Option C]
+D: [Option D]
+
+**Answer:** [Correct option]
+**Explanation:** [Why this is correct]
+```
+
+## Testing Your Implementation
+
+Run `/test` in the console to check your implementation.
+
+### Expected Test Results
+
+As you work through the exercise, you'll see tests pass progressively:
+
+| Test | When It Passes |
+| ---- | -------------- |
+| emoji-decorator | ✅ Immediately (example skill provided) |
+| Generate flashcards | After defining generate-flashcards/SKILL.md |
+| Generate quiz questions | After defining create-quiz-questions/SKILL.md |
+| Use multiple skills | After both skills are complete |
+| Generate specific number | After flashcards skill is robust |
+
+**Initial state:** Only test 1 should pass (the emoji-decorator example).
+
+**Goal:** All 5 tests passing means your implementation is complete!
+
+### Debugging Failed Tests
+
+If a test fails, the agent might:
+
+* Not recognize when to use your skill → Check the `description` field
+* Use the skill but produce wrong output → Review the `Instructions` section
+* Skip the skill entirely → Make sure the SKILL.md file exists and is properly formatted
+
+## Try These Prompts
+
+After implementing, try:
+
+```plaintext
+>>> Create flashcards from this content: "LangGraph is a library for building stateful, multi-actor applications with LLMs. It extends LangChain with graphs and persistence."
+```
+
+```plaintext
+>>> Generate a quiz about LLM tool calling
+```
+
+```plaintext
+>>> Create a complete study guide for RAG with both flashcards and quiz questions
+```
+
+Watch the agent plan and execute! You'll see:
+
+```bash
+🧠 Thinking...
+📝 Planning: Breaking task into steps
+🔨 Calling generate_flashcards(content="...")
+📦 generate_flashcards returned: [flashcards]
+```
+
+## Understanding DeepAgents vs Custom Agents
+
+| Aspect | LangGraph Custom Agent | DeepAgent |
+| ------ | ----------------------- | -------------------- |
+| **Workflow** | Fixed graph (author→reviewer) | Dynamic planning |
+| **Capabilities** | Only what you code | Planning + files + skills |
+| **Tools** | Python @tool functions | SKILL.md files |
+| **Complexity** | You manage state flow | Built-in state management |
+| **Use Case** | Specific, predictable flows | Open-ended tasks |
+
+## Further Reading
+
+[Introduction to DeepAgents](https://docs.langchain.com/oss/python/deepagents/overview) - Official LangChain documentation covering architecture and use cases
+
+[The agentskills.io Specification](https://agentskills.io) - Standard format for defining agent skills
+
+[Planning in AI Agents](https://blog.langchain.com/planning-in-ai-agents/) - Deep dive into how agents decompose complex tasks
+
+### DeepAgents CLI Tool
+
+While this exercise integrates DeepAgents into our chatbot, [`deepagents-cli`](https://github.com/langchain-ai/deepagents) is also available as a companion terminal user interface (TUI) :
+
+```bash
+# Install and run
+pip install deepagents-cli
+deepagents "Create a summary of all Python files in src/"
+```
+
+The CLI provides real-time visualization of agent planning, interactive skill selection, file tree navigation with diff previews, and streaming output with syntax highlighting.
+
+---
+
+| 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s09_deep_agent/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e10_observability/README.md) |
+| --- | --- | --- | --- |

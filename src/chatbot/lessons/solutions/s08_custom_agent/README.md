@@ -54,5 +54,5 @@ The implementation and further exploration is left as an exercise for the reader
 
 ---
 
-🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e09_observability/README.md)
+🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e09_deep_agent/README.md)
 ---|---|---

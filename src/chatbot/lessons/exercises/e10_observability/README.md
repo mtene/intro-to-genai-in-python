@@ -140,5 +140,5 @@ It may also be instructive to study the [OpenTelemetry](https://opentelemetry.io
 
 ---
 
-🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md)
+🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e09_deep_agent/README.md)
 ---|---
