@@ -53,5 +53,7 @@ Inspect the [`ChatHistory`](/src/chatbot/chat_history.py) class and you can also
 
 [AI Agent Memory Types: Complete Guide for Developers](https://mljourney.com/ai-agent-memory-types-complete-guide-for-developers/) explores different memory architectures for AI agents, including short-term, long-term, episodic and semantic memory patterns.
 
+---
+
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e02_system_prompt/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s03_memory/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e04_rag/README.md)
 ---|---|---|---

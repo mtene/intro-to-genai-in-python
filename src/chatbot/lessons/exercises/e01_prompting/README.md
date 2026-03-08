@@ -58,5 +58,7 @@ You can use the following parameters to control the LLM's behavior during prompt
 
 [ChatOpenAI API Reference](https://python.langchain.com/api_reference/openai/chat_models/langchain_openai.chat_models.base.ChatOpenAI.html#langchain_openai.chat_models.base.ChatOpenAI) documents the LangChain class for configuring and calling OpenAI-compatible LLMs with various parameters.
 
+---
+
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e00_intro/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s01_prompting/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e02_system_prompt/README.md)
 ---|---|---|---

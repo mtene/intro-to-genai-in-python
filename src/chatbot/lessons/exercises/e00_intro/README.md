@@ -149,5 +149,7 @@ To complete all tutorials, native support for both structured outputs and tool c
 
 [AI Engineering Pitfalls](https://huyenchip.com/2025/01/16/ai-engineering-pitfalls.html) discusses the thought process behind deciding if GenAI is the right fit for an application, covering common pitfalls and when to avoid LLM-based solutions.
 
+---
+
 🏠 [Overview](/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e01_prompting/README.md)
 ---|---

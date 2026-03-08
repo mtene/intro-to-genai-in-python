@@ -121,5 +121,7 @@ movie = Movie(title="Impossible Movie", year=-1, genre="horror", rating=0.1)
 
 [The Art of the Description: Your Ultimate Guide to Optimizing LLM JSON Outputs](https://dev.to/yigit-konur/the-art-of-the-description-your-ultimate-guide-to-optimizing-llm-json-outputs-with-json-schema-jne) covers best practices for designing effective JSON schemas, with emphasis on writing clear field descriptions that improve LLM output quality.
 
+---
+
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e04_rag/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s05_structured_outputs/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md)
 ---|---|---|---

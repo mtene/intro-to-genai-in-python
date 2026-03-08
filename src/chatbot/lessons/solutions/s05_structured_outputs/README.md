@@ -49,5 +49,7 @@ answer = f"{response.name}, born in {response.year_of_birth}"
 
 Test different queries and confirm that you get the expected formatted output. Also try queries where the answer should contain no references to a person and see what happens!
 
+---
+
 🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e05_structured_outputs/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md)
 ---|---|---

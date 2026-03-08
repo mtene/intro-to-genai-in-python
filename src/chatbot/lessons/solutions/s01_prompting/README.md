@@ -32,5 +32,7 @@ As mentioned before, passing `ctx` via `config` is done only to enable reporting
 
 After completing the exercise, you should be able to prompt the chatbot and get reasonable results, as provided by the LLM. Hallucinations may occur and this is more likely with smaller models in terms of number of active parameters.
 
+---
+
 🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e01_prompting/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e02_system_prompt/README.md)
 ---|---|---

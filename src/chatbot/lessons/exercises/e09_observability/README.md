@@ -138,5 +138,7 @@ The instrumentation captures semantic conventions defined by the [OpenTelemetry 
 
 It may also be instructive to study the [OpenTelemetry](https://opentelemetry.io/docs/) framework.
 
+---
+
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md)
 ---|---

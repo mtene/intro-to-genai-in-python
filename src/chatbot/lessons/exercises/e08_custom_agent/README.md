@@ -88,5 +88,7 @@ The possibilities of how a given node's logic can be implemented are endless. Th
 
 [Choose a Design Pattern for Your Agentic AI System](https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system) explores various agent design patterns including reflection, planning, multi-agent collaboration and tool-use patterns for building production agentic systems.
 
+---
+
 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s08_custom_agent/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e09_observability/README.md)
 ---|---|---|---

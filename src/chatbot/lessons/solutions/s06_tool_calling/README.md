@@ -54,5 +54,7 @@ answer = str(response["messages"][-1].content)
 
 Ask questions involving time or currency conversions and verify that the tools get called by observing the status updates.
 
+---
+
 🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md)
 ---|---|---
