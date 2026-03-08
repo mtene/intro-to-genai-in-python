@@ -46,5 +46,5 @@ Here, the system prompt has its own dedicated [`langchain_core.prompts.SystemMes
 
 You can verify that the system prompt is effective by observing the changes in the structure or tone of the assistant's replies.
 
-🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e02_system_prompt/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e03_conversation_history/README.md)
+🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e02_system_prompt/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e03_memory/README.md)
 ---|---|---

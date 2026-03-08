@@ -7,7 +7,7 @@ Lesson | Links
 Introduction | 📖 [Exercise](/src/chatbot/lessons/exercises/e00_intro/README.md)
 Prompting | 📖 [Exercise](/src/chatbot/lessons/exercises/e01_prompting/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s01_prompting/README.md)
 System instructions | 📖 [Exercise](/src/chatbot/lessons/exercises/e02_system_prompt/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s02_system_prompt/README.md)
-Tracking conversation history | 📖 [Exercise](/src/chatbot/lessons/exercises/e03_conversation_history/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s03_conversation_history/README.md)
+Memory | 📖 [Exercise](/src/chatbot/lessons/exercises/e03_memory/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s03_memory/README.md)
 Retrieval Augmented Generation (RAG) | 📖 [Exercise](/src/chatbot/lessons/exercises/e04_rag/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s04_rag/README.md)
 Structured outputs | 📖 [Exercise](/src/chatbot/lessons/exercises/e05_structured_outputs/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s05_structured_outputs/README.md)
 Tool calling | 📖 [Exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s06_tool_calling/README.md)

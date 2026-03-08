@@ -71,5 +71,5 @@ Then, perform semantic search based on the query, retrieving the most relevant t
 
 [RAG Evaluation: Best Practices and Metrics](https://www.evidentlyai.com/llm-guide/rag-evaluation) demonstrates how to measure RAG system performance using metrics like context precision, context recall, faithfulness and answer relevance.
 
-🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e03_conversation_history/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s04_rag/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e05_structured_outputs/README.md)
+🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e03_memory/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s04_rag/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e05_structured_outputs/README.md)
 ---|---|---|---
