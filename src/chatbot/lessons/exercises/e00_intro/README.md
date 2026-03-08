@@ -1,4 +1,4 @@
-# Exercise 0: Introduction
+# Exercise: Introduction
 
 ⏱️ **Estimated time**: 10 minutes
 

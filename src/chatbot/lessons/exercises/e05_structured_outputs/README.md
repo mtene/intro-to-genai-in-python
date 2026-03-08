@@ -1,4 +1,4 @@
-# Exercise 4: Structured outputs
+# Exercise: Structured outputs
 
 ⏱️ **Estimated time**: 20 minutes
 
@@ -24,9 +24,12 @@ Dealing with natural-language inputs is tricky with traditional algorithms. LLMs
 
 ## How do I do it?
 
-In Python, it is natural to capture type constraints as [Pydantic](https://docs.pydantic.dev/latest/) models - classes with annotated fields, where validation is performed upon instantiation. Such a class describing a `Person` is already provided at the top of the exercise code.
+OpenAI were the first to introduce the concept of constraining LLM output via Json schemas. While powerful, the format is verbose and its typing system is slightly different to traditional programming.
 
-Libraries like LangChain use Pydantic's built-in serialization support to seamlessly configure structured outputs for LLMs. Study the docs on [`with_structured_output()`](https://python.langchain.com/docs/how_to/structured_output/).
+In Python, it is natural to capture type constraints as [Pydantic](https://docs.pydantic.dev/latest/) models - classes with type annotated fields, where validation is performed upon instantiation. Such a class describing a `Person` is already provided at the top of the exercise code.
+
+Pydantic's built-in serialization to Json schema 
+handles the translation, allowing us to seamlessly configure structured outputs for LLMs. Study the docs on [`with_structured_output()`](https://python.langchain.com/docs/how_to/structured_output/).
 
 ## Under the hood
 
@@ -118,5 +121,5 @@ movie = Movie(title="Impossible Movie", year=-1, genre="horror", rating=0.1)
 
 [The Art of the Description: Your Ultimate Guide to Optimizing LLM JSON Outputs](https://dev.to/yigit-konur/the-art-of-the-description-your-ultimate-guide-to-optimizing-llm-json-outputs-with-json-schema-jne) covers best practices for designing effective JSON schemas, with emphasis on writing clear field descriptions that improve LLM output quality.
 
-🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e03_conversation_history/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s04_structured_outputs/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e05_tool_calling/README.md)
+🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e04_rag/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s05_structured_outputs/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md)
 ---|---|---|---

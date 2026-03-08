@@ -1,4 +1,4 @@
-# Solution 1: Text prompting
+# Solution: Text prompting
 
 The [solution](chatbot.py) to the exercise uses an LLM to answer user queries.
 
@@ -6,14 +6,14 @@ Run the [tests](tests.py) in the console and verify that they all pass. Remember
 
 ## Implementation: LLM initialization
 
-You would obtain the same behavior with the LLM constructed just before use, in `get_answer` and destroyed afterwards. However, this is unnecessarily wasteful and may slow down responses.
-
 As a reusable resource, the LLM should be initialized only once, in the constructor
 
 ```python
 def __init__(self):
     self._llm = LLM()
 ```
+
+You would obtain the same behavior with the LLM constructed just before use, in `get_answer` and destroyed afterwards. However, this is unnecessarily wasteful and may slow down responses.
 
 The `_` prefix is just Python naming convention to signal that the field is for private use only and should not be inspected or modified from the outside. Unlike other languages (C++, C#, Java, etc.), Python syntax provides no privacy safeguards for class fields and methods.
 

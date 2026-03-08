@@ -1,4 +1,4 @@
-# Solution 4: Structured outputs
+# Solution: Structured outputs
 
 The [solution](chatbot.py) configures the LLM to create instances of the `Person` class.
 
@@ -49,5 +49,5 @@ answer = f"{response.name}, born in {response.year_of_birth}"
 
 Test different queries and confirm that you get the expected formatted output. Also try queries where the answer should contain no references to a person and see what happens!
 
-🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e04_structured_outputs/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e05_tool_calling/README.md)
+🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e05_structured_outputs/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md)
 ---|---|---

@@ -1,4 +1,4 @@
-# Solution 2: System prompt
+# Solution: System prompt
 
 A possible [solution](chatbot.py) makes the chatbot change roles depending on the type of user message.
 

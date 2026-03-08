@@ -1,4 +1,4 @@
-# Exercise 1: Text prompting
+# Exercise: Text prompting
 
 ⏱️ **Estimated time**: 15 minutes
 

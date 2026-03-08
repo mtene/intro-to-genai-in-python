@@ -1,4 +1,4 @@
-# Solution 3: Tracking conversation history
+# Solution: Tracking conversation history
 
 The [solution](chatbot.py) to the exercise equips the chatbot with a [`ChatHistory`](/src/chatbot/chat_history.py) object.
 
@@ -50,5 +50,5 @@ Production systems typically use these framework-level abstractions, but underst
 * Debug memory-related issues more effectively
 * Implement custom memory strategies when needed
 
-🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e03_conversation_history/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e04_structured_outputs/README.md)
+🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e03_conversation_history/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e04_rag/README.md)
 ---|---|---

@@ -1,4 +1,4 @@
-# Exercise 9: Observability
+# Exercise: Observability
 
 ⏱️ **Estimated time**: 30 minutes
 

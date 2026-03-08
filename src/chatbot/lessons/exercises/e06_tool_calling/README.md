@@ -1,4 +1,4 @@
-# Exercise 5: Tool calling
+# Exercise: Tool calling
 
 ⏱️ **Estimated time**: 25 minutes
 
@@ -22,11 +22,13 @@ Run the [tests](tests.py) in the console to track progress and extend them with 
 
 Continuing on the theme of programmatic uses of GenAI, a popular feature is LLM tool use. Tools give the model the capability to access new data sources or perform actions on behalf of the user.
 
-Tools can be vendor-provided, such as web search or defined by application developers. In Python, tools are functions with type-annotated parameters, as can be seen at the top of the exercise code (`convert_time` and `convert_currency`).
+Tools can be vendor-provided, such as web search or sandboxed code execution, or, more commonly, defined by application developers. In Python, tools are functions with type-annotated parameters, as can be seen at the top of the exercise code (`convert_time` and `convert_currency`).
 
 LangChain's [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools) method equips an LLM with tools, allowing the model to include tool call requests in its responses. However, this only covers the first part of the workflow - calling the requested tools and returning results remains a [manual process](https://python.langchain.com/docs/how_to/tool_results_pass_to_model/), cumbersome and error-prone.
 
-LangChain provides [`create_agent()`](https://docs.langchain.com/oss/python/langchain/agents/) to conveniently handle the entire LLM tool-calling workflow. ReAct (reasoning-acting) refers to a pattern introduced in this [paper](https://arxiv.org/abs/2210.03629). You can visualize the architecture of any LangGraph agent with:
+LangChain provides [`create_agent()`](https://docs.langchain.com/oss/python/langchain/agents/) to conveniently handle the entire LLM tool-calling workflow. The agent follows the ReAct (reasoning-acting) pattern, as introduced in this [paper](https://arxiv.org/abs/2210.03629).
+
+For clarity, you can visualize its architecture or that of any LangGraph agent with:
 
 ```python
 _agent.get_graph(xray=True).draw_mermaid_png(output_file_path="graph.png")
@@ -38,7 +40,7 @@ While tool call requests and text outputs aren't technically mutually exclusive 
 
 ## Conversation State Management
 
-In this exercise, you'll continue using the `ChatHistory` approach from Exercise 3 to manage conversation state. The agent will receive all historical messages and automatically handle the tool call loop, but you're still responsible for adding user questions and assistant responses to the chat history.
+In this exercise, you can continue using the `ChatHistory` tracking approach seen earlier to manage conversation state. This provides the agent with all historical messages as context, but you're still responsible for explicitly adding user questions and assistant responses.
 
 ## Under the hood
 
@@ -131,7 +133,7 @@ The behavior of the LLM when choosing to call tools can be controlled through tw
 
 ## Bonus Challenge: Automatic Memory with Checkpointer
 
-For an extra challenge, you can replace manual `ChatHistory` tracking with LangGraph's **checkpointer** feature. The `MemorySaver` checkpointer stores all messages (user messages, assistant responses, tool calls, and tool results) in memory, keyed by a `thread_id`.
+For an extra challenge, you can replace `ChatHistory` with LangGraph's **checkpointer** feature. The `MemorySaver` checkpointer stores all messages (user messages, assistant responses, tool calls, and tool results) in memory, keyed by a `thread_id`.
 
 **How it works:**
 
@@ -143,11 +145,12 @@ For an extra challenge, you can replace manual `ChatHistory` tracking with LangG
 **What you'll need:**
 
 * Import `MemorySaver` from `langgraph.checkpoint.memory`
-* Import `HumanMessage` from `langchain_core.messages`
 * Pass the `checkpointer` parameter when creating the agent
 * Include `thread_id` in the config when invoking the agent (use the `"configurable"` key)
+* Change the value of `thread_id` in `reset()`
+* Remove the `ChatHistory` field and explicit message management. Simply pass the new user message when invoking the LLM.
 
-This is simpler and more robust than manual conversation history management, and it's the recommended approach in LangGraph. If you implement this bonus, you get rid of the `ChatHistory` field.
+This is simpler and more robust than manual conversation history management, and it's the recommended approach in LangGraph.
 
-🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e04_structured_outputs/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s05_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e06_mcp/README.md)
+🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e05_structured_outputs/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s06_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md)
 ---|---|---|---

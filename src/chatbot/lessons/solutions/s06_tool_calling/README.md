@@ -1,4 +1,4 @@
-# Solution 5: Tool calling
+# Solution: Tool calling
 
 In the solution, we provide the [chatbot](chatbot.py) with a ReAct agent configured with our tools of interest.
 
@@ -14,7 +14,7 @@ def __init__(self):
     self._thread_id = str(uuid.uuid4())
 ```
 
-The agent sets up a [`langchain_core.prompts.ChatPromptTemplate`](https://python.langchain.com/api_reference/core/prompts/langchain_core.prompts.chat.ChatPromptTemplate.html) internally (though you can provide your own). It creates its own LLM instance and equips it with tools via LangChain's [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools). Like with structured outputs, the original `llm` object remains unmodified and returns free-text responses when invoked.
+The agent sets up a [`langchain_core.prompts.ChatPromptTemplate`](https://python.langchain.com/api_reference/core/prompts/langchain_core.prompts.chat.ChatPromptTemplate.html) internally (though you can provide your own). It configures the provided LLM instance to use tools via LangChain's [`bind_tools()`](https://docs.langchain.com/oss/python/integrations/chat/openai#chatopenai-bind-tools). As with structured outputs, the original `llm` object remains unmodified and continues to return free-text responses when invoked.
 
 The `MemorySaver` checkpointer automatically manages conversation history, storing all messages (including tool calls and results) keyed by `thread_id`.
 
@@ -24,7 +24,7 @@ The agent is used as below
 @override
 def get_answer(self, question: str, ctx: ChatContext) -> str:
     response = self._agent.invoke(
-        {"messages": [HumanMessage(content=question)]},
+        {"messages": [user_message(content=question)]},
         config={
             **self.get_config(ctx),
             "configurable": {"thread_id": self._thread_id}
@@ -34,6 +34,8 @@ def get_answer(self, question: str, ctx: ChatContext) -> str:
 ```
 
 Notice we pass only the **new message**, not the entire history. The checkpointer automatically loads previous messages using the `thread_id` and saves all new messages (including tool calls and results) after execution.
+
+`user_message()` is just a helper function that constructs a LangChain `HumanMessage` with the provided content.
 
 To clear the conversation, simply generate a new `thread_id` in the `reset()` method:
 
@@ -52,5 +54,5 @@ answer = str(response["messages"][-1].content)
 
 Ask questions involving time or currency conversions and verify that the tools get called by observing the status updates.
 
-🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e05_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e06_mcp/README.md)
+🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md)
 ---|---|---
