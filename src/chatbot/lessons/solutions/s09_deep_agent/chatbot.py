@@ -20,7 +20,9 @@ class ChatBot(BaseChatBot):
         root_path = Path(__file__).parent.parent.parent
 
         # Convert skills path to POSIX format (DeepAgents limitation on Windows)
-        skills_path = f"/{(Path(__file__).parent / 'skills').relative_to(root_path).as_posix()}/"
+        skills_path = (
+            f"/{(Path(__file__).parent / 'skills').relative_to(root_path).as_posix()}/"
+        )
 
         # Create the DeepAgent with loaded skills
         # LocalShellBackend provides filesystem access (rooted at root_path)

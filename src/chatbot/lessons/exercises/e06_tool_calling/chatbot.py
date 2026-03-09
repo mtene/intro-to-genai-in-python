@@ -62,7 +62,7 @@ class ChatBot(BaseChatBot):
         # TODO: study langchain.agents.create_agent
         # https://reference.langchain.com/python/langchain/agents/factory/create_agent
         # TODO: create an agent with tools (convert_time, convert_currency)
-        self._agent = LLM() 
+        self._agent = LLM()
         # Bonus TODO: replace with in-memory checkpointer
         self._chat_history = ChatHistory()
 

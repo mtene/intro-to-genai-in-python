@@ -6,11 +6,11 @@ from zoneinfo import ZoneInfo
 from typing import override
 from langchain_core.tools import tool
 from langchain.agents import create_agent
+from langchain.messages import HumanMessage
 from langgraph.checkpoint.memory import MemorySaver
 from langgraph.graph.state import CompiledStateGraph
 from chatbot.chatbot_base import BaseChatBot
 from chatbot.chat_context import ChatContext
-from chatbot.chat_history import user_message
 from chatbot.services.llm import LLM
 
 
@@ -93,7 +93,7 @@ class ChatBot(BaseChatBot):
         # Checkpointer automatically loads previous messages and saves new ones
         # also pass ctx so that the agent can publish status updates on tool calls to the UI
         response = self._agent.invoke(
-            {"messages": [user_message(content=question)]},
+            {"messages": [HumanMessage(content=question)]},
             config={
                 **self.get_config(ctx),
                 "configurable": {"thread_id": self._thread_id},

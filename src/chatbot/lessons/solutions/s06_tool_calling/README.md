@@ -24,7 +24,7 @@ The agent is used as below
 @override
 def get_answer(self, question: str, ctx: ChatContext) -> str:
     response = self._agent.invoke(
-        {"messages": [user_message(content=question)]},
+        {"messages": [HumanMessage(content=question)]},
         config={
             **self.get_config(ctx),
             "configurable": {"thread_id": self._thread_id}
@@ -33,9 +33,7 @@ def get_answer(self, question: str, ctx: ChatContext) -> str:
     answer = str(response["messages"][-1].content)
 ```
 
-Notice we pass only the **new message**, not the entire history. The checkpointer automatically loads previous messages using the `thread_id` and saves all new messages (including tool calls and results) after execution.
-
-`user_message()` is just a helper function that constructs a LangChain `HumanMessage` with the provided content.
+Notice we pass only the **new HumanMessage**, not the entire history. The checkpointer automatically loads previous messages using the `thread_id` and saves all new messages (including tool calls and results) after execution.
 
 To clear the conversation, simply generate a new `thread_id` in the `reset()` method:
 
@@ -56,5 +54,5 @@ Ask questions involving time or currency conversions and verify that the tools g
 
 ---
 
-🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md)
----|---|---
+| 🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md) |
+| --- | --- | --- |

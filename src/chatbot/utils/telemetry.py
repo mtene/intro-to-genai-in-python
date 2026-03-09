@@ -32,7 +32,7 @@ class Telemetry:
         """Dump all public attributes of an object to span attributes"""
         try:
             for attr_name in dir(obj):
-                if attr_name.startswith('_'):
+                if attr_name.startswith("_"):
                     continue
                 try:
                     attr_value = getattr(obj, attr_name)
@@ -57,7 +57,6 @@ class Telemetry:
         except Exception as e:
             logger.debug(f"Failed to dump {prefix}: {e}")
 
-
     def start(self) -> None:
         if self._started:
             return
@@ -81,12 +80,20 @@ class Telemetry:
         OpenAIInstrumentor().instrument()
         ChromaInstrumentor().instrument()
         RequestsInstrumentor().instrument(
-            request_hook=lambda span, request: self._dump_object_to_span(span, request, "http.request"),
-            response_hook=lambda span, request, response: self._dump_object_to_span(span, response, "http.response"),
+            request_hook=lambda span, request: self._dump_object_to_span(
+                span, request, "http.request"
+            ),
+            response_hook=lambda span, request, response: self._dump_object_to_span(
+                span, response, "http.response"
+            ),
         )
         HTTPXClientInstrumentor().instrument(
-            request_hook=lambda span, request: self._dump_object_to_span(span, request, "http.request"),
-            response_hook=lambda span, request, response: self._dump_object_to_span(span, response, "http.response"),
+            request_hook=lambda span, request: self._dump_object_to_span(
+                span, request, "http.request"
+            ),
+            response_hook=lambda span, request, response: self._dump_object_to_span(
+                span, response, "http.response"
+            ),
         )
         self._started = True
 

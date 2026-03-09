@@ -1,14 +1,12 @@
+import uuid
 from typing import override, Dict
+from langchain_core.messages import HumanMessage
 from langchain_core.runnables import RunnableConfig
 from langgraph.graph import StateGraph, START, END
 from langgraph.graph.state import CompiledStateGraph
+from langgraph.checkpoint.memory import MemorySaver
 from chatbot.chatbot_base import BaseChatBot
 from chatbot.chat_context import ChatContext
-from chatbot.chat_history import (
-    ChatHistory,
-    assistant_message,
-    user_message,
-)
 from .author import author
 from .reviewer import reviewer
 from .state import GraphState
@@ -40,7 +38,7 @@ class ChatBot(BaseChatBot):
 
     def __init__(self):
         self._agent = self._build_agent()
-        self._chat_history = ChatHistory()
+        self._thread_id = str(uuid.uuid4())
 
     def _build_agent(self) -> CompiledStateGraph[GraphState]:
         """Builds a custom graph"""
@@ -56,13 +54,14 @@ class ChatBot(BaseChatBot):
         graph_builder.add_conditional_edges(
             "UpdateIteration", _end_condition, {"continue": "Author", "finish": END}
         )
-        # build graph
-        return graph_builder.compile()
+        # build graph with checkpointer for conversation memory
+        return graph_builder.compile(checkpointer=MemorySaver())
 
     @override
     def reset(self) -> None:
         """Reset chatbot to initial state"""
-        self._chat_history.clear()
+        # Generate new thread ID to start fresh conversation
+        self._thread_id = str(uuid.uuid4())
 
     @override
     def get_answer(self, question: str, ctx: ChatContext) -> str:
@@ -70,17 +69,22 @@ class ChatBot(BaseChatBot):
         Produce the assistant's reply to the provided user question.
         Can use ctx to emit status updates, which will be displayed in the UI.
         """
-        # record question in chat history
-        self._chat_history.add_message(user_message(question))
-        # create the initial state
+        ctx.update_status("🧠 Thinking...")
+
+        # Create the initial state with new user message
+        # Checkpointer automatically loads previous messages
         initial_state = GraphState(
-            messages=self._chat_history.messages, feedback="create the first draft"
+            messages=[HumanMessage(content=question)], feedback="create the first draft"
         )
-        # invoke the graph on the state with the context
-        final_state = self._agent.invoke(initial_state, config=self.get_config(ctx))
-        # extract the answer from the text field of the final state
+        # Invoke the graph with thread_id for conversation memory
+        final_state = self._agent.invoke(
+            initial_state,
+            config={
+                **self.get_config(ctx),
+                "configurable": {"thread_id": self._thread_id},
+            },
+        )
+        # Extract the answer from the text field of the final state
         answer = final_state["text"]
-        # record answer in chat history
-        self._chat_history.add_message(assistant_message(answer))
 
         return answer

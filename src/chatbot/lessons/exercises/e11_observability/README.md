@@ -49,10 +49,10 @@ podman run --rm --name jaeger -p 16686:16686 -p 4318:4318 cr.jaegertracing.io/ja
 Once Jaeger is running, start your chatbot, which will probe the observability endpoint and, if successful, show the following message at the console:
 
 ```powershell
-INFO     Streaming traces to observability endpoint http://localhost:4318/v1/traces
+INFO     Streaming traces to observability endpoint http://127.0.0.1:4318/v1/traces
 ```
 
-In this setup, chatbot traces are streamed via HTTP requests to port `4318` on the local machine and can be visualized by navigating to [`http://localhost:16686/`](http://localhost:16686/). As an example, the screenshot below shows a trace produced by running the custom agent from the previous lesson.
+In this setup, chatbot traces are streamed via HTTP requests to port `4318` on the local machine and can be visualized by navigating to [`http://127.0.0.1:16686/`](http://127.0.0.1:16686/). As an example, the screenshot below shows a trace produced by running the custom agent from the previous lesson.
 
 ![Trace visualization in Jaeger](/images/observability.png)
 
