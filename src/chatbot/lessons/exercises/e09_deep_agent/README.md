@@ -271,5 +271,5 @@ The CLI provides real-time visualization of agent planning, interactive skill se
 
 ---
 
-| 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s09_deep_agent/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e10_observability/README.md) |
+| 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s09_deep_agent/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e10_a2a/README.md) |
 | --- | --- | --- | --- |

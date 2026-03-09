@@ -1,0 +1,28 @@
+# Agent Card for Destination Expert
+# Describes this agent's capabilities for A2A discovery
+
+name: destination-expert
+description: >-
+  Recommends travel destinations based on preferences, interests, and constraints.
+  Suggests 2-3 specific destinations with explanations, best times to visit,
+  and highlights of unique attractions or experiences.
+
+version: "1.0"
+
+skills:
+  - name: recommend-destinations
+    description: >-
+      Recommends travel destinations matching user preferences (culture, nature,
+      adventure, relaxation) with timing advice and attraction highlights.
+
+capabilities:
+  streaming: false
+  async: false
+
+input_modes:
+  - text
+
+output_modes:
+  - text
+
+url: "http://127.0.0.1:8002"

@@ -1,0 +1,11 @@
+# A2A Agents Configuration
+# Defines the expert agents available to the orchestrator
+
+agents:
+  - name: budget_expert
+    url: http://127.0.0.1:8001
+    description: Provides travel budget estimates and cost-saving advice for destinations worldwide
+
+  - name: destination_expert
+    url: http://127.0.0.1:8002
+    description: Recommends travel destinations based on preferences, interests, and travel style

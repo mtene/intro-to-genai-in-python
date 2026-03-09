@@ -14,7 +14,8 @@ Tool calling | 📖 [Exercise](/src/chatbot/lessons/exercises/e06_tool_calling/R
 Model Context Protocol (MCP) | 📖 [Exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s07_mcp/README.md)
 Custom agent | 📖 [Exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s08_custom_agent/README.md)
 DeepAgents CLI | 📖 [Exercise](/src/chatbot/lessons/exercises/e09_deep_agent/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s09_deep_agent/README.md)
-Observability | 📖 [Exercise](/src/chatbot/lessons/exercises/e10_observability/README.md)
+Agent-to-Agent Protocol (A2A) | 📖 [Exercise](/src/chatbot/lessons/exercises/e10_a2a/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s10_a2a/README.md)
+Observability | 📖 [Exercise](/src/chatbot/lessons/exercises/e11_observability/README.md)
 
 All of the above include automated test suites to verify and benchmark the implementation. For details, read the [Testing Guide](/src/chatbot/testing/README.md).
 

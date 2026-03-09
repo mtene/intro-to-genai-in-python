@@ -1,0 +1,33 @@
+# Agent Card for Destination Expert
+# Describes this agent's capabilities for A2A discovery
+
+# TODO: Fill in the agent card fields
+# This metadata helps other agents discover and understand what this agent does
+
+name: destination-expert
+
+# TODO: Write a clear description of what this agent does
+# This is what other agents will see when deciding whether to call this agent
+description: >-
+  Your description here...
+
+version: "1.0"
+
+# TODO: Define the skills this agent provides
+# Each skill should have a name and description
+skills:
+  - name: recommend-destinations
+    description: >-
+      Your skill description here...
+
+capabilities:
+  streaming: false
+  async: false
+
+input_modes:
+  - text
+
+output_modes:
+  - text
+
+url: "http://127.0.0.1:8002"

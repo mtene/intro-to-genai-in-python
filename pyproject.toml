@@ -16,6 +16,7 @@ dependencies = [
     "langchain-openai>=1.1.6,<1.2.0",
     "deepagents>=0.4.5,<0.5.0",
     "langgraph>=1.0.10,<1.1.0",
+    "a2a-sdk>=0.3.24,<0.4.0",
     "fastmcp>=3.1.0,<3.2.0",
     "pydantic>=2.12.5,<2.13.0",
     "pyyaml>=6.0.3,<6.1.0",
@@ -57,6 +58,8 @@ exercise-8 = "chatbot.lessons.exercises.e08_custom_agent.__main__:main"
 solution-8 = "chatbot.lessons.solutions.s08_custom_agent.__main__:main"
 exercise-9 = "chatbot.lessons.exercises.e09_deep_agent.__main__:main"
 solution-9 = "chatbot.lessons.solutions.s09_deep_agent.__main__:main"
+exercise-10 = "chatbot.lessons.exercises.e10_a2a.__main__:main"
+solution-10 = "chatbot.lessons.solutions.s10_a2a.__main__:main"
 
 [tool.hatch.build.targets.sdist]
 include = [
