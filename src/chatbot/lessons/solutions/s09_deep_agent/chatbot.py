@@ -8,27 +8,28 @@ from langgraph.checkpoint.memory import MemorySaver
 from chatbot.chatbot_base import BaseChatBot
 from chatbot.chat_context import ChatContext
 from chatbot.services.llm import LLM
-from chatbot.utils.skill_loader import load_skills_from_dir
 
 
 class ChatBot(BaseChatBot):
     """Uses a DeepAgent with custom skills"""
 
     def __init__(self):
-        # Get the configured LLM (same as other lessons)
         llm = LLM()
-        # Path to skills directory
-        skills_dir = Path(__file__).parent / "skills"
-        # Load skills using helper (handles Windows path compatibility)
-        skills = load_skills_from_dir(skills_dir)
+
+        # Make the lessons folder the filesystem root for the agent
+        root_path = Path(__file__).parent.parent.parent
+
+        # Convert skills path to POSIX format (DeepAgents limitation on Windows)
+        skills_path = f"/{(Path(__file__).parent / 'skills').relative_to(root_path).as_posix()}/"
+
         # Create the DeepAgent with loaded skills
-        # LocalShellBackend provides filesystem access (rooted at lessons directory)
+        # LocalShellBackend provides filesystem access (rooted at root_path)
         # MemorySaver provides in-memory conversation history management
         self._agent = create_deep_agent(
             model=llm,
-            subagents=skills,
-            backend=LocalShellBackend(root_dir=Path(__file__).parent.parent.parent, virtual_mode=True),
-            system_prompt="Always delegate to the appropriate subagent when one matches the user's request.",
+            skills=[skills_path],
+            backend=LocalShellBackend(root_dir=root_path, virtual_mode=True),
+            system_prompt="Always use a skill when one matches the user's request.",
             checkpointer=MemorySaver(),
         )
         self._thread_id = str(uuid.uuid4())

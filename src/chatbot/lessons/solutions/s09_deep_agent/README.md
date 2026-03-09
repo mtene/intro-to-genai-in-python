@@ -9,21 +9,29 @@ This solution demonstrates how to build a DeepAgents-powered chatbot with custom
 The [implementation](chatbot.py) follows the standard `BaseChatBot` interface but uses `create_deep_agent()` instead of manually building a LangGraph:
 
 ```python
-# Create the DeepAgent with loaded skills
+# Convert skills path to POSIX format (DeepAgents limitation on Windows)
+skills_path = f"/{(Path(__file__).parent / 'skills').relative_to(root_path).as_posix()}/"
+
+# Create the DeepAgent with skills parameter
 self._agent = create_deep_agent(
     model=llm,
-    subagents=load_skills_from_dir(skills_dir),
-    backend=LocalShellBackend(
-        root_dir=Path(__file__).parent.parent.parent,
-        virtual_mode=True
-    ),
+    skills=[skills_path],
+    backend=LocalShellBackend(root_dir=root_path, virtual_mode=True),
     ...
 )
 ```
 
-**Why load skills this way?**
+**Skills loading is progressive:**
 
-The `load_skills_from_dir()` helper uses native Python `Path` operations to scan and parse SKILL.md files, avoiding Windows path compatibility issues that occur when DeepAgents processes the `skills=` parameter internally (which attempts to use paths like `/C:/...` that fail on Windows).
+The `skills=` parameter requires POSIX-style paths (forward slashes), even on Windows. We use `Path.as_posix()` to convert Windows paths automatically.
+
+DeepAgents uses a three-stage loading pattern:
+
+1. **At startup:** Only skill front-matter (name + description) loads into system prompt (~100 words each)
+2. **On activation:** Full SKILL.md body loads when the agent decides to use that skill
+3. **On demand:** Files mentioned in SKILL.md load only when needed
+
+This enables 30+ skills while consuming just ~3,000 tokens at rest.
 
 **Filesystem security:**
 

@@ -39,7 +39,9 @@ Unlike previously, where you defined tools as Python functions, DeepAgents uses 
 * Understandable by both humans and agents
 * Independent of implementation language
 
-**Why skills over tools?** Traditional tools (Python `@tool` or MCP) send full definitions with every API call (10 tools × ~1000 tokens = 10,000 tokens per call). Skills use a two-phase approach: the main agent sees only short descriptions (~50 tokens each) for routing, then loads full instructions only when executing that skill as a subagent. Even though this implies multiple exchanges with the LLM, it saves precious context window space, enabling agents to stay effective with 50+ skills instead of just 5-10 tools.
+**Skills over tools:**
+
+Traditional tools (Python `@tool` or MCP) send full definitions with every API call (10 tools × ~1000 tokens = 10,000 tokens per call). Skills use progressive disclosure: only the skill name and description (~100 words each) from the front-matter stay in the system prompt permanently. The full skill instructions are loaded into context only when that specific skill is activated. This enables agents to work with 30+ skills while consuming just ~3,000 tokens at rest.
 
 Run the [tests](tests.py) in the console to track progress.
 
@@ -47,7 +49,13 @@ Run the [tests](tests.py) in the console to track progress.
 
 ### The Rise of CLI Agents
 
-AI is transforming command-line interfaces from simple command executors into intelligent assistants. Modern CLI agents like GitHub Copilot CLI, [Aider](https://aider.chat/), and [Claude Code](https://claude.ai/code) can understand intent, plan autonomously, access codebase context, and execute multi-step operations safely.
+AI is transforming command-line interfaces from simple command executors into intelligent assistants. Modern terminal-based agents can understand intent, plan autonomously, access codebase context, and execute multi-step operations safely:
+
+* **[Aider](https://aider.chat/)** - Pioneer of terminal AI pair programming
+* **[Claude Code](https://claude.ai/code)** - Terminal agent with deep reasoning and session memory
+* **[OpenCode](https://opencode.ai/)** - Open-source CLI supporting 75+ LLM providers
+
+In contrast, **IDE-based agents** like [Cursor](https://cursor.com/) and [Windsurf](https://windsurf.com/) provide visual coding assistance with inline edits, while CLI agents excel at automation, git workflows, and composing with Unix tools.
 
 This shift - from "tell me the command" to "do it for me intelligently" - represents the future of developer tools.
 
@@ -121,15 +129,12 @@ The agent will use the emoji-decorator skill to enhance your text. Study this sk
 
 ### Task 1: Inspect the Chatbot (chatbot.py)
 
-Study the [chatbot logic](chatbot.py), noting the creating and use of DeepAgents:
+Study the [chatbot logic](chatbot.py), noting how DeepAgents are created and used:
 
-* the LLM and path to the skills directory is specified at construction
-* `load_skills_from_dir()` loads skills using native Python Path operations (avoids Windows path issues)
-* skills are passed as `subagents=` (pre-loaded SubAgent dicts) to `create_deep_agent()`
+* Skill front-matter is loaded using the `skills=` parameter with a POSIX-style path
+* `Path.as_posix()` converts Windows paths to forward slashes (required by DeepAgents)
 * `LocalShellBackend` with `virtual_mode=True` restricts file access to the lessons directory for security
-* virtual paths starting with `/` are used (e.g., `/exercises/e09_deep_agent/README.md`)
-* `config=self.get_config(ctx)` is passed when invoking to enable status updates
-* the agent returns a dictionary with a `"messages"` key
+* The agent is created with `create_deep_agent()` which includes built-in planning and file operations
 
 ### Task 2: Create the generate-flashcards Skill
 
