@@ -231,11 +231,11 @@ Follow the same pattern in [`agent_card.yaml`](agents/destination_expert/agent_c
 
 Similar for [`agent.py`](agents/destination_expert/agent.py).
 
-### Task 5: Review the Orchestrator
+## Orchestrator Review
 
-The orchestrator is **already complete**. Review it to understand:
+Even though the orchestrator implementation is already complete, it is instructive to review it:
 
-1. **agents.yaml** - Configuration file:
+1. **agents.yaml** is an agent discovery configuration file:
 
 ```yaml
 agents:
@@ -244,14 +244,14 @@ agents:
       url: http://127.0.0.1:8001
 ```
 
-1. **chatbot.py** - Loads agents dynamically:
+1. **chatbot.py** loads agents dynamically:
 
 * Reads [`agents.yaml`](agents.yaml) to discover agents
 * Constructs [`A2AAgentTool`](/src/chatbot/utils/a2a.py) for each agent
 * Creates a ReAct agent using `create_agent()` and registers the agents as tools
 * Defines a generic system prompt guiding orchestration behavior
 
-**You don't need to modify these files** - they will work once your expert agents are running.
+This exercise follows a **centralized orchestrator pattern** where one agent coordinates all others. However, A2A is a peer-to-peer protocol - there's nothing stopping expert agents from calling each other directly using a similar configuration and tool wrappers as the orchestrator! You could build a fully decentralized mesh network where agents discover and communicate without a central coordinator.
 
 ## Running Your Implementation
 
