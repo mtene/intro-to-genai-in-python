@@ -226,7 +226,6 @@ langchain-core==1.2.11
     #   langgraph
     #   langgraph-checkpoint
     #   langgraph-prebuilt
-    #   python-genai-intro
 langchain-google-genai==4.2.1
     # via deepagents
 langchain-mcp-adapters==0.2.1
