@@ -22,9 +22,9 @@ In this exercise, you will implement two **expert agents** for a Travel Planning
 
 An additional orchestrator agent is provided as the main entry point. It coordinates the experts to answer user questions.
 
-Each agent runs in its own separate process and communication happens over HTTP using the **A2A protocol**. [`__main__.py`](__main__.py) automatically starts the orchestrator and both expert agents.
+Each agent runs in its own separate process and communication happens over HTTP using the **A2A protocol**.
 
-Run the [tests](tests.py) in the console to track progress.
+[`__main__.py`](__main__.py) automatically starts the orchestrator and both expert agents,making it easy for you to run the [tests](tests.py) in the console and track progress. This is not done by the Streamlit UI, requiring you to start them manually beforehand.
 
 ## Motivation
 
@@ -255,7 +255,19 @@ This exercise follows a **centralized orchestrator pattern** where one agent coo
 
 ## Running Your Implementation
 
-Simply running the lesson will automatically start all agents.
+The expert agents run as independent HTTP servers in dedicated processes. In console mode, simply running the lesson will automatically start all agents to facilitate testing (see [`__main__.py`](__main__.py)). However, when using the Streamlit UI, they must be started manually beforehand, in separate terminals:
+
+```bash
+python -m chatbot.lessons.exercises.e10_a2a.agents.budget_expert
+python -m chatbot.lessons.exercises.e10_a2a.agents.destination_expert
+```
+
+for the exercises, or for the solutions:
+
+```bash
+python -m chatbot.lessons.solutions.s10_a2a.agents.budget_expert
+python -m chatbot.lessons.solutions.s10_a2a.agents.destination_expert
+```
 
 Try these prompts:
 
