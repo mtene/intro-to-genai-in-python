@@ -345,17 +345,6 @@ tool = A2AAgentTool(
 
 These wrappers handle all data conversion and A2A communication.
 
-## Key Differences from Previous Lessons
-
-| Aspect | Previous Lessons | This Lesson |
-| ------ | ---------------- | ----------- |
-| **Architecture** | Single process | Multiple processes |
-| **Communication** | In-memory function calls | HTTP (A2A protocol) |
-| **Deployment** | One script | Independent services |
-| **Scaling** | Vertical (bigger machine) | Horizontal (more instances) |
-| **Tool Calls** | Python functions (`@tool`) | Remote agents over HTTP |
-| **Observability** | One trace | Distributed traces across services |
-
 ## Further Reading
 
 [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) - Anthropic guide on agent design patterns and best practices
