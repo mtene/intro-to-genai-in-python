@@ -24,7 +24,7 @@ An additional orchestrator agent is provided as the main entry point. It coordin
 
 Each agent runs in its own separate process and communication happens over HTTP using the **A2A protocol**.
 
-[`__main__.py`](__main__.py) automatically starts the orchestrator and both expert agents,making it easy for you to run the [tests](tests.py) in the console and track progress. This is not done by the Streamlit UI, requiring you to start them manually beforehand.
+[`__main__.py`](__main__.py) automatically starts the orchestrator and both expert agents, making it easy for you to run the [tests](tests.py) in the console and track progress. This is not done by the Streamlit UI, requiring you to start them manually beforehand.
 
 ## Motivation
 
@@ -73,7 +73,7 @@ Benefits:
 * Independent development & deployment
 * Reusable across applications
 * Easier to test & maintain
-* Can scale experts independently
+* Each can be scaled independently
 
 ### The Agent-to-Agent (A2A) Protocol
 
