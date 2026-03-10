@@ -204,7 +204,7 @@ As you work through the exercise, you'll see tests pass progressively:
 | Generate flashcards | After defining generate-flashcards/SKILL.md |
 | Generate quiz questions | After defining create-quiz-questions/SKILL.md |
 | Use multiple skills | After both skills are complete |
-| Generate specific number | After flashcards skill is robust |
+| Apply skills to file content | After skill definitions are robust |
 
 **Initial state:** Only test 1 should pass (the emoji-decorator example).
 
