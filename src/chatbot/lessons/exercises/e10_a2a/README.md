@@ -322,8 +322,8 @@ server.start()  # Blocks until Ctrl+C
 * Loads agent metadata from YAML file
 * Wraps your sync agent in an async bridge (A2A SDK is async)
 * Creates an `AgentCard` from the YAML data
-* Starts a FastAPI server with uvicorn
-* Routes A2A requests to your agent
+* Starts the agent as a server
+* Routes A2A requests to your agent's implementation as if they were coming from the user
 
 ### A2AAgentTool
 
