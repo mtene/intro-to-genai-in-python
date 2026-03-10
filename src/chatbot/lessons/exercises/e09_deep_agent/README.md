@@ -33,7 +33,7 @@ Ensure your remote endpoint is configured and credentials are set as environment
 
 In this exercise, you will create a **Study Guide Generator Agent** that helps students learn by creating flashcards and quiz questions from educational content.
 
-Unlike previously, where you defined tools as Python functions, DeepAgents uses **skills** defined in natural language. Skills are typically defined in markdown files that are:
+In addition to Python functions exposed as tools, DeepAgents can use **skills** defined in natural language via markdown files, which are:
 
 * Easy to share and version control
 * Understandable by both humans and agents
