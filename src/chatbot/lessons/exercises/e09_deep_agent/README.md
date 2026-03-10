@@ -33,16 +33,6 @@ Ensure your remote endpoint is configured and credentials are set as environment
 
 In this exercise, you will create a **Study Guide Generator Agent** that helps students learn by creating flashcards and quiz questions from educational content.
 
-In addition to Python functions exposed as tools, DeepAgents can use **skills** defined in natural language via markdown files, which are:
-
-* Easy to share and version control
-* Understandable by both humans and agents
-* Independent of implementation language
-
-**Skills over tools:**
-
-Traditional tools (Python `@tool` or MCP) send full definitions with every API call (10 tools × ~1000 tokens = 10,000 tokens per call). Skills use progressive disclosure: only the skill name and description (~100 words each) from the front-matter stay in the system prompt permanently. The full skill instructions are loaded into context only when that specific skill is activated. This enables agents to work with 30+ skills while consuming just ~3,000 tokens at rest.
-
 Run the [tests](tests.py) in the console to track progress.
 
 ## Motivation
@@ -75,6 +65,20 @@ Previously, you built a custom agent with an author-reviewer loop. While powerfu
 * **Skills**: Modular capabilities defined in markdown
 * **Persistence**: Built on LangGraph's state management
 * **CLI-first design**: Meant to be run from the terminal
+
+### Skills over Tools
+
+We've previously seen how Python functions can be exposed as tools for LLM usage. In addition to this, DeepAgents can use **skills** defined in natural language via `SKILL.md` markdown files.
+
+**Why skills?**
+
+Traditional tools (Python `@tool` or MCP) send full definitions with every API call (10 tools × ~1000 tokens = 10,000 tokens per call). Skills use progressive disclosure: only the skill name and description (~100 words each) from the front-matter stay in the system prompt permanently. The full skill instructions are loaded into context only when that specific skill is activated. This enables agents to work with 30+ skills while consuming just ~3,000 tokens at rest.
+
+The markdown format makes skills:
+
+* Easy to share and version control
+* Understandable by both humans and agents
+* Independent of implementation language
 
 ## What You'll Build
 
