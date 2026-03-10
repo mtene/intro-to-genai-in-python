@@ -243,7 +243,7 @@ agents:
       url: http://127.0.0.1:8001
 ```
 
-1. **chatbot.py** loads agents dynamically:
+2. **chatbot.py** loads agents dynamically:
 
 * Reads [`agents.yaml`](agents.yaml) to discover agents
 * Constructs [`A2AAgentTool`](/src/chatbot/utils/a2a.py) for each agent
