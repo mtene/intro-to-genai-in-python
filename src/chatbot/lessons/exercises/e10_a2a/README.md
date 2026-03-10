@@ -15,10 +15,10 @@ By the end of this exercise, you should be able to:
 
 ## Overview
 
-In this exercise, you will implement two **expert agents** for a Travel Planning Assistant:
+In this exercise, you will implement two **specialized agents** for a Travel Planning Assistant:
 
-1. **Budget Expert** - Provides cost estimates and budget advice (you implement)
-1. **Destination Expert** - Recommends destinations based on preferences (you implement)
+1. **Budget Expert** - Provides cost estimates and budget advice
+1. **Destination Expert** - Recommends destinations based on preferences
 
 An additional orchestrator agent is provided as the main entry point. It coordinates the experts to answer user questions.
 
