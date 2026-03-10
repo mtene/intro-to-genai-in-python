@@ -123,7 +123,6 @@ This metadata enables **agent discovery** - other agents can find and understand
 | -------- | ------- | ----- |
 | **A2A** | Agent-to-agent communication | Distributed AI systems |
 | **MCP** | Tool/data source integration | Connecting agents to resources |
-| **OpenAI Assistants API** | Agent hosting | Cloud-based agent platform |
 
 A2A complements MCP - you might use MCP to connect an agent to databases, and A2A to connect agents to each other.
 
