@@ -118,39 +118,6 @@ You'll see this in the console:
 📦 extract_quiz_questions returned: [quiz created]
 ```
 
-## Comparison with Custom Agent
-
-| Aspect | Custom Agent | DeepAgent |
-| --- | --- | --- |
-| Workflow | Fixed: author → reviewer → iterate | Dynamic: plan based on request |
-| Capabilities | Only LLM generation | LLM + planning + file ops + skills |
-| Tools | Python `@tool` functions | SKILL.md files |
-| State Management | Manual (`GraphState`) | Built-in |
-| Complexity | You design the graph | Framework handles it |
-| Best for | Specific, predictable flows | Open-ended, complex tasks |
-
-## Running the Solution
-
-Try these example prompts:
-
-```plaintext
->>> Create flashcards about the MCP protocol
-```
-
-```plaintext
->>> Generate a quiz to test my understanding of tool calling
-```
-
-```plaintext
->>> Create a complete study guide for custom LangGraph agents with both flashcards and quiz questions. Save it to study_guides/langgraph_agents
-```
-
-```plaintext
->>> Add some emojis to this: DeepAgents makes building AI agents much easier!
-```
-
-The last one demonstrates the emoji-decorator example skill.
-
 ## Key Takeaways
 
 1. **SKILL.md format** is simple but powerful - no code needed for basic capabilities
