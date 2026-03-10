@@ -90,7 +90,7 @@ Effective descriptions:
 * **Specify use cases** - when should the agent use this?
 * **Be specific but concise** - under 1024 characters
 
-The agent uses ONLY the description to decide skill relevance, so this is critical!
+The agent uses only the description to decide skill relevance, so this is critical!
 
 ## How DeepAgents Planning Works
 
@@ -138,5 +138,5 @@ All tests should pass with this solution.
 
 ---
 
-| 🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e09_deep_agent/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e10_observability/README.md) |
+| 🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e09_deep_agent/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e10_a2a/README.md) |
 | --- | --- | --- |
