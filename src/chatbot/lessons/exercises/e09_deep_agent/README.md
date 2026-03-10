@@ -6,10 +6,10 @@
 
 By the end of this exercise, you should be able to:
 
-* Understand what how LangChain DeepAgents compared to the custom defined agents encountered in a previous lesson
+* Understand how LangChain DeepAgents compare to the other agents encountered in this course
 * Define skills following the [agentskills.io](https://agentskills.io) specification
-* Build agents with custom skills, planning and task delegation capabilities
-* Observe how the agent handles file operations and multi-step workflows
+* Build agents with shell access, custom skills, todo list planning and task delegation capabilities
+* Observe how the agent handles multi-step workflows
 
 ## Model Requirements
 
