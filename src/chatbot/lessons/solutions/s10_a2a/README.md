@@ -146,8 +146,34 @@ self._agent: CompiledStateGraph = create_agent(
     checkpointer=MemorySaver(),
 )
 ```
+**Agent Cards vs Tool Descriptions**
 
-**How routing works:**
+Notice how we define agent metadata in **two places**:
+
+1. **Agent card (YAML)** - For the agent server:
+
+```yaml
+description: Provides travel budget estimates...
+```
+
+1. **Tool description** - For the orchestrator:
+
+```python
+A2AAgentTool(
+    name="budget_expert",
+    description="Get travel budget estimates...",  # Similar but for LLM
+    url="http://127.0.0.1:8001",
+)
+```
+
+**Why the duplication?**
+
+* **Agent card** - Used by A2A discovery (agents finding each other)
+* **Tool description** - Used by LLM routing (deciding when to call)
+
+In a production A2A system, the orchestrator could fetch agent cards automatically and generate tool descriptions from them. For this lesson, we deliberately keep them separate for simplicity.
+
+**How agent routing works:**
 
 The orchestrator doesn't use keyword matching or rules. Instead, the LLM:
 
@@ -208,7 +234,7 @@ For complex questions, the orchestrator may call multiple experts or make multip
 
 ## Extensions
 
-Want to go further? Try:
+Want to go further? Try to:
 
 1. **Add a third expert** (e.g., weather, activities)
 2. **Add RAG to destination expert** (load destination database)
@@ -216,33 +242,6 @@ Want to go further? Try:
 4. **Implement parallel calls** (orchestrator calls both experts simultaneously)
 5. **Add error handling** (what if an expert is down?)
 6. **Switch to DeepAgents** (use `create_deep_agent` with skills)
-
-## Agent Cards vs Tool Descriptions
-
-Notice how we define agent metadata in **two places**:
-
-1. **Agent card (YAML)** - For the agent server:
-
-```yaml
-description: Provides travel budget estimates...
-```
-
-1. **Tool description** - For the orchestrator:
-
-```python
-A2AAgentTool(
-    name="budget_expert",
-    description="Get travel budget estimates...",  # Similar but for LLM
-    url="http://127.0.0.1:8001",
-)
-```
-
-**Why the duplication?**
-
-* **Agent card** - Used by A2A discovery (agents finding each other)
-* **Tool description** - Used by LLM routing (deciding when to call)
-
-In a full A2A system, the orchestrator could fetch agent cards automatically and generate tool descriptions from them. For this lesson, we deliberately keep them separate for simplicity.
 
 ## Key Takeaways
 
