@@ -579,7 +579,7 @@ tokenizers==0.22.2
     # via chromadb
 toml==0.10.2
     # via streamlit
-tornado==6.5.4
+tornado==6.5.5
     # via streamlit
 tqdm==4.67.1
     # via
