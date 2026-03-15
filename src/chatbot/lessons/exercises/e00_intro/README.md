@@ -162,12 +162,12 @@ def get_info():
 ```python
 # Asynchronous: can run both calls "at the same time"
 async def get_info():
-    result1 = await call_llm("What's the weather?")
-    result2 = await call_llm("What's the time?")
+    result1 = await call_llm_async("What's the weather?")
+    result2 = await call_llm_async("What's the time?")
     return f"{result1}\n{result2}
 ```
 
-For simplicity, this tutorial uses synchronous code. However, some libraries (like MCP and A2A) are purely asynchronous, so we created wrapper utilities to bridge them to sync code.
+For simplicity, this tutorial uses synchronous code. Most modern Python libraries have boith sync and async versions for essential calls. Some of them (like MCP and A2A) are purely asynchronous, so we created wrapper utilities to bridge them to sync code.
 
 Even though async is out of scope here, it's essential for production applications. To learn more, see [Async IO in Python: A Complete Walkthrough](https://realpython.com/async-io-python/).
 
