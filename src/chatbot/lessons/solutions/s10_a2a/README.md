@@ -99,10 +99,10 @@ The orchestrator loads agent configuration from [`agents.yaml`](agents.yaml). Th
 ```yaml
 agents:
   - id: budget_expert
-    description: Provides travel budget estimates and cost-saving advice
+    url: http://127.0.0.1:8001
 
   - id: destination_expert
-    description: Recommends travel destinations based on preferences
+    url: http://127.0.0.1:8002
 ```
 
 This makes it:
