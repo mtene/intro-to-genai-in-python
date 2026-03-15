@@ -29,7 +29,7 @@ class ChatBot(BaseChatBot):
 
         # Create orchestrator agent with A2A agents as tools
         # The LLM decides which to consult based on the user's question
-        system_prompt = """You are an orchestrator with access to expert agents. Always delegate questions to the appropriate expert rather than answering directly."""
+        system_prompt = "You are an orchestrator with access to expert agents. Always delegate questions to the appropriate expert and base your response solely on their answers."
 
         self._agent: CompiledStateGraph = create_agent(
             model=llm,
