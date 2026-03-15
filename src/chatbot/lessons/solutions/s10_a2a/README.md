@@ -11,12 +11,13 @@ Both experts follow the same pattern:
 **agent_card.yaml:**
 
 ```yaml
-name: expert-name
+name: Detailed expert name
 description: >-
   Clear description of what this agent does...
 
 skills:
-  - name: skill-name
+  - id: skill_name
+    name: Detailed skill name
     description: >-
       What this skill accomplishes...
 
@@ -60,7 +61,8 @@ This tells other agents exactly when to use this expert.
 
 ```yaml
 skills:
-  - name: estimate-budget
+  - id: estimate_budget
+    name: Estimate Budget
     description: >-
       Estimates realistic daily travel budgets for specific destinations,
       breaking down costs by category and considering seasonal variations.
@@ -83,9 +85,9 @@ This gives the LLM clear guardrails for generating useful budget advice.
 
 The destination expert prompt includes:
 
-* Role definition (destination recommendations)
+* Role definition (destination or activity recommendations)
 * Expertise areas (matching preferences, seasonal advice, activities)
-* Response structure (2-3 destinations with reasoning)
+* Response structure (2-3 items with reasoning)
 * Example response showing the format
 
 This ensures recommendations are actionable and well-organized.
@@ -96,12 +98,10 @@ The orchestrator loads agent configuration from [`agents.yaml`](agents.yaml). Th
 
 ```yaml
 agents:
-  - name: budget_expert
-    url: http://127.0.0.1:8001
+  - id: budget_expert
     description: Provides travel budget estimates and cost-saving advice
 
-  - name: destination_expert
-    url: http://127.0.0.1:8002
+  - id: destination_expert
     description: Recommends travel destinations based on preferences
 ```
 
@@ -117,61 +117,11 @@ This makes it:
 ```yaml
 agents:
   ...
-  - name: weather_expert
+  - id: weather_expert
     url: http://127.0.0.1:8003
-    description: Provides weather forecasts and seasonal information
 ```
 
-**chatbot.py:** loads agents dynamically and creates tools
-
-```python
-# Load agents configuration from YAML
-with open(Path(__file__).parent / "agents.yaml", "r") as f:
-    config = yaml.safe_load(f)
-
-# Create A2A tools from configuration
-agents = [
-    A2AAgentTool(
-        name=agent["name"],
-        description=agent["description"],
-        url=agent["url"],
-    )
-    for agent in config["agents"]
-]
-
-# Create orchestrator with tools (same pattern as lesson 6)
-self._agent: CompiledStateGraph = create_agent(
-    model=llm,
-    tools=agents,
-    checkpointer=MemorySaver(),
-)
-```
-**Agent Cards vs Tool Descriptions**
-
-Notice how we define agent metadata in **two places**:
-
-1. **Agent card (YAML)** - For the agent server:
-
-```yaml
-description: Provides travel budget estimates...
-```
-
-1. **Tool description** - For the orchestrator:
-
-```python
-A2AAgentTool(
-    name="budget_expert",
-    description="Get travel budget estimates...",  # Similar but for LLM
-    url="http://127.0.0.1:8001",
-)
-```
-
-**Why the duplication?**
-
-* **Agent card** - Used by A2A discovery (agents finding each other)
-* **Tool description** - Used by LLM routing (deciding when to call)
-
-In a production A2A system, the orchestrator could fetch agent cards automatically and generate tool descriptions from them. For this lesson, we deliberately keep them separate for simplicity.
+**chatbot.py:** loads agents dynamically and creates tools for each of their skills
 
 **How agent routing works:**
 

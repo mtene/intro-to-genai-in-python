@@ -18,7 +18,7 @@ By the end of this exercise, you should be able to:
 In this exercise, you will implement two **specialized agents** for a Travel Planning Assistant:
 
 1. **Budget Expert** - Provides cost estimates and budget advice
-1. **Destination Expert** - Recommends destinations based on preferences
+1. **Destination Expert** - Recommends destinations and activities based on preferences
 
 An additional orchestrator agent is provided as the main entry point. It coordinates the experts to answer user questions.
 
@@ -34,17 +34,7 @@ As AI applications grow more sophisticated, **multi-agent systems** are becoming
 
 **Monolithic approach** (everything in one agent):
 
-```plaintext
-┌────────────────────────────────┐
-│   Single Large Agent           │
-│                                │
-│  • Budget calculations         │
-│  • Destination knowledge       │
-│  • Weather data                │
-│  • Booking systems             │
-│  • Reviews aggregation         │
-└────────────────────────────────┘
-```
+![Monolithic Agent](/images/monolithic_agent.png)
 
 Limitations:
 
@@ -54,19 +44,7 @@ Limitations:
 
 **Distributed approach** (specialized agents):
 
-```plaintext
-┌──────────────────┐
-│  Orchestrator    │────┐
-└──────────────────┘    │
-                        │
-        ┌───────────────┼───────────────┐
-        │               │               │
-        ▼               ▼               ▼
-┌──────────────┐ ┌──────────────┐ ┌──────────────┐
-│   Budget     │ │ Destination  │ │   Weather    │
-│   Expert     │ │   Expert     │ │   Expert     │
-└──────────────┘ └──────────────┘ └──────────────┘
-```
+![Orchestrator delegating tasks to expert sub-agents](/images/orchestrator_expert_agents.png)
 
 Benefits:
 
@@ -103,12 +81,13 @@ An **agent card** is like a business card for your agent. It tells other agents:
 **Example agent card:**
 
 ```yaml
-name: weather-service
+name: Weather Service
 description: >-
   Provides weather forecasts and climate information for locations worldwide
 
 skills:
-  - name: get-forecast
+  - id: get_forecast
+    name: Get Forecast
     description: >-
       Returns weather forecast for a specific location and time range
 
@@ -128,37 +107,11 @@ A2A complements MCP - you might use MCP to connect an agent to databases, and A2
 
 ## Architecture
 
-This exercise demonstrates a simple A2A architecture:
-
-```plaintext
-User Question
-     │
-     ▼
-┌─────────────────────────────────┐
-│  Orchestrator (chatbot.py)      │
-│  Decides which expert(s) to use │
-└─────────────────────────────────┘
-     │
-     ├──────────────────┬──────────────────┐
-     │                  │                  │
-     ▼                  ▼                  ▼
-┌──────────┐      ┌──────────┐      ┌──────────┐
-│  Budget  │      │  Dest.   │      │  Both    │
-│  Expert  │      │  Expert  │      │  (Order) │
-│  :8001   │      │  :8002   │      │  Varies  │
-└──────────┘      └──────────┘      └──────────┘
-     │                  │                  │
-     └──────────────────┴──────────────────┘
-                    │
-                    ▼
-               Final Answer
-```
-
-**How it works:**
+This exercise demonstrates the following simple A2A architecture:
 
 1. User asks a question to the orchestrator
 2. Orchestrator's LLM decides which expert(s) to call (using tool calling)
-3. Expert agents run on separate ports (8001, 8002)
+3. Two expert agents run on separate ports (8001, 8002)
 4. Orchestrator calls experts via HTTP using A2A protocol
 5. Experts return answers
 6. Orchestrator synthesizes final response
@@ -167,18 +120,18 @@ User Question
 
 ### 1. Budget Expert [`agents/budget_expert/`](agents/budget_expert/)
 
-A simple agent with expertise in travel costs:
+An agent with a single skill that estimates travel costs:
 
 * [`agent.py`](agents/budget_expert/agent.py) - Defines the agent with `create_agent()` and a system prompt (✏️ TODO)
-* [`agent_card.yaml`](agents/budget_expert/agent_card.yaml) - Agent metadata for A2A discovery (✏️ TODO)
+* [`agent_card.yaml`](agents/budget_expert/agent_card.yaml) - Agent and skill metadata for A2A discovery (✏️ TODO)
 * [`__main__.py`](agents/budget_expert/__main__.py) - Starts the A2A server on port 8001 (✅ DONE)
 
 ### 2. Destination Expert [`agents/destination_expert/`](agents/destination_expert/)
 
-A simple agent with expertise in destination recommendations:
+An agent with two skills covering destination and activity recommendations:
 
 * [`agent.py`](agents/destination_expert/agent.py) - Defines the agent with `create_agent()` and a system prompt (✏️ TODO)
-* [`agent_card.yaml`](agents/destination_expert/agent_card.yaml) - Agent metadata for A2A discovery (✏️ TODO)
+* [`agent_card.yaml`](agents/destination_expert/agent_card.yaml) - Agent and skills metadata for A2A discovery (✏️ TODO)
 * [`__main__.py`](agents/destination_expert/__main__.py) - Starts the A2A server on port 8002 (✅ DONE)
 
 ### 3. Orchestrator
@@ -224,7 +177,7 @@ In [`agent.py`](agents/budget_expert/agent.py):
 
 ### Task 3: Design Destination Expert Agent Card
 
-Follow the same pattern in [`agent_card.yaml`](agents/destination_expert/agent_card.yaml).
+Follow the same pattern in [`agent_card.yaml`](agents/destination_expert/agent_card.yaml), but this time for both skills.
 
 ### Task 4: Implement Destination Expert
 
@@ -238,9 +191,8 @@ Even though the orchestrator implementation is already complete, it is instructi
 
 ```yaml
 agents:
-   - name: budget_expert
-      description: When to use this agent...
-      url: http://127.0.0.1:8001
+   - id: weather_service
+     url: http://127.0.0.1:9000
 ```
 
 2. **chatbot.py** loads agents dynamically:
@@ -311,8 +263,8 @@ Exposes a LangChain agent via A2A protocol:
 ```python
 # Create A2A server
 server = A2AAgent(
-    agent=my_agent,                      # LangChain agent from create_agent()
-    agent_card_path="agent_card.yaml"    # Path to agent card YAML
+    agent=my_agent,                            # LangChain agent from create_agent()
+    agent_card_path=Path("agent_card.yaml")    # Path to agent card YAML
 )
 server.start()  # Blocks until Ctrl+C
 ```
@@ -327,13 +279,15 @@ server.start()  # Blocks until Ctrl+C
 
 ### A2AAgentTool
 
-Calls a remote A2A agent as a LangChain tool:
+Calls a remote A2A agent skill as a LangChain tool:
 
 ```python
 tool = A2AAgentTool(
-    name="expert_name",              # Tool name for LLM
-    description="When to use this",  # Helps LLM decide
-    url="http://127.0.0.1:8001"      # A2A agent URL
+    agent_id="agent_id",                         # A2A agent ID
+    agent_url="http://127.0.0.1:8001",           # A2A agent URL
+    skill_id="agent_skill_id",                   # A2A agents's skill ID, the IDs are combined to form the tool's unique name
+    skill_description="When to use this skill",  # Helps orchestrator decide when to call the skill
+    http_client=httpx.Client(timeout=60.0),      # client managing the HTTP connection to the A2A agent
 )
 ```
 

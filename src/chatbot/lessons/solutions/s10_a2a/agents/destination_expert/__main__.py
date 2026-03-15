@@ -16,7 +16,7 @@ def main():
     server = A2AAgent(agent=agent, agent_card_path=agent_card_path)
 
     # Start server with telemetry enabled
-    with Telemetry(service_name="destination-expert"):
+    with Telemetry(service_name="destination_expert"):
         server.start()
 
 

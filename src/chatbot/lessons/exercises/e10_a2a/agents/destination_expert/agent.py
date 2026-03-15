@@ -1,4 +1,4 @@
-"""Destination Expert Agent - Provides destination recommendations"""
+"""Destination Expert Agent - Provides destination and activity recommendations"""
 
 from langchain_core.messages import AIMessage
 
@@ -7,8 +7,8 @@ from langchain_core.messages import AIMessage
 # Use: from chatbot.services.llm import LLM
 #
 # Create a system prompt for the destination expert that:
-# - Recommends destinations based on interests and preferences
-# - Suggests 2-3 specific destinations with explanations
+# - Recommends destinations or activitites based on interests and preferences
+# - Suggests 2-3 specific items with explanations
 # - Mentions the best time to visit
 # - Highlights unique attractions
 # - Keeps responses concise and actionable

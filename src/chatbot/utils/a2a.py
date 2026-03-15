@@ -9,12 +9,11 @@ Provides classes to:
 import logging
 import yaml
 from pathlib import Path
-from typing import Any
-from urllib.parse import urlparse
+from typing import Any, Dict, List, override
+from urllib.parse import urljoin, urlparse
 from langchain_core.tools import BaseTool
 from langchain_core.messages import HumanMessage
 from chatbot.services.agent import AgentProtocol
-from a2a.client import A2AClient
 from a2a.server.agent_execution.agent_executor import AgentExecutor
 from a2a.server.apps import A2AStarletteApplication
 from a2a.server.request_handlers import DefaultRequestHandler
@@ -29,6 +28,7 @@ from a2a.types import (
     TextPart,
     MessageSendParams,
     SendMessageRequest,
+    SendMessageResponse,
     SendMessageSuccessResponse,
 )
 import httpx
@@ -50,6 +50,7 @@ class _AgentBridge(AgentExecutor):
     def __init__(self, sync_agent: AgentProtocol):
         self.sync_agent = sync_agent
 
+    @override
     async def execute(self, context: Any, event_queue: Any) -> None:
         """Execute the agent with incoming A2A message."""
         # Extract incoming message from A2A request
@@ -76,6 +77,7 @@ class _AgentBridge(AgentExecutor):
         )
         await event_queue.enqueue_event(response_message)
 
+    @override
     async def cancel(self, context: Any, event_queue: Any) -> None:
         """Cancel the agent execution (required by AgentExecutor)."""
         pass
@@ -105,17 +107,15 @@ class A2AAgent:
 
     def start(self) -> None:
         """Start the A2A server (blocks until stopped)"""
-        # Build skills with defaults for required fields
-        skills = []
-        for skill in self._card_data.get("skills", []):
-            skills.append(
-                AgentSkill(
-                    id=skill.get("id", skill["name"]),  # Default id to name
-                    name=skill["name"],
-                    description=skill["description"],
-                    tags=skill.get("tags", []),  # Default to empty list
-                )
+        skills = [
+            AgentSkill(
+                id=skill.get("id", skill["name"]),
+                name=skill["name"],
+                description=skill["description"],
+                tags=skill.get("tags", []),
             )
+            for skill in self._card_data.get("skills", [])
+        ]
 
         # Build agent card from YAML data
         agent_card = AgentCard(
@@ -156,27 +156,36 @@ class A2AAgent:
 
 class A2AAgentTool(BaseTool):
     """
-    LangChain tool that calls a remote A2A agent.
-
-    This allows your orchestrator to call remote A2A agents as tools.
-    The LLM sees the name and description to decide when to use it.
+    LangChain tool that calls a specific skill of a remote A2A agent.
 
     Args:
-        name: Tool name for the LLM
-        description: When to use this tool
-        url: A2A agent URL (e.g., "http://127.0.0.1:8002")
+        agent_url: Base URL of the A2A agent (e.g., "http://127.0.0.1:8002")
+        skill_id: The ID of the skill to invoke on the remote agent.
+        skill_name: The name of the skill for the LLM tool.
+        skill_description: Description of the skill for the LLM tool.
     """
 
-    def __init__(self, name: str, description: str, url: str):
-        super().__init__(name=name, description=description)
-        self._url = url
-        self._http = httpx.AsyncClient(timeout=60.0)
-        self._client = A2AClient(httpx_client=self._http, url=self._url)
+    def __init__(
+        self,
+        agent_url: str,
+        agent_id: str,
+        skill_id: str,
+        skill_description: str,
+        http_client: httpx.Client,
+    ):
+        super().__init__(name=f"{agent_id}.{skill_id}", description=skill_description)
+        self._agent_url = agent_url
+        self._agent_id = agent_id
+        self._skill_id = skill_id
+        self._http_client = http_client
 
+    @override
     def _run(self, query: str) -> str:
         """Called when LLM decides to use this tool"""
-        # Create A2A message request
-        text_part = TextPart(text=query)
+        # Construct a message that instructs the remote agent to use a specific skill.
+        message_content = f"Execute skill '{self._skill_id}' for query: {query}"
+
+        text_part = TextPart(text=message_content)
         message = Message(
             role=Role.user,
             message_id="1",
@@ -185,15 +194,66 @@ class A2AAgentTool(BaseTool):
         params = MessageSendParams(message=message)
         request = SendMessageRequest(id=1, params=params)
 
-        # Send message via A2A protocol
-        # LangChain expects sync, but A2A is async - use asyncio.run to bridge
-        response = asyncio.run(self._client.send_message(request))
+        try:
+            response = self._http_client.post(
+                self._agent_url, json=request.model_dump(), timeout=30.0
+            )
+            response.raise_for_status()
+            result = response.json()
 
-        # Extract answer from response
-        if isinstance(response.root, SendMessageSuccessResponse):
-            result = response.root.result
-            if isinstance(result, Message):
-                first_part = result.parts[0].root
-                if isinstance(first_part, TextPart):
-                    return first_part.text
-        return str(response)
+            response_data = SendMessageResponse(**result)
+            if isinstance(response_data.root, SendMessageSuccessResponse):
+                result = response_data.root.result
+                if isinstance(result, Message):
+                    first_part = result.parts[0].root
+                    if isinstance(first_part, TextPart):
+                        return first_part.text
+            return str(response_data)
+        except Exception as e:
+            logger.error(
+                f"Error calling skill '{self._skill_id}' for A2A agent '{self._agent_id}' at '{self._agent_url}': {repr(e)}"
+            )
+            return f"Error: {str(e)}"
+
+
+def create_tools_from_a2a_agent_skills(config: Dict[str, Any]) -> List[BaseTool]:
+    """
+    Creates a list of LangChain tools for interacting with A2A agent skills.
+    Args:
+        agents_config: a dictionary, giving 'name' and 'url' for each A2A agent.
+    Returns:
+        A list of BaseTool instances, one for each agent skill or agent.
+    """
+    if "agents" not in config:
+        logger.error("Invalid A2A agent configuration")
+        return []
+
+    orchestrator_tools = []
+    http_client = httpx.Client(timeout=60.0)
+
+    for agent_config in config["agents"]:
+        agent_id = agent_config["id"]
+        agent_url = agent_config["url"]
+
+        try:
+            agent_card_url = urljoin(agent_url, "/.well-known/agent-card.json")
+            response = http_client.get(agent_card_url)
+            agent_card = AgentCard(**response.json())
+
+            for skill in agent_card.skills:
+                orchestrator_tools.append(
+                    A2AAgentTool(
+                        agent_url=agent_url,
+                        agent_id=agent_id,
+                        skill_id=skill.id,
+                        skill_description=skill.description,
+                        http_client=http_client,
+                    )
+                )
+        except Exception as e:
+            logger.error(
+                f"Could not load agent card for '{agent_id}' at '{agent_url}': {repr(e)}"
+            )
+            continue
+
+    return orchestrator_tools
