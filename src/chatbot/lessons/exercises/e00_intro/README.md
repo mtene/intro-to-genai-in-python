@@ -112,9 +112,9 @@ Running local LLMs requires an orchestration framework, such as:
 Choose a model based on your application's required capabilities and available hardware (CPU or discrete GPU):
 
 * **< 5B parameters**: designed for edge devices with limited resources (IoT, phones). Very responsive but often struggle with reasoning, have difficulty following instructions and produce more hallucinations.
-* **5-8B parameters**: run reasonably well on consumer-grade laptops with discrete graphics cards.
-* **8-15B parameters**: require more powerful workstation GPUs.
-* **> 15B parameters**: require cluster-grade GPUs.
+* **5-10B parameters**: run reasonably well on consumer-grade laptops with discrete graphics cards.
+* **10-20B parameters**: require more powerful workstation GPUs.
+* **> 20B parameters**: require cluster-grade GPUs.
 
 Some options are given below, in ascending order of hardware requirements. You can use them by pasting the Ollama catalog name in the `local_llm` settings from [`config.yaml`](/src/config.yaml).
 
