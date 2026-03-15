@@ -145,6 +145,32 @@ Model                           | Active Params | Context Window | Input modalit
 
 To complete all tutorials, native support for both structured outputs and tool calling is needed. **IBM Granite 4 7B MoE** meets these criteria and is able to run at decently low latency on a consumer-grade laptop with a discrete GPU. Opt for **OpenAI GPT-OSS 20B MoE** if your machine has better-than-average hardware.
 
+## A note on sync vs async programming
+
+**Synchronous code** runs one step at a time. When your code makes a network call (like asking an LLM), it stops and waits for the response before continuing. This is simple but wasteful, as the process sits idle while waiting.
+
+```python
+# Synchronous: waits for each call to finish
+def get_info():
+    result1 = call_llm("What's the weather?")
+    result2 = call_llm("What's the time?")  # starts only after result1
+    return f"{result1}\n{result2}
+```
+
+**Asynchronous code** lets your program do other work while waiting. It uses an event loop to handle multiple requests concurrently.
+
+```python
+# Asynchronous: can run both calls "at the same time"
+async def get_info():
+    result1 = await call_llm("What's the weather?")
+    result2 = await call_llm("What's the time?")
+    return f"{result1}\n{result2}
+```
+
+For simplicity, this tutorial uses synchronous code. However, some libraries (like MCP and A2A) are purely asynchronous, so we created wrapper utilities to bridge them to sync code.
+
+Even though async is out of scope here, it's essential for production applications. To learn more, see [Async IO in Python: A Complete Walkthrough](https://realpython.com/async-io-python/).
+
 ## Further reading
 
 [AI Engineering Pitfalls](https://huyenchip.com/2025/01/16/ai-engineering-pitfalls.html) discusses the thought process behind deciding if GenAI is the right fit for an application, covering common pitfalls and when to avoid LLM-based solutions.
