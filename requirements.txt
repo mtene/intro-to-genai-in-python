@@ -372,7 +372,7 @@ opentelemetry-util-http==0.60b1
     # via
     #   opentelemetry-instrumentation-httpx
     #   opentelemetry-instrumentation-requests
-orjson==3.11.5
+orjson==3.11.7
     # via
     #   chromadb
     #   langgraph-sdk
@@ -454,7 +454,7 @@ pydeck==0.9.1
     # via streamlit
 pygments==2.19.2
     # via rich
-pyjwt==2.10.1
+pyjwt==2.12.1
     # via mcp
 pyperclip==1.11.0
     # via fastmcp
