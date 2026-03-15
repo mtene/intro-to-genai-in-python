@@ -94,8 +94,6 @@ MCP servers can be hosted locally, on a private intranet or on the public intern
 
 ## Further reading
 
-[Async IO in Python: A Complete Walkthrough](https://realpython.com/async-io-python/) provides comprehensive coverage of asynchronous programming in Python, essential for understanding MCP client and server implementations in production environments.
-
 [Tool Calling is Broken Without MCP Server Composition](https://hackteam.io/blog/tool-calling-is-broken-without-mcp-server-composition/) explains why tool overload degrades LLM performance and demonstrates composition patterns for organizing tools across multiple MCP servers.
 
 ---

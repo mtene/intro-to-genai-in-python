@@ -15,7 +15,7 @@ def main():
     # The agent card YAML defines the agent's metadata and capabilities
     server = A2AAgent(agent=agent, agent_card_path=agent_card_path)
 
-    with Telemetry(service_name="budget-expert"):
+    with Telemetry(service_name="budget_expert"):
         server.start()
 
 

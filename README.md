@@ -31,7 +31,7 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
     * using winget
     >
     > ```powershell
-    > winget install --id Python.Python.3.13 --version 3.13.3 --scope user
+    > winget install --id Python.Python.3.13 --scope user
     > ```
 
     * or [downloading](https://www.python.org/downloads/release/python-3133/) and installing somewhere accessible e.g. `%APPDATA%`.
@@ -58,7 +58,7 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
 1. Use uv to create a Python virtual environment at the git clone location
 
     ```powershell
-    uv venv --python 3.13.3
+    uv venv --python 3.13
     ```
 
     and install the dependencies

@@ -1,4 +1,4 @@
-"""Destination Expert Agent - Provides destination recommendations"""
+"""Destination Expert Agent - Provides destination and activity recommendations"""
 
 from langchain.agents import create_agent
 from chatbot.services.llm import LLM
@@ -14,8 +14,8 @@ Your expertise:
 - Matching destinations to traveler preferences (culture, nature, adventure, relaxation)
 
 When answering:
-- Suggest 2-3 specific destinations that match the criteria
-- Explain why each destination fits (1-2 sentences per destination)
+- Suggest 2-3 specific items that match the criteria
+- Explain why each items fits (1-2 sentences per item)
 - Mention the best time to visit
 - Highlight unique attractions or experiences
 - Keep responses concise and actionable

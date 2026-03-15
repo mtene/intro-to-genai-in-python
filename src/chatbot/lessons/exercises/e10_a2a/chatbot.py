@@ -11,7 +11,7 @@ from langgraph.graph.state import CompiledStateGraph
 from chatbot.chatbot_base import BaseChatBot
 from chatbot.chat_context import ChatContext
 from chatbot.services.llm import LLM
-from chatbot.utils.a2a import A2AAgentTool
+from chatbot.utils.a2a import create_tools_from_a2a_agent_skills
 
 
 class ChatBot(BaseChatBot):
@@ -24,23 +24,16 @@ class ChatBot(BaseChatBot):
         with open(Path(__file__).parent / "agents.yaml", "r") as f:
             config = yaml.safe_load(f)
 
-        # Create A2A tools from configuration
-        agents = [
-            A2AAgentTool(
-                name=agent["name"],
-                description=agent["description"],
-                url=agent["url"],
-            )
-            for agent in config["agents"]
-        ]
+        # Create one tool per A2A agent skill, after fetching all agent cards
+        tools = create_tools_from_a2a_agent_skills(config)
 
         # Create orchestrator agent with A2A agents as tools
         # The LLM decides which to consult based on the user's question
-        system_prompt = """You are an orchestrator with access to expert agents. Always delegate questions to the appropriate expert rather than answering directly."""
+        system_prompt = "You are an orchestrator with access to expert agents. Always delegate questions to the appropriate expert(s) and base your response solely on their answers."
 
         self._agent: CompiledStateGraph = create_agent(
             model=llm,
-            tools=agents,
+            tools=tools,
             system_prompt=system_prompt,
             checkpointer=MemorySaver(),
         )

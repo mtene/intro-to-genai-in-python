@@ -112,9 +112,9 @@ Running local LLMs requires an orchestration framework, such as:
 Choose a model based on your application's required capabilities and available hardware (CPU or discrete GPU):
 
 * **< 5B parameters**: designed for edge devices with limited resources (IoT, phones). Very responsive but often struggle with reasoning, have difficulty following instructions and produce more hallucinations.
-* **5-8B parameters**: run reasonably well on consumer-grade laptops with discrete graphics cards.
-* **8-15B parameters**: require more powerful workstation GPUs.
-* **> 15B parameters**: require cluster-grade GPUs.
+* **5-10B parameters**: run reasonably well on consumer-grade laptops with discrete graphics cards.
+* **10-20B parameters**: require more powerful workstation GPUs.
+* **> 20B parameters**: require cluster-grade GPUs.
 
 Some options are given below, in ascending order of hardware requirements. You can use them by pasting the Ollama catalog name in the `local_llm` settings from [`config.yaml`](/src/config.yaml).
 
@@ -144,6 +144,32 @@ Model                           | Active Params | Context Window | Input modalit
 * **Capabilities marked with `*`**: advertised by the vendor but unreliable in practice, likely due to training / fine-tuning approaches or small parameter counts.
 
 To complete all tutorials, native support for both structured outputs and tool calling is needed. **IBM Granite 4 7B MoE** meets these criteria and is able to run at decently low latency on a consumer-grade laptop with a discrete GPU. Opt for **OpenAI GPT-OSS 20B MoE** if your machine has better-than-average hardware.
+
+## A note on sync vs async programming
+
+**Synchronous code** runs one step at a time. When the program executes a network call (like asking an LLM) or accesses a disk, it stops and waits for the response before continuing. This is simple but wasteful, as the process sits idle while waiting.
+
+```python
+# Synchronous: waits for each call to finish
+def get_info():
+    result1 = call_llm("What's the weather?")
+    result2 = call_llm("What's the time?")  # starts only after result1
+    return f"{result1}\n{result2}
+```
+
+**Asynchronous code** lets your program do other work while waiting. It uses an event loop to handle multiple requests concurrently.
+
+```python
+# Asynchronous: can run both calls "at the same time"
+async def get_info():
+    result1 = await call_llm_async("What's the weather?")
+    result2 = await call_llm_async("What's the time?")
+    return f"{result1}\n{result2}
+```
+
+For simplicity, this tutorial uses synchronous code. Most modern Python libraries have both sync and async versions of essential calls. Some of them (like MCP and A2A) are purely asynchronous, so we created wrapper utilities to bridge them to sync code.
+
+Even though async is out of scope here, it's essential for production applications. To learn more, see [Async IO in Python: A Complete Walkthrough](https://realpython.com/async-io-python/).
 
 ## Further reading
 

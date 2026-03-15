@@ -1,7 +1,7 @@
 # Agent Card for Budget Expert
 # Describes this agent's capabilities for A2A discovery
 
-name: budget-expert
+name: Budget Expert
 description: >-
   Provides travel budget estimates and cost-saving advice for destinations worldwide.
   Offers realistic daily budget breakdowns covering accommodation, food, transportation,
@@ -10,7 +10,8 @@ description: >-
 version: "1.0"
 
 skills:
-  - name: estimate-budget
+  - id: estimate_budget
+    name: Estimate Budget
     description: >-
       Estimates realistic daily travel budgets for specific destinations,
       breaking down costs by category and considering seasonal variations.
