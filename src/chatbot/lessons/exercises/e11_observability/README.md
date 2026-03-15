@@ -33,7 +33,7 @@ As your LLM‑powered application grows more complex, it becomes increasingly im
 
 Each chatbot implementation explored so far in the course has the capability to export OpenTelemetry traces to an external endpoint, given by the `observability_config` setting in [`config.yaml`](/src/config.yaml).
 
-First, study the `Telemetry` class, defined in [`telemetry.py`](/chatbot/utils/telemetry.py) and observe its usage as a [context manager](https://www.pythontutorial.net/advanced-python/python-context-managers/) in the `__main__.py` file of any of the chatbot implementations:
+First, study the `Telemetry` class, defined in [`telemetry.py`](/src/chatbot/utils/telemetry.py) and observe its usage as a [context manager](https://www.pythontutorial.net/advanced-python/python-context-managers/) in the `__main__.py` file of any of the chatbot implementations:
 
 ```python
 with Telemetry(service_name=Path(__file__).parent.name):
@@ -68,7 +68,7 @@ This information is also available when errors occur and can be invaluable when 
 
 ## Under the hood
 
-The [`Telemetry`](src/chatbot/utils/telemetry.py:27-47) class takes a selective instrumentation approach, installing only the telemetry providers needed for the specific frameworks used in this codebase. This involves:
+The [`Telemetry`](/src/chatbot/utils/telemetry.py) class takes a selective instrumentation approach, installing only the telemetry providers needed for the specific frameworks used in this codebase. This involves:
 
 1. **Manual provider setup**: Creating an OpenTelemetry `TracerProvider` with a service name resource attribute that identifies the specific chatbot implementation being traced.
 
