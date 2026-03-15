@@ -147,7 +147,7 @@ To complete all tutorials, native support for both structured outputs and tool c
 
 ## A note on sync vs async programming
 
-**Synchronous code** runs one step at a time. When your code makes a network call (like asking an LLM), it stops and waits for the response before continuing. This is simple but wasteful, as the process sits idle while waiting.
+**Synchronous code** runs one step at a time. When the program executes a network call (like asking an LLM) or accesses a disk, it stops and waits for the response before continuing. This is simple but wasteful, as the process sits idle while waiting.
 
 ```python
 # Synchronous: waits for each call to finish
