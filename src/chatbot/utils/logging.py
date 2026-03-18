@@ -29,7 +29,7 @@ def configure_logging() -> None:
 
     # suppress some the 3rd party packages INFO logging, to reduce clutter
     if log_level > logging.DEBUG:
-        for logger_name in ["httpx", "mcp"]:
+        for logger_name in ["httpx", "mcp", "uvicorn.access", "uvicorn.error"]:
             logging.getLogger(logger_name).setLevel(logging.WARNING)
 
     # now that logging is setup, report any errors encountered
