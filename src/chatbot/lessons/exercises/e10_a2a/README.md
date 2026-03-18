@@ -293,9 +293,11 @@ tool = A2AAgentTool(
 
 **How it works:**
 
-* Creates an A2A client on first use
-* Bridges sync tool calling to async A2A calls
+* Sends a JSON-RPC request directly via `httpx.Client` (synchronous HTTP)
+* Parses the A2A `SendMessageResponse` and extracts the text from the reply
 * Returns the expert's response as a string
+
+> **Note:** The A2A SDK provides an `A2AClient` class that is the recommended way to call remote agents, but it is async. `A2AAgentTool` avoids it intentionally — LangChain's sync `BaseTool._run()` cannot `await`, so using raw `httpx.Client` keeps everything synchronous without leaking async into the rest of the codebase. If you are building in an async context (e.g. FastAPI, async LangGraph), prefer `A2AClient` from the `a2a.client` package instead.
 
 These wrappers handle all data conversion and A2A communication.
 
