@@ -1,5 +1,7 @@
+import base64
 import logging
 import json
+import os
 from chatbot.config import config
 from chatbot.utils.processes import is_endpoint_reachable
 from opentelemetry import trace
@@ -60,12 +62,47 @@ class Telemetry:
     def start(self) -> None:
         if self._started:
             return
-        endpoint = config.get_observability_endpoint()
+        obs_cfg = config.get_observability_config()
+        endpoint = obs_cfg.get("endpoint")
+
+        if not endpoint:
+            logger.debug("No observability endpoint configured; traces disabled")
+            return
+
         if not is_endpoint_reachable(endpoint):
             logger.debug(
                 f"Could not reach observability endpoint {endpoint}, traces disabled"
             )
             return
+
+        os.environ.setdefault(
+            "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT", "true"
+        )
+
+        pub_env = obs_cfg.get("langfuse_public_key_env_var")
+        sec_env = obs_cfg.get("langfuse_secret_key_env_var")
+        pub_env = (
+            pub_env.strip() if isinstance(pub_env, str) and pub_env.strip() else None
+        )
+        sec_env = (
+            sec_env.strip() if isinstance(sec_env, str) and sec_env.strip() else None
+        )
+        if not pub_env or not sec_env:
+            logger.error(
+                "Langfuse telemetry auth is not configured in config.yaml. Traces disabled."
+            )
+            return
+
+        pub = os.environ.get(pub_env)
+        sec = os.environ.get(sec_env)
+        if not pub or not sec:
+            logger.error(
+                "Langfuse telemetry auth env vars are not set. Traces disabled."
+            )
+            return
+
+        token = base64.b64encode(f"{pub}:{sec}".encode("utf-8")).decode("ascii")
+        headers: dict[str, str] = {"Authorization": f"Basic {token}"}
         logger.info(
             f"Streaming traces to observability endpoint {endpoint} for service {self._service_name}"
         )
@@ -73,7 +110,9 @@ class Telemetry:
         provider = TracerProvider(
             resource=Resource.create({"service.name": self._service_name})
         )
-        self._processor = BatchSpanProcessor(OTLPSpanExporter(endpoint=endpoint))
+        self._processor = BatchSpanProcessor(
+            OTLPSpanExporter(endpoint=endpoint, headers=headers)
+        )
         provider.add_span_processor(self._processor)
         trace.set_tracer_provider(provider)
         LangchainInstrumentor().instrument()
