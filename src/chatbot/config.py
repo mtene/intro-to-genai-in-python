@@ -13,11 +13,6 @@ class ServiceType(StrEnum):
     REMOTE = "remote"
 
 
-class VectorDBSimilarityType(StrEnum):
-    EUCLIDEAN_DISTANCE = "euclidean_distance"
-    COSINE = "cosine"
-
-
 class Config:
     def __init__(self):
         config_path = Path(__file__).parent.parent / "config.yaml"

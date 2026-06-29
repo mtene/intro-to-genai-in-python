@@ -11,7 +11,6 @@ from opentelemetry.sdk.trace.export import BatchSpanProcessor
 from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
 from opentelemetry.instrumentation.langchain import LangchainInstrumentor
 from opentelemetry.instrumentation.openai_v2 import OpenAIInstrumentor
-from opentelemetry.instrumentation.chromadb import ChromaInstrumentor
 from opentelemetry.instrumentation.requests import RequestsInstrumentor
 from opentelemetry.instrumentation.httpx import HTTPXClientInstrumentor
 
@@ -117,7 +116,6 @@ class Telemetry:
         trace.set_tracer_provider(provider)
         LangchainInstrumentor().instrument()
         OpenAIInstrumentor().instrument()
-        ChromaInstrumentor().instrument()
         RequestsInstrumentor().instrument(
             request_hook=lambda span, request: self._dump_object_to_span(
                 span, request, "http.request"
