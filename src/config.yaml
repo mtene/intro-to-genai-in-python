@@ -38,8 +38,6 @@ remote_embeddings: &remote_embeddings_settings
 # configuration for a local vector store service
 local_vectordb: &local_vectordb_settings
   type: local
-  # choose between: cosine, euclidean_distance
-  similarity: euclidean_distance
 
 ## App configuration settings
 

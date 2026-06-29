@@ -1,37 +1,30 @@
-import chromadb.config
-from langchain_chroma import Chroma
+from typing import Any
+
+from langchain_core.documents import Document
+from langchain_core.vectorstores import InMemoryVectorStore
+from typing_extensions import override
+
 from .embeddings import Embeddings
-from chatbot.config import config, VectorDBSimilarityType
 
 
-class LocalVectorDB(Chroma):
-    """Represents a locally-hosted vector store which supports semantic search
-    Usage:
-         vectordb_service = LocalVectorDB()
-         text = "Hi"
-         results = vectordb_service.invoke(text)
-    """
+class LocalVectorDB(InMemoryVectorStore):
+    """In-memory vector store for semantic search (cosine similarity via numpy)."""
 
-    def __init__(self, **kwargs):
-        # fetch service configuration from the config file
-        service_config = config.get_vectordb_config()
+    def __init__(self, **kwargs: Any):
+        super().__init__(embedding=Embeddings(), **kwargs)
+        # Reentrant call guard
+        self._retrieving = False
 
-        # create embeddings service
-        embeddings_service = Embeddings()
-
-        # define index and distance
-        match service_config["similarity"]:
-            case VectorDBSimilarityType.EUCLIDEAN_DISTANCE:
-                collection_metadata = {"hnsw:space": "l2"}
-            case VectorDBSimilarityType.COSINE:
-                collection_metadata = {"hnsw:space": "cosine"}
-            case _:
-                raise NotImplementedError
-
-        # establish connection to service
-        super().__init__(
-            embedding_function=embeddings_service,
-            collection_metadata=collection_metadata,
-            client_settings=chromadb.config.Settings(anonymized_telemetry=False),
-            **kwargs,
-        )
+    @override
+    def similarity_search(
+        self, query: str, k: int = 4, **kwargs: Any
+    ) -> list[Document]:
+        # Reentrant call guard
+        if self._retrieving:
+            return super().similarity_search(query, k=k, **kwargs)
+        self._retrieving = True
+        try:
+            # Emits telemetry spans under LangchainInstrumentor
+            return self.as_retriever(search_kwargs={"k": k, **kwargs}).invoke(query)
+        finally:
+            self._retrieving = False
