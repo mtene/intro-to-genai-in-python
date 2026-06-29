@@ -271,11 +271,9 @@ server.start()  # Blocks until Ctrl+C
 
 **How it works:**
 
-* Loads agent metadata from YAML file
-* Wraps your sync agent in an async bridge (A2A SDK is async)
-* Creates an `AgentCard` from the YAML data
-* Starts the agent as a server
-* Routes A2A requests to your agent's implementation as if they were coming from the user
+* Loads agent metadata from YAML and publishes an agent card for discovery
+* Listens for incoming A2A messages over HTTP
+* Forwards each message to your LangChain agent and returns the reply
 
 ### A2AAgentTool
 
@@ -285,21 +283,23 @@ Calls a remote A2A agent skill as a LangChain tool:
 tool = A2AAgentTool(
     agent_id="agent_id",                         # A2A agent ID
     agent_url="http://127.0.0.1:8001",           # A2A agent URL
-    skill_id="agent_skill_id",                   # A2A agents's skill ID, the IDs are combined to form the tool's unique name
+    skill_id="agent_skill_id",                   # A2A agent's skill ID; combined with agent_id for the tool name
     skill_description="When to use this skill",  # Helps orchestrator decide when to call the skill
-    http_client=httpx.Client(timeout=60.0),      # client managing the HTTP connection to the A2A agent
 )
 ```
 
 **How it works:**
 
-* Sends a JSON-RPC request directly via `httpx.Client` (synchronous HTTP)
-* Parses the A2A `SendMessageResponse` and extracts the text from the reply
-* Returns the expert's response as a string
+* Each tool represents one skill on a remote expert agent
+* When the orchestrator invokes the tool, it sends the user's query to that agent
+* The expert processes the message and returns a text response
+* The orchestrator incorporates that response into its answer
 
-> **Note:** The A2A SDK provides an `A2AClient` class that is the recommended way to call remote agents, but it is async. `A2AAgentTool` avoids it intentionally — LangChain's sync `BaseTool._run()` cannot `await`, so using raw `httpx.Client` keeps everything synchronous without leaking async into the rest of the codebase. If you are building in an async context (e.g. FastAPI, async LangGraph), prefer `A2AClient` from the `a2a.client` package instead.
+`create_tools_from_a2a_agent_skills()` reads each agent's published card and registers one tool per skill.
 
-These wrappers handle all data conversion and A2A communication.
+> **Note:** `A2AAgent` and `A2AAgentTool` handle agent-card formatting and A2A protocol messaging so you can focus on agent logic. The A2A SDK is async under the hood; these two classes hide that so your code stays synchronous.
+>
+> In a real service, host agents in an async web stack (e.g. FastAPI) and use the SDK client directly. Reuse clients across requests, model long-running or streaming work with the task lifecycle (status and artifact updates), and implement cancellation.
 
 ## Further Reading
 
@@ -309,7 +309,10 @@ These wrappers handle all data conversion and A2A communication.
 
 [Multi-Agent System Architectures: A Survey](https://arxiv.org/abs/2404.11584) - Academic overview of architectural patterns for LLM agents
 
-[A2A Protocol Specification](https://a2a-protocol.org/latest/) - Official A2A SDK and protocol documentation
+[A2A Python SDK tutorials](https://a2a-protocol.org/latest/tutorials/python/) - Official guides for servers, clients, executors, and production-oriented SDK usage
+
+[A2A Protocol Specification](https://a2a-protocol.org/latest/) - Official A2A protocol reference
+
 
 ---
 
