@@ -8,12 +8,11 @@ By the end of this exercise, you should be able to:
 
 * Explain why observability is important in applications using LLMs
 * Identify what kind of data can be observed from application telemetry
-* Visualize telemetry traces as a timeline
-* Drill down into individual prompts and inspect metadata
+* Browse telemetry traces and inspect prompts, metadata, and cost
 
 ## Overview
 
-In this exercise, you will start a telemetry endpoint which receives traces and displays them visually for inspection.
+In this exercise, you will connect your chatbot to an observability backend that receives traces and lets you inspect them in a UI.
 
 ## Motivation
 
@@ -40,31 +39,117 @@ with Telemetry(service_name=Path(__file__).parent.name):
     console(ChatBot)
 ```
 
-To collect and visualize traces in this exercise, we will use [Jaeger](https://www.jaegertracing.io/download), a popular open‑source distributed tracing system. You can either download and run the binary or use [`podman`](https://podman.io/) to start it in a container:
+To collect and visualize traces in this exercise, we will use [Langfuse](https://langfuse.com/), an open‑source LLM observability platform that can act as an OpenTelemetry HTTP backend. To run it locally with [Podman](https://podman-desktop.io/downloads), follow these steps:
 
-```powershell
-podman run --rm --name jaeger -p 16686:16686 -p 4318:4318 cr.jaegertracing.io/jaegertracing/jaeger
+1. Ensure you have a Compose provider installed.
+
+   `podman compose` is a thin wrapper that delegates to an external provider (typically `docker-compose` or `podman-compose`). Confirm what Podman will use:
+
+   ```powershell
+   podman compose version
+   ```
+
+   If you see an error about a missing provider (or `podman compose` is not available), install `podman-compose` (Python) and re-run the command:
+
+   ```powershell
+   pip install --user podman-compose
+   podman compose version
+   ```
+
+2. Create a folder for local Langfuse config (any location is fine) and create a `.env` file there with the following content:
+
+   ```text
+   # Core app secrets (local-only placeholders)
+   NEXTAUTH_SECRET=dev-secret
+   SALT=dev-salt
+   # 64 hex chars. Generate securely for anything beyond local dev.
+   ENCRYPTION_KEY=0000000000000000000000000000000000000000000000000000000000000000
+
+   # Datastores (must match the docker-compose services)
+   POSTGRES_USER=postgres
+   POSTGRES_PASSWORD=postgres
+   POSTGRES_DB=postgres
+
+   CLICKHOUSE_USER=clickhouse
+   CLICKHOUSE_PASSWORD=clickhouse
+
+   REDIS_AUTH=myredissecret
+
+   MINIO_ROOT_USER=minio
+   MINIO_ROOT_PASSWORD=miniosecret
+   ```
+
+   Passwords/secrets are required even for local runs because Postgres/Redis/MinIO need credentials and Langfuse uses secrets to sign sessions and encrypt stored payloads. Use placeholders for local development only, keep services bound to localhost, and don't reuse these values in shared environments.
+
+3. Start Podman:
+
+   ```powershell
+   podman machine start
+   ```
+
+4. Download the upstream Langfuse `docker-compose.yml` into the same folder as your `.env`:
+
+   ```powershell
+   Invoke-WebRequest "https://raw.githubusercontent.com/langfuse/langfuse/main/docker-compose.yml" -OutFile docker-compose.yml
+   ```
+
+5. Run Podman Compose from that folder, referencing the downloaded compose file:
+
+   ```powershell
+   podman compose --env-file .env -f docker-compose.yml up -d
+   ```
+
+6. Ensure [`config.yaml`](/src/config.yaml) `observability_config` points to the Langfuse endpoint and names the environment variables that hold your API keys:
+
+   ```yaml
+   observability_config:
+     endpoint: http://localhost:3000/api/public/otel/v1/traces
+     langfuse_public_key_env_var: LANGFUSE_PUBLIC_KEY
+     langfuse_secret_key_env_var: LANGFUSE_SECRET_KEY
+   ```
+
+7. Open the Langfuse UI at [`http://localhost:3000/`](http://localhost:3000/) and complete first-time setup: create an account, organization and project, then generate project API keys in the UI:
+
+   * Select your **organization**
+   * Select your **project**
+   * Go to **Project Settings** → **API Keys**
+   * Click **Create new API key**
+   * Copy the **Public Key** and **Secret Key**
+
+   Langfuse requires HTTP Basic authentication headers in telemetry messages, where the username is the **public key** and the password is the **secret key**. Set them as user environment variables: **Start** → search **environment variables** → **Edit environment variables for your account** → under *User variables*, add `LANGFUSE_PUBLIC_KEY` and `LANGFUSE_SECRET_KEY` with the values from the Langfuse UI. Restart your IDE afterward so your environment is refreshed to contain them.
+
+Once Langfuse is running and the keys are set, start your chatbot. It will probe the observability endpoint and, if successful, show the following message at the console:
+
+```text
+INFO     Streaming traces to observability endpoint http://localhost:3000/api/public/otel/v1/traces for service <chatbot_name>
 ```
 
-Once Jaeger is running, start your chatbot, which will probe the observability endpoint and, if successful, show the following message at the console:
+In this setup, traces are exported to the observability backend configured in `config.yaml` and appear in its UI after you run a chatbot implementation.
 
-```powershell
-INFO     Streaming traces to observability endpoint http://127.0.0.1:4318/v1/traces
-```
+The dashboard summarizes activity across your project, for example trace counts, model usage, and cost:
 
-In this setup, chatbot traces are streamed via HTTP requests to port `4318` on the local machine and can be visualized by navigating to [`http://127.0.0.1:16686/`](http://127.0.0.1:16686/). As an example, the screenshot below shows a trace produced by running the custom agent from the previous lesson.
+![Observability dashboard showing trace counts and model cost](/images/observability_cost.png)
 
-![Trace visualization in Jaeger](/images/observability.png)
+Open an individual trace to see how work is broken down into nested operations, such as agent-to-agent communication, LLM calls or HTTP requests. Selecting an operation reveals details captured by the instrumentation:
 
-Each horizontal bar represents a span, corresponding to one operation in your application - such as constructing the prompt, retrieving documents or calling the LLM. By selecting a span, you can inspect metadata such as:
+![Trace detail view showing prompts sent to the model](/images/observability_prompts.png)
+
+For example, you can inspect:
 
 * the full prompt and context sent to the model
-* token usage (input/output)
-* model configuration (temperature, max tokens, model version)
+* LLM responses
+* token usage and cost
+* model identity and provider
+* timing for each step
 * intermediate operations such as retrieval, rewriting, filtering or tool calls
-* timing for each step in the process
 
-This information is also available when errors occur and can be invaluable when debugging unexpected output, diagnosing latency spikes or tracking down excessive token usage.
+This information is also available when errors occur and can help debug unexpected output, diagnose latency spikes, or track down excessive token usage.
+
+To shut down Langfuse when you are done:
+
+```powershell
+podman compose --env-file .env -f docker-compose.yml down
+```
 
 ## Under the hood
 
@@ -72,7 +157,7 @@ The [`Telemetry`](/src/chatbot/utils/telemetry.py) class takes a selective instr
 
 1. **Manual provider setup**: Creating an OpenTelemetry `TracerProvider` with a service name resource attribute that identifies the specific chatbot implementation being traced.
 
-2. **OTLP HTTP exporter**: Using `OTLPSpanExporter` configured to send traces via HTTP to the observability endpoint. The exporter uses `BatchSpanProcessor` to efficiently batch spans before transmission, reducing network overhead.
+2. **OTLP HTTP exporter**: Using `OTLPSpanExporter` configured to send traces via HTTP to the observability endpoint. The exporter can attach optional HTTP headers—for example API key authentication configured in `observability_config`. It uses `BatchSpanProcessor` to efficiently batch spans before transmission, reducing network overhead.
 
 3. **Targeted instrumentation**: Only instrumenting the libraries actually used in the application:
 
@@ -98,7 +183,8 @@ class Telemetry:
     def start(self) -> None:
         if self._started:
             return
-        endpoint = config.get_observability_endpoint()
+        obs_cfg = config.get_observability_config()
+        endpoint = obs_cfg.get("endpoint")
         if not is_endpoint_reachable(endpoint):
             return
 
@@ -140,5 +226,5 @@ It may also be instructive to study the [OpenTelemetry](https://opentelemetry.io
 
 ---
 
-🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e10_a2a/README.md)
----|---
+| 🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e10_a2a/README.md) |
+| --- | --- |

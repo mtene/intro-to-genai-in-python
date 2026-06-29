@@ -47,8 +47,8 @@ class Config:
     def get_vectordb_config(self) -> Dict[str, Any]:
         return self._vectordb_config.copy()
 
-    def get_observability_endpoint(self) -> str:
-        return self._observability_config["endpoint"]
+    def get_observability_config(self) -> Dict[str, Any]:
+        return self._observability_config.copy()
 
     def get_log_level(self) -> str:
         return self._log_level
