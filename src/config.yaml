@@ -52,9 +52,13 @@ local_vectordb: &local_vectordb_settings
 # - fatal
 log_level: info
 
-# endpoint to send OpenTelemetry traces to e.g. Jaeger
 observability_config:
-  endpoint: http://localhost:4318/v1/traces
+  # OpenTelemetry HTTP ingestion endpoint
+  endpoint: http://localhost:3000/api/public/otel/v1/traces
+  # Langfuse OTLP ingestion uses HTTP Basic auth, based on a
+  # public and private key pair. Set env vars to read the keys at runtime.
+  langfuse_public_key_env_var: LANGFUSE_PUBLIC_KEY
+  langfuse_secret_key_env_var: LANGFUSE_SECRET_KEY
 
 # choose one of the predefined LLM service configs from above:
 # - local_llm_settings  - a locally-hosted service
