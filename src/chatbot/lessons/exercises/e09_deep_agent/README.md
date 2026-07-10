@@ -27,7 +27,7 @@ llm_config:
   <<: *remote_llm_settings  # Change from local_llm_settings
 ```
 
-Ensure your remote endpoint is configured and credentials are set as environment variables.
+Ensure the OpenAI-compatible `endpoint` and `model` are configured in `src/config.yaml`, and credentials are set as environment variables.
 
 ## Overview
 

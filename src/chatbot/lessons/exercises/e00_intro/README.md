@@ -90,13 +90,13 @@ This decision depends on the level of complexity in your application. Some guide
 
 ### Remote LLMs
 
-Remote LLMs are the most powerful models, typically hosted on cloud infrastructure. They require authentication (API keys, tokens, etc.) and come with billing and legal implications related to data IP.
+Remote LLMs are the most powerful models, typically hosted on cloud infrastructure. They require authentication (API keys, tokens, etc.) and come with billing and legal implications related to data IP. Remote services are accessed through an OpenAI-compatible API endpoint configured in [`config.yaml`](/src/config.yaml).
 
 To use remote LLMs:
 
 1. Follow due process to obtain credentials
 1. Update [`config.yaml`](/src/config.yaml) with the necessary details
-1. Store secret values in user environment variables before starting the app
+1. Store credentials in user environment variables before starting the app
 
 ### Local LLMs
 
