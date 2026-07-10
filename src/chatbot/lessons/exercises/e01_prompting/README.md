@@ -30,7 +30,7 @@ For local LLMs, Ollama provides OpenAI API compatibility, translating requests b
 
 **Local LLMs** require no authentication credentials. The dummy value in [`LocalLLM`](/src/chatbot/services/local_llm.py)'s constructor exists only because LangChain's `ChatOpenAI` expects a non-empty string.
 
-**Remote LLMs** use authentication via a fixed secret key configured through a user environment variable (see [`RemoteLLM`](/src/chatbot/services/remote_llm.py)). More advanced authentication mechanisms (such as token services) are out of scope, but could easily be implemented by extending the [`Authenticator`](/src/chatbot/services/authenticator.py).
+**Remote LLMs** use authentication via a fixed secret key configured through [`config.yaml`](/src/config.yaml) and [`RemoteLLM`](/src/chatbot/services/remote_llm.py), which connects to an OpenAI-compatible endpoint using LangChain's `ChatOpenAI`. More advanced authentication mechanisms (such as token services) are out of scope, but could easily be implemented by extending the [`Authenticator`](/src/chatbot/services/authenticator.py).
 
 ## LLM behavior tuning
 
@@ -46,7 +46,7 @@ You can use the following parameters to control the LLM's behavior during prompt
 
 * **`seed`** (positive integer): controls the sequence of random choices during response generation.
 
-**Reproducibility**: setting `temperature` to `0.0` ensures deterministic results. With positive temperature values, a fixed `seed` enables reproducible behavior when using the same model, `api_version` and prompt sequence.
+**Reproducibility**: setting `temperature` to `0.0` ensures deterministic results. With positive temperature values, a fixed `seed` enables reproducible behavior when using the same model, endpoint and prompt sequence.
 
 **Note**: not all models expose the `seed` parameter. Some models provide a `top_k` parameter (restricting sampling to the top k most likely tokens), which is not part of the [OpenAI API](https://platform.openai.com/docs/api-reference/chat/create?api-mode=chat) standard.
 

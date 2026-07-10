@@ -14,8 +14,7 @@ local_llm: &local_llm_settings
 remote_llm: &remote_llm_settings
   type: remote
   model: "gpt-4o"
-  api_version: "2024-10-21"
-  endpoint: "https://<your-resource-name>.openai.azure.com/"
+  endpoint: "https://<your-endpoint>/v1"
   extra_headers:
   authentication:
     <<: *api_key_authentication_settings
@@ -29,8 +28,7 @@ local_embeddings: &local_embeddings_settings
 remote_embeddings: &remote_embeddings_settings
   type: remote
   model: "text-embedding-3-small"
-  api_version: "2024-10-21"
-  endpoint: "https://<your-resource-name>.openai.azure.com/"
+  endpoint: "https://<your-endpoint>/v1"
   extra_headers:
   authentication:
     <<: *api_key_authentication_settings

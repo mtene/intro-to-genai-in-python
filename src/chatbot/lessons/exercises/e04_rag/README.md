@@ -30,7 +30,7 @@ The relevance of retrieved results is crucial for RAG success. Since queries are
 
 Semantic search works by transforming text into **embeddings** - vectors of floating-point numbers representing coordinates in high-dimensional space. This representation enables computing relevance through linear algebra operations like distances and angles.
 
-**Embedding models** are trained specifically to generate embeddings. Like LLMs, they vary by parameter count, context length and hardware requirements. Models with publicly available weights can run locally using orchestrators like Ollama or vLLM. Proprietary models (such as those from OpenAI) are cloud-hosted and accessed via authenticated endpoints.
+**Embedding models** are trained specifically to generate embeddings. Like LLMs, they vary by parameter count, context length and hardware requirements. Models with publicly available weights can run locally using orchestrators like Ollama or vLLM. Proprietary models (such as those from OpenAI) are cloud-hosted and accessed via authenticated OpenAI-compatible endpoints configured in [`config.yaml`](/src/config.yaml). See [`RemoteEmbeddings`](/src/chatbot/services/remote_embeddings.py) for the remote implementation.
 
  **Embedding Model**                | **Active Params** | **Context Window** | **Embedding Dimension** | **Weights & Arch**       | **License**       | **Hardware Requirements** | **Ollama Catalog Name**
 ---                                 |---                |---                 |---                      |---                       |---                |---                        |---
