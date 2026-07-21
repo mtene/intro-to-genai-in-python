@@ -356,7 +356,7 @@ pandas==2.3.3
     # via streamlit
 pathable==0.6.0
     # via jsonschema-path
-pillow==12.2.0
+pillow==12.3.0
     # via streamlit
 platformdirs==4.10.0
     # via fastmcp-slim
