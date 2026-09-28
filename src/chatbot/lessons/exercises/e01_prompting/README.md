@@ -18,7 +18,6 @@ In this exercise, you will make the [chatbot logic](chatbot.py) use the LLM to a
 
 To achieve this, inspect the LLM classes in [`src/chatbot/services`](/src/chatbot/services) and the configuration file [`src/config.yaml`](/src/config.yaml). This configuration file allows you to choose which LLM is used and with what parameters.
 
-Run the [tests](tests.py) in the console to track progress and extend them with your own. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions.
 
 ## LLM selection
 
@@ -60,5 +59,5 @@ You can use the following parameters to control the LLM's behavior during prompt
 
 ---
 
-🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e00_intro/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s01_prompting/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e02_system_prompt/README.md)
+🏠 [Overview](/README.md) | ◀️ [Previous exercise](/src/chatbot/lessons/exercises/e00_intro/README.md) | ✅ [Solution](/src/chatbot/lessons/solutions/s01_prompting/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e02_evals/README.md)
 ---|---|---|---

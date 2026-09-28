@@ -1,8 +1,6 @@
 # Solution: Text prompting
 
-The [solution](chatbot.py) to the exercise uses an LLM to answer user queries.
-
-Run the [tests](tests.py) in the console and verify that they all pass. Remember that LLMs are non-deterministic, so increase repetition count before drawing conclusions. Also consider setting the `seed` parameter or changing `temperature` and `top_p`.
+The [solution](chatbot.py) to the exercise uses an LLM to answer user queries. Lesson 2 evaluates this chatbot, so there is intentionally no `tests.py` in this lesson.
 
 ## Implementation: LLM initialization
 
@@ -34,5 +32,5 @@ After completing the exercise, you should be able to prompt the chatbot and get 
 
 ---
 
-🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e01_prompting/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e02_system_prompt/README.md)
+🏠 [Overview](/README.md) | ◀️ [Back to exercise](/src/chatbot/lessons/exercises/e01_prompting/README.md) | ▶️ [Next exercise](/src/chatbot/lessons/exercises/e02_evals/README.md)
 ---|---|---

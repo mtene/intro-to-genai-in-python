@@ -13,14 +13,19 @@ logger = logging.getLogger(__name__)
 
 
 def handle_test_command(chatbot: BaseChatBot, rich_console: Console):
-    """Run the test suite for the current chatbot."""
-    test_suite = chatbot.get_test_suite()
-    if test_suite is None:
+    """Run DeepEval suites declared in the chatbot's tests.py module."""
+    module = chatbot.get_test_module()
+    if module is None or not hasattr(module, "EVAL_SUITES"):
         rich_console.print("[yellow]No test suite defined for this chatbot.[/yellow]")
         return
 
     evaluator = ChatbotEvaluator(chatbot)
-    evaluator.run_test_suite(test_suite, rich_console)
+    evaluator.run(
+        module.EVAL_SUITES,
+        rich_console,
+        repetitions=getattr(module, "EVAL_REPETITIONS", 1),
+        min_pass_rate=getattr(module, "EVAL_MIN_PASS_RATE", 0.8),
+    )
 
 
 def console(chatbot_type: Type[BaseChatBot]):
@@ -28,7 +33,7 @@ def console(chatbot_type: Type[BaseChatBot]):
     chatbot = chatbot_type()
     rich_console = Console()
     rich_console.print(
-        f"\n[bold cyan]{chatbot.get_name()}[/bold cyan] console: type /quit to exit, /test to run tests"
+        f"\n[bold cyan]{chatbot.get_name()}[/bold cyan] console: type /quit to exit, /test to run evaluations"
     )
     try:
         while True:
@@ -40,7 +45,7 @@ def console(chatbot_type: Type[BaseChatBot]):
             match question.strip():
                 case "/quit" | "/exit":
                     break
-                case "/test":
+                case "/test" | "/eval":
                     handle_test_command(chatbot, rich_console)
                     continue
             # retrieve assistant answer

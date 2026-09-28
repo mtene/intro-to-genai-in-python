@@ -6,18 +6,17 @@ Lesson | Links
 ---    |---
 Introduction | 📖 [Exercise](/src/chatbot/lessons/exercises/e00_intro/README.md)
 Prompting | 📖 [Exercise](/src/chatbot/lessons/exercises/e01_prompting/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s01_prompting/README.md)
-System instructions | 📖 [Exercise](/src/chatbot/lessons/exercises/e02_system_prompt/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s02_system_prompt/README.md)
-Memory | 📖 [Exercise](/src/chatbot/lessons/exercises/e03_memory/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s03_memory/README.md)
-Retrieval Augmented Generation (RAG) | 📖 [Exercise](/src/chatbot/lessons/exercises/e04_rag/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s04_rag/README.md)
-Structured outputs | 📖 [Exercise](/src/chatbot/lessons/exercises/e05_structured_outputs/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s05_structured_outputs/README.md)
-Tool calling | 📖 [Exercise](/src/chatbot/lessons/exercises/e06_tool_calling/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s06_tool_calling/README.md)
-Model Context Protocol (MCP) | 📖 [Exercise](/src/chatbot/lessons/exercises/e07_mcp/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s07_mcp/README.md)
-Custom agent | 📖 [Exercise](/src/chatbot/lessons/exercises/e08_custom_agent/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s08_custom_agent/README.md)
-DeepAgents CLI | 📖 [Exercise](/src/chatbot/lessons/exercises/e09_deep_agent/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s09_deep_agent/README.md)
-Agent-to-Agent Protocol (A2A) | 📖 [Exercise](/src/chatbot/lessons/exercises/e10_a2a/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s10_a2a/README.md)
-Observability | 📖 [Exercise](/src/chatbot/lessons/exercises/e11_observability/README.md)
-
-All of the above include automated test suites to verify and benchmark the implementation. For details, read the [Testing Guide](/src/chatbot/testing/README.md).
+Testing and evaluation | 📖 [Exercise](/src/chatbot/lessons/exercises/e02_evals/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s02_evals/README.md)
+System instructions | 📖 [Exercise](/src/chatbot/lessons/exercises/e03_system_prompt/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s03_system_prompt/README.md)
+Memory | 📖 [Exercise](/src/chatbot/lessons/exercises/e04_memory/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s04_memory/README.md)
+Retrieval Augmented Generation (RAG) | 📖 [Exercise](/src/chatbot/lessons/exercises/e05_rag/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s05_rag/README.md)
+Structured outputs | 📖 [Exercise](/src/chatbot/lessons/exercises/e06_structured_outputs/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s06_structured_outputs/README.md)
+Tool calling | 📖 [Exercise](/src/chatbot/lessons/exercises/e07_tool_calling/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s07_tool_calling/README.md)
+Model Context Protocol (MCP) | 📖 [Exercise](/src/chatbot/lessons/exercises/e08_mcp/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s08_mcp/README.md)
+Custom agent | 📖 [Exercise](/src/chatbot/lessons/exercises/e09_custom_agent/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s09_custom_agent/README.md)
+DeepAgents CLI | 📖 [Exercise](/src/chatbot/lessons/exercises/e10_deep_agent/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s10_deep_agent/README.md)
+Agent-to-Agent Protocol (A2A) | 📖 [Exercise](/src/chatbot/lessons/exercises/e11_a2a/README.md) ✅ [Solution](/src/chatbot/lessons/solutions/s11_a2a/README.md)
+Observability | 📖 [Exercise](/src/chatbot/lessons/exercises/e12_observability/README.md)
 
 A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided, so that the lessons can solely focus on the chatbot logic.
 
@@ -78,11 +77,11 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
 1. Alternatively, each exercise can be run in console mode
 
     ```powershell
-    uv run exercise-5
+    uv run exercise-1
     ```
 
     or a corresponding solution
 
     ```powershell
-    uv run solution-5
+    uv run solution-1
     ```

@@ -23,18 +23,24 @@ The [chatbot logic](chatbot.py) for this exercise is just a dummy implementation
 
 The graphical user interface is defined using [`streamlit`](https://docs.streamlit.io/get-started) in [`src/user_interface/app.py`](/src/user_interface/app.py). It consists of a basic conversation pane and a selector for choosing which chatbot implementation to use.
 
-![Chat UI](/images/ui.png)
-
-The chatbot defined in each exercise or solution can also be tested at the command-line, by issuing the following launch commands:
+Start it from the project root with:
 
 ```powershell
-uv run exercise-5
+uv run genai-chat
+```
+
+![Chat UI](/images/ui.png)
+
+The chatbot defined in each exercise or solution can also be tested at the command-line:
+
+```powershell
+uv run exercise-1
 ```
 
 or
 
 ```powershell
-uv run solution-5
+uv run solution-1
 ```
 
 This allows you to attach a debugger and step through the code or capture exceptions.
@@ -72,17 +78,13 @@ def reset(self):
 
 ## Testing
 
-Each exercise and solution includes an automated test suite that validates your implementation. To run tests, launch the console interface and use the `/test` command:
+Lessons with a `tests.py` file define example inputs and criteria for assessing chatbot responses. Run `/test` in the console to execute that lesson's tests and review the results:
 
 ```powershell
-uv run exercise-1
+uv run exercise-2
 
 >>> /test
 ```
-
-The test suite will evaluate your chatbot against predefined prompts and checking for expected keywords. This provides immediate feedback on whether your implementation meets the requirements.
-
-For comprehensive documentation on writing custom tests, understanding evaluation metrics and best practices, see the [Testing Guide](/src/chatbot/testing/README.md).
 
 ## Choice of language model
 

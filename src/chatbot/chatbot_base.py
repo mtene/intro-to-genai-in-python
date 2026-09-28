@@ -2,9 +2,9 @@ import importlib
 import inspect
 from abc import ABC, abstractmethod
 from pathlib import Path
+from types import ModuleType
 from langchain_core.runnables import RunnableConfig
 from chatbot.chat_context import ChatContext
-from chatbot.testing.test_suite import TestSuite
 
 
 class BaseChatBot(ABC):
@@ -43,13 +43,11 @@ class BaseChatBot(ABC):
         pass
 
     @classmethod
-    def get_test_suite(cls) -> TestSuite | None:
-        """Automatically discover and load test suite from tests.py in the same directory."""
+    def get_test_module(cls) -> ModuleType | None:
+        """Automatically discover and load tests.py in the same directory."""
         module_name = f"chatbot.lessons.{cls.get_name()}.tests"
         try:
-            # import the tests from the lesson
-            module = importlib.import_module(module_name)
-            return getattr(module, "TEST_SUITE", None)
+            return importlib.import_module(module_name)
         except Exception:
             return None
 
