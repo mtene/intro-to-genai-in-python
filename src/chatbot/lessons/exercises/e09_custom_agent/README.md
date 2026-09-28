@@ -83,15 +83,15 @@ While convenient (nodes only return `{"messages": [llm_request, llm_response]}`)
 
 The possibilities of how a given node's logic can be implemented are endless. They can use algorithms, call LLMs, consult web services / file systems / databases or even invoke their own nested agents. This makes graphs very versatile for advanced AI application development, with the trade-off of implementation and maintenance complexity. This can be mitigated, in part, by using a modular code structure with type annotations, making use of classes split among separate files.
 
-## Further reading
-
-[Choose a Design Pattern for Your Agentic AI System](https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system) explores various agent design patterns including reflection, planning, multi-agent collaboration and tool-use patterns for building production agentic systems.
-
 ## Testing and evaluation
 
 Run `/test` for each requested format, then refine a rubric for the final draft rather than only checking topic words.
 
 Evaluate observable graph behavior deterministically when possible, and use narrow rubrics for subjective final drafts. Account for the extra latency and cost of author-reviewer loops.
+
+## Further reading
+
+[Choose a Design Pattern for Your Agentic AI System](https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system) explores various agent design patterns including reflection, planning, multi-agent collaboration and tool-use patterns for building production agentic systems.
 
 ---
 

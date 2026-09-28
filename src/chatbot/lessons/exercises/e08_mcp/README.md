@@ -91,15 +91,15 @@ MCP servers can be hosted locally, on a private intranet or on the public intern
 1. The server executes the tool and returns results
 1. During execution, servers can stream logs or status updates so clients can track progress
 
-## Further reading
-
-[Tool Calling is Broken Without MCP Server Composition](https://hackteam.io/blog/tool-calling-is-broken-without-mcp-server-composition/) explains why tool overload degrades LLM performance and demonstrates composition patterns for organizing tools across multiple MCP servers.
-
 ## Testing and evaluation
 
 Run `/test` only after the MCP server is available; add one tool-contract check before evaluating the final answer.
 
 Test MCP tool contracts independently from LLM routing, then use end-to-end evals for final synthesis. Stdio startup, remote search changes, and timeouts are infrastructure failures, not model-quality signals.
+
+## Further reading
+
+[Tool Calling is Broken Without MCP Server Composition](https://hackteam.io/blog/tool-calling-is-broken-without-mcp-server-composition/) explains why tool overload degrades LLM performance and demonstrates composition patterns for organizing tools across multiple MCP servers.
 
 ---
 

@@ -46,11 +46,9 @@ The response contains a list of all messages generated during this turn. They in
 answer = str(response["messages"][-1].content)
 ```
 
-## Verification
+## Testing and evaluation
 
 Ask questions involving time or currency conversions and verify that the tools get called by observing the status updates.
-
-## Testing and evaluation
 
 Separate the visible answer from the tool trajectory. Mock deterministic tools to validate selected names and arguments; use answer metrics only for the final synthesis, and do not confuse API outages with agent failures.
 

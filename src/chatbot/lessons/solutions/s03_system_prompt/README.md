@@ -40,7 +40,7 @@ def get_answer(self, question: str, ctx: ChatContext) -> str:
 
 Here, the system prompt has its own dedicated [`langchain_core.prompts.SystemMessagePromptTemplate`](https://python.langchain.com/api_reference/core/prompts/langchain_core.prompts.chat.SystemMessagePromptTemplate.html), while all other chat messages are appended afterwards via the [`langchain_core.prompts.MessagesPlaceholder`](https://python.langchain.com/api_reference/core/prompts/langchain_core.prompts.chat.MessagesPlaceholder.html).
 
-## Verification
+## Testing and evaluation
 
 You can verify that the system prompt is effective by observing the changes in the structure or tone of the assistant's replies.
 

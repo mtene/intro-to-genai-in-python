@@ -43,11 +43,9 @@ Finally, the format of the final answer can be defined programmatically, for exa
 answer = f"{response.name}, born in {response.year_of_birth}"
 ```
 
-## Verification
+## Testing and evaluation
 
 Test different queries and confirm that you get the expected formatted output. Also try queries where the answer should contain no references to a person and see what happens!
-
-## Testing and evaluation
 
 Prefer deterministic checks for schema validity, required fields, types, and ranges. Evaluate semantic field correctness separately: a well-formed object can still contain the wrong facts.
 

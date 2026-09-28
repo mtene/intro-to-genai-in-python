@@ -79,11 +79,9 @@ self._chat_history.add_message(assistant_message(answer))
 
 Thus, the chatbot's state is prepared for a future call.
 
-## Verification
+## Testing and evaluation
 
 Ask questions about the document and observe which chunks are being retrieved and how the model interprets the content. Try different embedding models and LLMs, local and remote, if possible, and assess how the quality of the response changes.
-
-## Testing and evaluation
 
 Separate retrieval quality from answer quality. Final-answer checks cannot prove retrieval worked; capture retrieved chunks as `retrieval_context` when evaluating faithfulness, and add out-of-corpus cases to expose hallucinations.
 

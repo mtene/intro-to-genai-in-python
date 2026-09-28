@@ -48,15 +48,15 @@ Additionally, to reduce the context length, avoid biases from old data and maint
 
 Inspect the [`ChatHistory`](/src/chatbot/chat_history.py) class and you can also take inspiration from how it is used in the [UI](/src/user_interface/app.py).
 
+## Testing and evaluation
+
+Run `/test` with the provided multi-turn sequence and keep dependent turns in one dataset sequence with `reset_chatbot=False` metadata.
+
+Evaluate a conversation as an ordered sequence, not as isolated prompts. Keep deterministic reset and state checks separate from semantic judgments about whether the final answer used earlier context correctly.
+
 ## Further reading
 
 [AI Agent Memory Types: Complete Guide for Developers](https://mljourney.com/ai-agent-memory-types-complete-guide-for-developers/) explores different memory architectures for AI agents, including short-term, long-term, episodic and semantic memory patterns.
-
-## Testing and evaluation
-
-Run `/test` after a multi-turn exchange and keep the dependent turns in one dataset sequence with `reset_chatbot=False` metadata.
-
-Evaluate a conversation as an ordered sequence, not as isolated prompts. Keep deterministic reset and state checks separate from semantic judgments about whether the final answer used earlier context correctly.
 
 ---
 

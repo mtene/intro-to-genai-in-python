@@ -188,7 +188,7 @@ D: [Option D]
 **Explanation:** [Why this is correct]
 ```
 
-## Testing Your Implementation
+## Testing and evaluation
 
 Run `/test` in the console to check your implementation.
 
@@ -215,6 +215,8 @@ If a test fails, the agent might:
 * Not recognize when to use your skill → Check the `description` field
 * Use the skill but produce wrong output → Review the `Instructions` section
 * Skip the skill entirely → Make sure the SKILL.md file exists and is properly formatted
+
+Test skill activation, filesystem isolation, and output structure separately from pedagogical quality. Deterministic markers and counts are useful smoke checks; use a judge for whether flashcards or quizzes are genuinely useful.
 
 ## Try These Prompts
 
@@ -251,7 +253,7 @@ Watch the agent plan and execute! You'll see:
 | **Complexity** | You manage state flow | Built-in state management |
 | **Use Case** | Specific, predictable flows | Open-ended tasks |
 
-## Further Reading
+## Further reading
 
 [Introduction to DeepAgents](https://docs.langchain.com/oss/python/deepagents/overview) - Official LangChain documentation covering architecture and use cases
 
@@ -270,12 +272,6 @@ deepagents "Create a summary of all Python files in src/"
 ```
 
 The CLI provides real-time visualization of agent planning, interactive skill selection, file tree navigation with diff previews, and streaming output with syntax highlighting.
-
-## Testing and evaluation
-
-Run `/test` after each skill is available, then separately inspect structure and educational quality in the generated material.
-
-Test skill activation, filesystem isolation, and output structure separately from pedagogical quality. Deterministic markers and counts are useful smoke checks; use a judge for whether flashcards or quizzes are genuinely useful.
 
 ---
 

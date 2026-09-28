@@ -58,6 +58,12 @@ Your task is to read the target text document, split it into chunks using LangCh
 
 Then, perform semantic search based on the query, retrieving the most relevant text chunks and include them as part of the conversation passed to the LLM. You have the choice between storing them in a system prompt or augmenting the user query itself. It is generally best to avoid including RAG context in the conversation history, as that will increase its size unnecessarily and bias the LLM during future queries.
 
+## Testing and evaluation
+
+Run `/test` with both a known-document question and an out-of-corpus question; record retrieved chunks before adding faithfulness metrics.
+
+Separate retrieval quality from answer quality. Final-answer checks cannot prove retrieval worked; capture retrieved chunks as `retrieval_context` when evaluating faithfulness, and add out-of-corpus cases to expose hallucinations.
+
 ## Further reading
 
 [RAG 101: Chunking Strategies](https://towardsdatascience.com/rag-101-chunking-strategies-fdc6f6c2aaec/) explores various chunking approaches including fixed-size, recursive, semantic and agentic strategies for optimizing retrieval accuracy.
@@ -69,12 +75,6 @@ Then, perform semantic search based on the query, retrieving the most relevant t
 [8 RAG Architectures You Should Know](https://humanloop.com/blog/rag-architectures) provides a comprehensive overview of different RAG patterns including naive RAG, agentic RAG with tool-wrapped retrieval, corrective RAG and multi-query approaches, with their respective trade-offs.
 
 [RAG Evaluation: Best Practices and Metrics](https://www.evidentlyai.com/llm-guide/rag-evaluation) demonstrates how to measure RAG system performance using metrics like context precision, context recall, faithfulness and answer relevance.
-
-## Testing and evaluation
-
-Run `/test` with both a known-document question and an out-of-corpus question; record retrieved chunks before adding faithfulness metrics.
-
-Separate retrieval quality from answer quality. Final-answer checks cannot prove retrieval worked; capture retrieved chunks as `retrieval_context` when evaluating faithfulness, and add out-of-corpus cases to expose hallucinations.
 
 ---
 

@@ -26,7 +26,7 @@ response = self._llm.invoke(messages, config=self.get_config(ctx))
 
 As mentioned before, passing `ctx` via `config` is done only to enable reporting status updates to the UI and has no consequence for LLM behavior.
 
-## Verification
+## Testing and evaluation
 
 After completing the exercise, you should be able to prompt the chatbot and get reasonable results, as provided by the LLM. Hallucinations may occur and this is more likely with smaller models in terms of number of active parameters.
 
