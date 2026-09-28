@@ -126,10 +126,6 @@ The behavior of the LLM when choosing to call tools can be controlled through tw
 * `tool_choice`, which can be the default `auto` (0 or more tools) or `none` (0 tools), `required` (1 or more tools), `forced` (where the list of tools that must be called is specified)
 * `parallel_tool_calls` which is `true` if the LLM is allowed to request multiple tool calls per exchange or `false` to force a maximum of 1
 
-## Further reading
-
-[Beyond Brittle: Building Resilient LLM Tool Calls](https://www.linkedin.com/pulse/beyond-brittle-building-resilient-llm-tool-calls-limin-ma-yuzpc/) covers error handling strategies for LLM tool calls, including retry logic, fallback mechanisms and validation patterns for production systems.
-
 ## Bonus Challenge: Automatic Memory with Checkpointer
 
 For an extra challenge, you can replace `ChatHistory` with LangGraph's **checkpointer** feature. The `MemorySaver` checkpointer stores all messages (user messages, assistant responses, tool calls, and tool results) in memory, keyed by a `thread_id`.
@@ -156,6 +152,10 @@ This is simpler and more robust than manual conversation history management, and
 Run `/test` against stable tool inputs; add mocked unit coverage before relying on a live API for a regression signal.
 
 Separate the visible answer from the tool trajectory. Mock deterministic tools to validate selected names and arguments; use answer metrics only for the final synthesis, and do not confuse API outages with agent failures.
+
+## Further reading
+
+[Beyond Brittle: Building Resilient LLM Tool Calls](https://www.linkedin.com/pulse/beyond-brittle-building-resilient-llm-tool-calls-limin-ma-yuzpc/) covers error handling strategies for LLM tool calls, including retry logic, fallback mechanisms and validation patterns for production systems.
 
 ---
 

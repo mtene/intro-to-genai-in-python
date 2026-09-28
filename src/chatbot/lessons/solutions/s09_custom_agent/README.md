@@ -22,17 +22,6 @@ The reviewer is asked to produce the following structured output
 
 These two nodes are called in a loop with up to 3 iterations, which can end early if the reviewer assesses that the text fulfills all requirements (captured in the state by `feedback` being blank). As extra protection, another iteration is also issued if the `text` is blank, e.g. due to author hallucination or error occurrence.
 
-## Verification
-
-Send queries for short post-its, telegrams, letters or postcards and observe the interaction.
-
-With small language models, the reviewer typically exhibits one of two behaviors:
-
-1. Accepts the text on the first turn
-1. Keeps requesting revisions, often inventing additional criteria despite the system prompt rules
-
-This inconsistency stems from small models' limited reasoning capabilities, making them prone to ignoring instructions or hallucinating.
-
 ## Further improvement
 
 **Major weakness**: the [`author`](author.py) can directly overwrite the state's text. Any hallucinations cause regressions - there's no guarantee quality improves monotonically with each iteration.
@@ -51,6 +40,8 @@ The second approach is more robust, since regression requires both `author` and 
 The implementation and further exploration is left as an exercise for the reader.
 
 ## Testing and evaluation
+
+Send queries for short post-its, telegrams, letters or postcards and observe the interaction. With small language models, the reviewer may accept the text on the first turn or keep requesting revisions, sometimes inventing additional criteria despite the system prompt rules.
 
 Evaluate observable graph behavior deterministically when possible, and use narrow rubrics for subjective final drafts. Account for the extra latency and cost of author-reviewer loops.
 

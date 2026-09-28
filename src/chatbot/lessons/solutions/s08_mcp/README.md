@@ -34,13 +34,11 @@ mcp_config = {
 }
 ```
 
-## Verification
+## Testing and evaluation
 
 If the connection to the MCP servers is successful, all available tools will be listed in a log message at chatbot creation.
 
 Ask questions about Microsoft software, the current time or currency conversions and verify that the tools get called by observing the status updates.
-
-## Testing and evaluation
 
 Test MCP tool contracts independently from LLM routing, then use end-to-end evals for final synthesis. Stdio startup, remote search changes, and timeouts are infrastructure failures, not model-quality signals.
 

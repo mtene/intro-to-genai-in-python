@@ -125,7 +125,7 @@ You'll see this in the console:
 1. **DeepAgents planning** enables complex multi-step tasks without manual graph design
 1. **Skills are composable** - the agent can combine multiple skills intelligently
 
-## Testing
+## Testing and evaluation
 
 Run `/test` in the console to verify:
 
@@ -135,8 +135,6 @@ Run `/test` in the console to verify:
 * ✅ Agent can plan and use multiple skills together
 
 All tests should pass with this solution.
-
-## Testing and evaluation
 
 Test skill activation, filesystem isolation, and output structure separately from pedagogical quality. Deterministic markers and counts are useful smoke checks; use a judge for whether flashcards or quizzes are genuinely useful.
 

@@ -36,15 +36,15 @@ The system prompt is bundled with other chat messages in the LLM call. What dist
 
 **Message ordering matters.** When prompting LLMs, information order is critical because the model's "attention span" is limited, especially for models with fewer active parameters. The most important information should appear first, which is why the system prompt should precede all other chat messages.
 
-## Further reading
-
-[Learn Prompting: Introduction to Prompt Engineering](https://learnprompting.org/docs/introduction) provides comprehensive tutorials on prompt engineering techniques, including system prompt design, few-shot learning and advanced prompting strategies.
-
 ## Testing and evaluation
 
 Run `/test`, then add a prompt that checks a factual answer and a separate prompt that probes the requested persona.
 
 Keep factual checks separate from instruction adherence. A required token can be checked deterministically, but a single token does not prove that the response actually follows the requested persona. Use a narrow `GEval` rubric when testing tone, conditional behavior, or resistance to conflicting user instructions.
+
+## Further reading
+
+[Learn Prompting: Introduction to Prompt Engineering](https://learnprompting.org/docs/introduction) provides comprehensive tutorials on prompt engineering techniques, including system prompt design, few-shot learning and advanced prompting strategies.
 
 ---
 

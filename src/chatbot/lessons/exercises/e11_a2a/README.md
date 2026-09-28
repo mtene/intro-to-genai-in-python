@@ -293,7 +293,13 @@ tool = A2AAgentTool(
 >
 > In a real service, host agents in an async web stack (e.g. FastAPI) and use the SDK client directly. Reuse clients across requests, model long-running or streaming work with the task lifecycle (status and artifact updates), and implement cancellation.
 
-## Further Reading
+## Testing and evaluation
+
+Run `/test` after both expert services are ready, then distinguish routing failures from a weak synthesized response.
+
+Treat expert services as contracts and the orchestrator as an integration test. Check service readiness and routing separately from the synthesized answer, since final keywords can pass even when no expert ran.
+
+## Further reading
 
 [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents) - Anthropic guide on agent design patterns and best practices
 
@@ -304,12 +310,6 @@ tool = A2AAgentTool(
 [A2A Python SDK tutorials](https://a2a-protocol.org/latest/tutorials/python/) - Official guides for servers, clients, executors, and production-oriented SDK usage
 
 [A2A Protocol Specification](https://a2a-protocol.org/latest/) - Official A2A protocol reference
-
-## Testing and evaluation
-
-Run `/test` after both expert services are ready, then distinguish routing failures from a weak synthesized response.
-
-Treat expert services as contracts and the orchestrator as an integration test. Check service readiness and routing separately from the synthesized answer, since final keywords can pass even when no expert ran.
 
 ---
 

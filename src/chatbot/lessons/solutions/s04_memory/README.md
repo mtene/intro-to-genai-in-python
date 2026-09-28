@@ -28,11 +28,13 @@ response = self._llm.invoke(self._chat_history.messages, config=self.get_config(
 
 The addition of chat history tracking makes the chatbot stateful, an important stepping stone towards becoming an agent.
 
-## Verification
+## Testing and evaluation
 
 After a few exchanges, ask the chatbot to translate its first answer to another language.
 
 If you've implemented pruning to keep only the last 5 exchanges, the chatbot will translate its second answer in a conversation with 6 exchanges (since the first was pruned). While this may surprise users, it's rare in practice. The gains in robustness and avoiding context-size errors outweigh this drawback. The optimal sliding window length is application-specific.
+
+Evaluate a conversation as an ordered sequence, not as isolated prompts. Keep deterministic reset and state checks separate from semantic judgments about whether the final answer used earlier context correctly.
 
 ## Further reading
 
@@ -47,10 +49,6 @@ Production systems typically use these framework-level abstractions, but underst
 * Appreciate what frameworks do behind the scenes
 * Debug memory-related issues more effectively
 * Implement custom memory strategies when needed
-
-## Testing and evaluation
-
-Evaluate a conversation as an ordered sequence, not as isolated prompts. Keep deterministic reset and state checks separate from semantic judgments about whether the final answer used earlier context correctly.
 
 ---
 

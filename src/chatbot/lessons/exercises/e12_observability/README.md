@@ -191,17 +191,17 @@ The instrumentors use OpenTelemetry's [monkey patching](https://en.wikipedia.org
 
 The instrumentation captures semantic conventions defined by the [OpenTelemetry Semantic Conventions for AI](https://opentelemetry.io/docs/specs/semconv/gen-ai/), ensuring consistent attribute naming across different tracing implementations.
 
-## Further reading
-
-[Best LLM Observability Tools of 2025](https://www.comet.com/site/blog/llm-observability-tools/) is a comparison of different trace collection and visualization solutions.
-
-It may also be instructive to study the [OpenTelemetry](https://opentelemetry.io/docs/) framework.
-
 ## Testing and evaluation
 
 Run `/test` for an earlier lesson and inspect its trace when a metric fails.
 
 Use traces to explain evaluation failures. Check span presence, attributes, latency, and token usage deterministically; inspect retrieved context and tool spans when a quality metric fails.
+
+## Further reading
+
+[Best LLM Observability Tools of 2025](https://www.comet.com/site/blog/llm-observability-tools/) is a comparison of different trace collection and visualization solutions.
+
+It may also be instructive to study the [OpenTelemetry](https://opentelemetry.io/docs/) framework.
 
 ---
 
