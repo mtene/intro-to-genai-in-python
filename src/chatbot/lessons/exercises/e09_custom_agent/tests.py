@@ -27,19 +27,30 @@ EVAL_SUITES = {
                 )
             ]
         ),
-        [PatternMatchMetric(pattern="(?s)(?=.*impact).*", ignore_case=True)],
+        [PatternMatchMetric(
+            pattern=(
+                r"(?s)(?!.*(?:\S+\s+){30}\S)"
+                r"(?=.*(?:impact|asteroid|extinct|collision|catastroph)).*"
+            ),
+            ignore_case=True,
+        )],
     ),
     "postcard_cheese": (
         EvaluationDataset(
             goldens=[
                 Golden(
                     name="postcard_cheese",
-                    input="Write a postcard about cheese from Greece",
+                    input="Write a haiku about cheese from Greece",
                     additional_metadata={"reset_chatbot": True},
                 )
             ]
         ),
-        [PatternMatchMetric(pattern="(?s)(?=.*feta).*", ignore_case=True)],
+        [
+            PatternMatchMetric(
+                pattern=r"(?s)(?=.*(?:feta|cheese)).*\n.*\n.*",
+                ignore_case=True,
+            )
+        ],
     ),
 }
 

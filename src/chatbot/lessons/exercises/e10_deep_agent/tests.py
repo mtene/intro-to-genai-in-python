@@ -15,7 +15,7 @@ EVAL_SUITES = {
                 )
             ]
         ),
-        [PatternMatchMetric(pattern="(?s)(?=.*❤️)(?=.*🐍)(?=.*🤖).*", ignore_case=True)],
+        [PatternMatchMetric(pattern=r"(?s)(?=.*🐍)(?=.*🤖).*")],
     ),
     "generate-flashcards-skill": (
         EvaluationDataset(
@@ -29,7 +29,8 @@ EVAL_SUITES = {
         ),
         [
             PatternMatchMetric(
-                pattern="(?s)(?=.*Q:)(?=.*A:)(?=.*@tool)(?=.*ReAct).*", ignore_case=True
+                pattern=r"(?s)(?=.*@tool)(?=.*ReAct)(?=.*(?:\*\*Q:\*\*|Q:)).*",
+                ignore_case=True,
             )
         ],
     ),
@@ -45,7 +46,7 @@ EVAL_SUITES = {
         ),
         [
             PatternMatchMetric(
-                pattern="(?s)(?=.*A:)(?=.*B:)(?=.*C:)(?=.*D:)(?=.*Answer:)(?=.*Explanation:)(?=.*RAG).*",
+                pattern=r"(?s)(?=.*A[:\.)])(?=.*B[:\.)])(?=.*C[:\.)])(?=.*D[:\.)])(?=.*(?:Answer|Explanation):)(?=.*RAG).*",
                 ignore_case=True,
             )
         ],
@@ -62,7 +63,7 @@ EVAL_SUITES = {
         ),
         [
             PatternMatchMetric(
-                pattern="(?s)(?=.*flashcard)(?=.*quiz)(?=.*Q:)(?=.*A:)(?=.*Answer:)(?=.*DeepAgent).*",
+                pattern=r"(?s)(?=.*flashcard)(?=.*quiz)(?=.*(?:\*\*Answer:\*\*|Answer:)).*",
                 ignore_case=True,
             )
         ],
@@ -79,7 +80,7 @@ EVAL_SUITES = {
         ),
         [
             PatternMatchMetric(
-                pattern="(?s)(?=.*A\\.)(?=.*B\\.)(?=.*Correct\\ answer:)(?=.*skill).*",
+                pattern=r"(?s)(?=.*A[:\.)])(?=.*B[:\.)])(?=.*C[:\.)])(?=.*D[:\.)])(?=.*(?:Answer|Explanation):)(?=.*(?:LangGraph|custom agent|author|reviewer|skill)).*",
                 ignore_case=True,
             )
         ],

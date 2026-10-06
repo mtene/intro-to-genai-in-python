@@ -1,11 +1,13 @@
 __pycache__/
 .ruff_cache
 .langgraph_api
+.deepeval/
 *.orig
 .venv/
 venv/
-.vs/
+.workspace/
 .vscode/
-openspec/
-.claude/
+.vs/
 CLAUDE.md
+.claude/
+openspec/

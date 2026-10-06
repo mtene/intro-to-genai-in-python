@@ -10,24 +10,30 @@ EVAL_SUITES = {
             goldens=[
                 Golden(
                     name="currency_conversion",
-                    input="Is 100 USD enough to buy a 50 EUR present? Answer with just yes or no",
+                    input=(
+                        "Use convert_currency to convert 100 USD to EUR. "
+                        "Reply with only the numeric EUR amount."
+                    ),
                     additional_metadata={"reset_chatbot": True},
                 )
             ]
         ),
-        [PatternMatchMetric(pattern="(?s)(?=.*yes).*", ignore_case=True)],
+        [PatternMatchMetric(pattern=r"(?s)(?=.*\d+\.\d+).*")],
     ),
     "time_conversion": (
         EvaluationDataset(
             goldens=[
                 Golden(
                     name="time_conversion",
-                    input="What is 4 PM Oslo time in New York?",
+                    input=(
+                        "Use convert_time to convert 16:00 from Europe/Oslo to "
+                        "America/New_York. Reply with only the tool output."
+                    ),
                     additional_metadata={"reset_chatbot": True},
                 )
             ]
         ),
-        [PatternMatchMetric(pattern="(?s)(?=.*10).*", ignore_case=True)],
+        [PatternMatchMetric(pattern=r"(?s).*\[America/New_York\].*")],
     ),
     "mcp_search": (
         EvaluationDataset(
@@ -39,7 +45,11 @@ EVAL_SUITES = {
                 )
             ]
         ),
-        [PatternMatchMetric(pattern="(?s)(?=.*pipelines).*", ignore_case=True)],
+        [
+            PatternMatchMetric(
+                pattern="(?s)(?=.*Azure Pipelines).*", ignore_case=True
+            )
+        ],
     ),
 }
 

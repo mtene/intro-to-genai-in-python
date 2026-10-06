@@ -2,6 +2,7 @@ import requests
 import datetime
 from zoneinfo import ZoneInfo
 from enum import Enum
+
 from fastmcp import FastMCP
 
 mcp_server = FastMCP("my_mcp_tools")

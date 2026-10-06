@@ -11,6 +11,8 @@ from deepeval.dataset import EvaluationDataset, Golden
 from deepeval.metrics import BaseMetric
 from deepeval.test_case import LLMTestCase
 from rich.console import Console
+from rich.markdown import Markdown
+from rich.panel import Panel
 from rich.table import Table
 
 from chatbot.chat_context import ChatContext
@@ -86,6 +88,13 @@ class ChatbotEvaluator:
         latency = time.perf_counter() - start
 
         if error:
+            console.print(
+                Panel(
+                    f"[red]{error}[/red]",
+                    title="Assistant",
+                    border_style="red",
+                )
+            )
             return [
                 {
                     "suite": suite_name,
@@ -99,6 +108,8 @@ class ChatbotEvaluator:
                 }
                 for metric in metrics
             ]
+
+        console.print(Panel(Markdown(answer), title="Assistant", border_style="cyan"))
 
         test_case = LLMTestCase(
             input=golden.input,

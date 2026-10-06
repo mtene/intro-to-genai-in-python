@@ -4,6 +4,11 @@
 from deepeval.dataset import EvaluationDataset, Golden
 from deepeval.metrics import PatternMatchMetric
 
+_REFUSAL = (
+    r"(?:not implemented|can't help|cannot provide|currently cannot|"
+    r"can't retrieve|don't have the ability|I currently don't)"
+)
+
 EVAL_SUITES = {
     "budget_expert_routing": (
         EvaluationDataset(
@@ -17,7 +22,10 @@ EVAL_SUITES = {
         ),
         [
             PatternMatchMetric(
-                pattern="(?s)(?=.*budget)(?=.*day)(?=.*accommodation)(?=.*food).*",
+                pattern=(
+                    rf"(?s)(?!.*{_REFUSAL})(?=.*Rome)(?=.*\$\d+)"
+                    r"(?=.*(?:accommodation|food|transport|activities|per day))"
+                ),
                 ignore_case=True,
             )
         ],
@@ -34,7 +42,12 @@ EVAL_SUITES = {
         ),
         [
             PatternMatchMetric(
-                pattern="(?s)(?=.*destination)(?=.*beach).*", ignore_case=True
+                pattern=(
+                    rf"(?s)(?!.*{_REFUSAL})(?=.*\b(?:Bali|Thailand|Maldives|Philippines|"
+                    r"Indonesia|Fiji|Hawaii|Belize|Egypt|Komodo|Sipadan|Caribbean|"
+                    r"Red Sea|Great Barrier Reef|Cancún|Cancun)\b)"
+                ),
+                ignore_case=True,
             )
         ],
     ),
@@ -50,7 +63,13 @@ EVAL_SUITES = {
         ),
         [
             PatternMatchMetric(
-                pattern="(?s)(?=.*budget)(?=.*destination).*", ignore_case=True
+                pattern=(
+                    rf"(?s)(?!.*{_REFUSAL})(?=.*\b150\b)(?=.*\$\d+)"
+                    r"(?=.*\b(?:Thailand|Vietnam|Bali|Philippines|Japan|Taiwan|India|"
+                    r"Malaysia|Nepal|Sri Lanka|Cambodia|Laos|Korea|Singapore|"
+                    r"Hong Kong|Indonesia)\b)"
+                ),
+                ignore_case=True,
             )
         ],
     ),

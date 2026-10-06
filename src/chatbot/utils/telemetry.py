@@ -87,7 +87,7 @@ class Telemetry:
             sec_env.strip() if isinstance(sec_env, str) and sec_env.strip() else None
         )
         if not pub_env or not sec_env:
-            logger.error(
+            logger.warning(
                 "Langfuse telemetry auth is not configured in config.yaml. Traces disabled."
             )
             return
@@ -95,8 +95,13 @@ class Telemetry:
         pub = os.environ.get(pub_env)
         sec = os.environ.get(sec_env)
         if not pub or not sec:
-            logger.error(
-                "Langfuse telemetry auth env vars are not set. Traces disabled."
+            missing = [
+                name for name, val in [(pub_env, pub), (sec_env, sec)] if not val
+            ]
+            logger.warning(
+                "Langfuse telemetry auth env vars are not set: "
+                + ", ".join(missing)
+                + ". Traces disabled."
             )
             return
 

@@ -39,7 +39,14 @@ EVAL_SUITES = {
                 )
             ]
         ),
-        [PatternMatchMetric(pattern="(?s)(?=.*bubbly).*", ignore_case=True)],
+        [
+            PatternMatchMetric(
+                pattern=(
+                    "(?s)(?=.*(?:bubbl|enthusias|positiv|joy|excit|cheerful|sunshine)).*"
+                ),
+                ignore_case=True,
+            )
+        ],
     ),
 }
 

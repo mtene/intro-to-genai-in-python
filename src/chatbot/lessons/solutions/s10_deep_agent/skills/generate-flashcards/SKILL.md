@@ -24,7 +24,14 @@ The user will provide:
 * Optionally, specific topics to focus on
 
 ## Output Format
-Create a markdown file with this structure:
+You **must** do both:
+
+1. **Write a file:** save the full flashcards as markdown under **`/solutions/s10_deep_agent/.workspace/`** only, using a descriptive kebab-case name (for example `/solutions/s10_deep_agent/.workspace/flashcards-tool-calling.md`).
+2. **Reply:** include the same flashcards in your message and state the file path you wrote.
+
+Do not write files anywhere else.
+
+Use this structure in the file and in your reply:
 
 ```markdown
 # Flashcards for [Topic Name]

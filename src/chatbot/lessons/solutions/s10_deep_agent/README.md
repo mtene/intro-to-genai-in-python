@@ -41,6 +41,8 @@ The file system backend uses `virtual_mode=True` which:
 - Prevents access to files outside the root directory for security
 - Allows the agent to access both `/exercises/` and `/solutions/` subdirectories
 
+Flashcard and quiz skills save generated markdown under `/solutions/s10_deep_agent/.workspace/` and include the same content in the reply.
+
 ### Skills Implementation
 
 Two complete skills are provided:

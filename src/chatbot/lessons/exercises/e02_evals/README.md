@@ -49,7 +49,7 @@ Then add the `semantic quality` suite:
 
 1. Add a [reference example (`Golden`)](https://deepeval.com/docs/evaluation-datasets) for the one-sentence Python explanation.
 2. Add [`AnswerRelevancyMetric`](https://deepeval.com/docs/metrics-answer-relevancy) with the supplied evaluation model. It judges whether the answer addresses the prompt without requiring an expected answer.
-3. Add [`GEval`](https://deepeval.com/docs/metrics-llm-evals) with [`SingleTurnParams.INPUT`, `SingleTurnParams.ACTUAL_OUTPUT`, and `SingleTurnParams.EXPECTED_OUTPUT`](https://deepeval.com/docs/evaluation-test-cases). Define a focused rubric for correctness, directness, and sentence count.
+3. Add [`GEval`](https://deepeval.com/docs/metrics-llm-evals) with [`SingleTurnParams.INPUT`, `SingleTurnParams.ACTUAL_OUTPUT`, and `SingleTurnParams.EXPECTED_OUTPUT`](https://deepeval.com/docs/evaluation-test-cases). Define a focused rubric for factual correctness (for example, that the answer identifies Python as a programming language).
 4. Set a reasonable threshold and run `/test`.
 
 The console reports each metric's score, threshold, result, reason, and latency. Refine the criteria and rerun the tests to see how the results change.

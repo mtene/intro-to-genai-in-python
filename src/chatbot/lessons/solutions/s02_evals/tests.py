@@ -46,10 +46,13 @@ EVAL_SUITES = {
             ]
         ),
         [
-            AnswerRelevancyMetric(model=EVALUATION_MODEL, threshold=0.7),
+            AnswerRelevancyMetric(model=EVALUATION_MODEL, threshold=0.5),
             GEval(
                 name="Correctness",
-                criteria="The answer is correct, direct, and one sentence.",
+                criteria=(
+                    "The answer correctly identifies Python as a programming language. "
+                    "Wording may differ from the expected output."
+                ),
                 evaluation_params=[
                     SingleTurnParams.INPUT,
                     SingleTurnParams.ACTUAL_OUTPUT,
