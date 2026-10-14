@@ -25,10 +25,6 @@ providers:
       text-embedding-3-small:
         name: text-embedding-3-small
 
-# configuration for a local vector store service
-local_vectordb: &local_vectordb_settings
-  type: local
-
 ## App configuration settings
 
 # minimum level for log messages to be displayed
@@ -55,8 +51,3 @@ llm_config:
 embeddings_config:
   provider: local_ollama
   deployment: snowflake-arctic-embed
-
-# choose one of the predefined vector store service configs from above:
-# - local_vectordb_settings - a locally-hosted service
-vectordb_config:
-  <<: *local_vectordb_settings
