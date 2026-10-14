@@ -111,14 +111,7 @@ Running local LLMs requires an orchestration framework, such as:
 * Ollama: Easiest to get started with, supports many models via CLI and API.
 * vLLM: Best for high-performance, multi-user or server-based deployments.
 
-Choose a model based on your application's required capabilities and available hardware (CPU or discrete GPU):
-
-* **Edge**: very small models for CPUs, integrated graphics, or tight VRAM (roughly up to ~5B active parameters). Fast and cheap to run; weaker at reasoning, instruction following, and agents.
-* **Laptop**: consumer laptops with a discrete GPU (often 6–12 GB VRAM). The usual sweet spot for local experimentation.
-* **Workstation**: a single high-end GPU (often 16–24 GB VRAM) or a desktop with one large card.
-* **Cluster**: datacenter or multi-GPU setups (very large dense models, or MoE bundles that still need tens of gigabytes of VRAM).
-
-Four tables below use the same columns; rows are sorted by ascending hardware within each tier. To use a different local model, add a deployment entry to [`config.yaml`](/src/config.yaml) under `providers.local_ollama.deployments` (use a human-readable key and set `name` to the Ollama catalog name from the table) then make `llm_config.deployment` use the corresponding key.
+Choose a model based on your application's required capabilities and available hardware (CPU or discrete GPU). Four tables below use the same columns; rows are sorted by ascending hardware within each tier. To use a different local model, add a deployment entry to [`config.yaml`](/src/config.yaml) under `providers.local_ollama.deployments` (use a human-readable key and set `name` to the Ollama catalog name from the table) then make `llm_config.deployment` use the corresponding key.
 
 #### Edge
 
