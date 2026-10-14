@@ -1,9 +1,11 @@
-"""Build LangChain chat and embedding clients from provider connection dicts."""
+"""Build LangChain chat, embedding, and vector-store clients."""
 
-from typing import Any
+from typing import Any, override
 
+from langchain_core.documents import Document
 from langchain_core.embeddings import Embeddings
 from langchain_core.language_models.chat_models import BaseChatModel
+from langchain_core.vectorstores import InMemoryVectorStore, VectorStore
 from langchain_openai import ChatOpenAI
 from langchain_openai.embeddings import OpenAIEmbeddings
 from pydantic import SecretStr
@@ -56,3 +58,31 @@ def build_embeddings_model(
         max_retries=3,
         **kwargs,
     )
+
+
+class InMemoryVectorDB(InMemoryVectorStore):
+    """In-memory store; routes search through a retriever for LangChain telemetry spans."""
+
+    def __init__(self, *, embedding: Embeddings, **kwargs: Any) -> None:
+        super().__init__(embedding=embedding, **kwargs)
+        self._retrieving = False
+
+    @override
+    def similarity_search(
+        self, query: str, k: int = 4, **kwargs: Any
+    ) -> list[Document]:
+        if self._retrieving:
+            return super().similarity_search(query, k=k, **kwargs)
+        self._retrieving = True
+        try:
+            return self.as_retriever(search_kwargs={"k": k, **kwargs}).invoke(query)
+        finally:
+            self._retrieving = False
+
+
+def build_in_memory_vector_store(
+    *,
+    embedding: Embeddings,
+    **kwargs: Any,
+) -> VectorStore:
+    return InMemoryVectorDB(embedding=embedding, **kwargs)
