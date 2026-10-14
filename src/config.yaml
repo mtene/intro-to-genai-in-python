@@ -10,8 +10,8 @@ providers:
   local_ollama:
     endpoint: http://127.0.0.1:11434/v1
     deployments:
-      llm:
-        name: granite4:7b-a1b-h
+      granite4.2:
+        name: granite4.2:8b
       snowflake-arctic-embed:
         name: snowflake-arctic-embed:m-long
   remote_openai:
@@ -50,7 +50,7 @@ observability_config:
 
 llm_config:
   provider: local_ollama
-  deployment: llm
+  deployment: granite4.2
 
 embeddings_config:
   provider: local_ollama
