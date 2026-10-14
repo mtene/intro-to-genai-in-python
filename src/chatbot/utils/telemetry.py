@@ -95,13 +95,9 @@ class Telemetry:
         pub = os.environ.get(pub_env)
         sec = os.environ.get(sec_env)
         if not pub or not sec:
-            missing = [
-                name for name, val in [(pub_env, pub), (sec_env, sec)] if not val
-            ]
             logger.warning(
-                "Langfuse telemetry auth env vars are not set: "
-                + ", ".join(missing)
-                + ". Traces disabled."
+                "Langfuse telemetry credentials are not set in the environment. "
+                "Traces disabled."
             )
             return
 
