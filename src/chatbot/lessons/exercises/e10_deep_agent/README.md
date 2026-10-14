@@ -24,10 +24,11 @@ From testing, GPT-OSS 20B is the smallest local LLM that works with DeepAgents. 
 
 ```yaml
 llm_config:
-  <<: *remote_llm_settings  # Change from local_llm_settings
+  provider: remote_openai   # or another provider you define under providers
+  deployment: gpt-4o
 ```
 
-Ensure the OpenAI-compatible `endpoint` and `model` are configured in `src/config.yaml`, and credentials are set as environment variables.
+Ensure that provider has a valid OpenAI-compatible `endpoint`, a deployment for your model, and credentials set as environment variables when `authentication` is configured.
 
 ## Overview
 

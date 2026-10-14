@@ -54,6 +54,13 @@ A basic [`streamlit`](https://docs.streamlit.io/get-started) chat UI is provided
 
     * or [downloading](https://github.com/ollama/ollama/releases) and installing somewhere accessible e.g. `%APPDATA%`.
 
+1. Download the models referenced in [`src/config.yaml`](/src/config.yaml) via `ollama pull`. 
+
+    ```powershell
+    ollama pull granite4.2:8b
+    ollama pull snowflake-arctic-embed:m-long
+    ```
+
 1. Use uv to create a Python virtual environment at the git clone location
 
     ```powershell

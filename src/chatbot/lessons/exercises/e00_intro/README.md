@@ -111,30 +111,56 @@ Running local LLMs requires an orchestration framework, such as:
 * Ollama: Easiest to get started with, supports many models via CLI and API.
 * vLLM: Best for high-performance, multi-user or server-based deployments.
 
-Choose a model based on your application's required capabilities and available hardware (CPU or discrete GPU):
+Choose a model based on your application's required capabilities and available hardware (CPU or discrete GPU). Four tables below use the same columns; rows are sorted by ascending hardware within each tier. To use a different local model, add a deployment entry to [`config.yaml`](/src/config.yaml) under `providers.local_ollama.deployments` (use a human-readable key and set `name` to the Ollama catalog name from the table) then make `llm_config.deployment` use the corresponding key.
 
-* **< 5B parameters**: designed for edge devices with limited resources (IoT, phones). Very responsive but often struggle with reasoning, have difficulty following instructions and produce more hallucinations.
-* **5-10B parameters**: run reasonably well on consumer-grade laptops with discrete graphics cards.
-* **10-20B parameters**: require more powerful workstation GPUs.
-* **> 20B parameters**: require cluster-grade GPUs.
+#### Edge
 
-Some options are given below, in ascending order of hardware requirements. You can use them by pasting the Ollama catalog name in the `local_llm` settings from [`config.yaml`](/src/config.yaml).
+Runs on CPUs, integrated graphics, or a few gigabytes of VRAM — think phones, IoT, and low-power devices where latency and footprint matter more than reasoning depth.
 
-Model                           | Active Params | Context Window | Input modality  | Structured Output   | Tool Calling  | Weights & Arch     | License           | Hardware Requirements  | Ollama Catalog Name
----                             |---            |---             |---              |---                  |---            |---                 |---                |---                     |---
-**Google Gemma 3 0.27B**        | 0.27B         | 32K            | Text-only       | Emulated            | Emulated      | Open / Open        | Apache 2.0-like   | CPU or GPU, 0.5GB VRAM | `gemma3:270m`
-**IBM Granite 4 0.35B**         | 0.35B         | 1000K          | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | CPU or GPU, 0.8GB VRAM | `granite4:350m-h`
-**Google Gemma 3 1B**           | 1B            | 32K            | Text-only       | Emulated            | Emulated      | Open / Open        | Apache 2.0-like   | CPU or GPU, 1GB VRAM   | `gemma3:1b`
-**IBM Granite 4 1B**            | 1B            | 1000K          | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | CPU or GPU, 1.8GB VRAM | `granite4:1b-h`
-**Microsoft Phi-4 Mini 3.8B**   | 3.84B         | 128K           | Text-only       | Native\*            | Native\*      | Open / Open        | MIT               | CPU or GPU, 2.5GB VRAM | `phi4-mini:3.8b`
-**IBM Granite 4 3B**            | 3B            | 1000K          | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | CPU or GPU, 3.8GB VRAM | `granite4:3b-h`
-**IBM Granite 4 7B MoE**        | 1B            | 1000K          | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | GPU, 4.2GB VRAM        | `granite4:7b-a1b-h`
-**Mistral 0.3 7B**              | 7B            | 32K            | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | GPU, 4.5GB VRAM        | `mistral:7b`
-**Meta LLaMA 3.1 8B**           | 8B            | 128K           | Text-only       | Native              | Native        | Open / Open        | Community license | GPU, 5GB VRAM          | `llama3.1:8b`
-**OpenAI GPT-OSS 20B MoE**      | 3.6B          | 128K           | Text-only       | Native              | Native        | Open / Closed      | Apache 2.0        | GPU, 14GB VRAM         | `gpt-oss:20b`
-**Mistral Small 3.2 24B**       | 24B           | 128K           | Text, Images    | Native              | Native        | Open / Open        | Apache 2.0        | GPU, 15GB VRAM         | `mistral-small3.2:24b`
-**IBM Granite 4 32B MoE**       | 9B            | 1000K          | Text-only       | Native              | Native        | Open / Open        | Apache 2.0        | GPU, 19GB VRAM         | `granite4:32b-a9b-h`
-**OpenAI GPT-OSS 120B MoE**     | 5.1B          | 128K           | Text-only       | Native              | Native        | Open / Closed      | Apache 2.0        | GPU, 65GB VRAM         | `gpt-oss:120b`
+| Model | Active Params | Context Window | Input modality | Structured Output | Tool Calling | Weights & Arch | License | Hardware Requirements | Ollama Catalog Name |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **IBM Granite 4 0.35B** | 0.35B | 1000K | Text-only | Native | Native | Open / Open | Apache 2.0 | CPU or GPU, 0.8GB VRAM | `granite4:350m-h` |
+| **IBM Granite 4 1B** | 1B | 1000K | Text-only | Native | Native | Open / Open | Apache 2.0 | CPU or GPU, 1.8GB VRAM | `granite4:1b-h` |
+| **Google Gemma 4 E2B** | 2.3B | 128K | Text, Image, Audio | Native | Native | Open / Open | Gemma license | CPU or GPU, 2GB VRAM | `gemma4:e2b` |
+| **Microsoft Phi-4 Mini 3.8B** | 3.84B | 128K | Text-only | Native\* | Native\* | Open / Open | MIT | CPU or GPU, 2.5GB VRAM | `phi4-mini:3.8b` |
+| **IBM Granite 4.2 3B** | 3B | 128K | Text-only | Native | Native | Open / Open | Apache 2.0 | CPU or GPU, ~3GB VRAM | `granite4.2:3b` |
+| **Alibaba Qwen 3.5 4B** | 4B | 256K | Text, Image | Native | Native | Open / Open | Apache 2.0 | CPU or GPU, ~4GB VRAM | `qwen3.5:4b` |
+| **Google Gemma 4 E4B** | 4.5B | 128K | Text, Image, Audio | Native | Native | Open / Open | Gemma license | CPU or GPU, 4GB VRAM | `gemma4:e4b` |
+
+#### Laptop
+
+Targets a single discrete GPU in a portable PC (often 8-16 GB VRAM): large enough for useful chat and agents, still realistic on a consumer gaming or prosumer laptop.
+
+| Model | Active Params | Context Window | Input modality | Structured Output | Tool Calling | Weights & Arch | License | Hardware Requirements | Ollama Catalog Name |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **IBM Granite 4.2 8B** | 8B | 128K | Text-only | Native | Native | Open / Open | Apache 2.0 | GPU, ~5.3GB VRAM | `granite4.2:8b` |
+| **Meta LLaMA 3.1 8B** | 8B | 128K | Text-only | Native | Native | Open / Open | Community license | GPU, 5GB VRAM | `llama3.1:8b` |
+| **Mistral Ministral 3 8B** | 8B | 256K | Text, Image | Native | Native | Open / Open | Apache 2.0 | GPU, ~6GB VRAM | `ministral-3:8b` |
+| **Alibaba Qwen 3.5 9B** | 9B | 256K | Text, Image | Native | Native | Open / Open | Apache 2.0 | GPU, ~8GB VRAM | `qwen3.5:9b` |
+| **Google Gemma 4 12B** | 12B | 256K | Text, Image | Native | Native | Open / Open | Gemma license | GPU, 8GB VRAM | `gemma4:12b` |
+
+#### Workstation
+
+Assumes one high-end desktop GPU (commonly 16–24 GB VRAM) so you can load bigger dense models or MoE packages that fit on a single card.
+
+| Model | Active Params | Context Window | Input modality | Structured Output | Tool Calling | Weights & Arch | License | Hardware Requirements | Ollama Catalog Name |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **OpenAI GPT-OSS 20B MoE** | 3.6B | 128K | Text-only | Native | Native | Open / Closed | Apache 2.0 | GPU, 14GB VRAM | `gpt-oss:20b` |
+| **Mistral Small 3.2 24B** | 24B | 128K | Text, Images | Native | Native | Open / Open | Apache 2.0 | GPU, 15GB VRAM | `mistral-small3.2:24b` |
+| **Google Gemma 4 26B MoE** | 3.8B | 256K | Text, Image | Native | Native | Open / Open | Gemma license | GPU, 17GB VRAM | `gemma4:26b` |
+| **Alibaba Qwen 3.8 27B** | 27B | 256K | Text, Image | Native | Native | Open / Open | Apache 2.0 | GPU, ~18GB VRAM | `qwen3.8:27b` |
+| **IBM Granite 4.2 30B** | 30B | 128K | Text-only | Native | Native | Open / Open | Apache 2.0 | GPU, ~18GB VRAM | `granite4.2:30b` |
+| **Google Gemma 4 31B** | 31B | 256K | Text, Image | Native | Native | Open / Open | Gemma license | GPU, 20GB VRAM | `gemma4:31b` |
+
+#### Cluster
+
+Needs datacenter-scale memory or several GPUs working together — weights and long-context cache exceed what one consumer card can provide.
+
+| Model | Active Params | Context Window | Input modality | Structured Output | Tool Calling | Weights & Arch | License | Hardware Requirements | Ollama Catalog Name |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| **OpenAI GPT-OSS 120B MoE** | 5.1B | 128K | Text-only | Native | Native | Open / Closed | Apache 2.0 | GPU, 65GB VRAM | `gpt-oss:120b` |
+| **Alibaba Qwen 3.5 122B** | 122B | 256K | Text, Image | Native | Native | Open / Open | Apache 2.0 | GPU, ~81GB VRAM | `qwen3.5:122b` |
+
 
 **Notes**:
 
@@ -145,7 +171,14 @@ Model                           | Active Params | Context Window | Input modalit
 * **Native support**: the model has innate ability to understand JSON schema constraints (or similar mechanisms), with strong compliance guarantees.
 * **Capabilities marked with `*`**: advertised by the vendor but unreliable in practice, likely due to training / fine-tuning approaches or small parameter counts.
 
-To complete all tutorials, native support for both structured outputs and tool calling is needed. **IBM Granite 4 7B MoE** meets these criteria and is able to run at decently low latency on a consumer-grade laptop with a discrete GPU. Opt for **OpenAI GPT-OSS 20B MoE** if your machine has better-than-average hardware.
+To complete all tutorials, native support for both structured outputs and tool calling is needed. **IBM Granite 4.2 8B** meets these criteria and is able to run at decently low latency on a consumer-grade laptop with a discrete GPU. Opt for **OpenAI GPT-OSS 20B MoE** if your machine has better-than-average hardware.
+
+For Ollama, install models on the machine **before** starting the tutorial app. The OpenAI-compatible endpoint defined in [`config.yaml`](/src/config.yaml) only uses models already on disk; it does not download them on first request:
+
+```powershell
+ollama pull granite4.2:8b
+ollama pull snowflake-arctic-embed:m-long
+```
 
 ## A note on sync vs async programming
 

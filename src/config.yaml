@@ -5,33 +5,25 @@ api_key_authentication: &api_key_authentication_settings
   type: env_var_secret
   env_var_name: OPENAI_API_KEY
 
-# configuration for a local LLM service, launched using Ollama
-local_llm: &local_llm_settings
-  type: local
-  model: 'granite4:7b-a1b-h'
-
-# configuration for a remote LLM service, hosted in the cloud
-remote_llm: &remote_llm_settings
-  type: remote
-  model: "gpt-4o"
-  endpoint: "https://<your-endpoint>/v1"
-  extra_headers:
-  authentication:
-    <<: *api_key_authentication_settings
-
-# configuration for a local embeddings service, launched using Ollama
-local_embeddings: &local_embeddings_settings
-  type: local
-  model: "snowflake-arctic-embed:m-long"
-
-# configuration for a remote embeddings service, hosted in the cloud
-remote_embeddings: &remote_embeddings_settings
-  type: remote
-  model: "text-embedding-3-small"
-  endpoint: "https://<your-endpoint>/v1"
-  extra_headers:
-  authentication:
-    <<: *api_key_authentication_settings
+# Catalog of language service providers and deployments
+providers:
+  local_ollama:
+    endpoint: http://127.0.0.1:11434/v1
+    deployments:
+      granite4.2:
+        name: granite4.2:8b
+      snowflake-arctic-embed:
+        name: snowflake-arctic-embed:m-long
+  remote_openai:
+    endpoint: "https://<your-endpoint>/v1"
+    extra_headers:
+    authentication:
+      <<: *api_key_authentication_settings
+    deployments:
+      gpt-4o:
+        name: gpt-4o
+      text-embedding-3-small:
+        name: text-embedding-3-small
 
 # configuration for a local vector store service
 local_vectordb: &local_vectordb_settings
@@ -56,17 +48,13 @@ observability_config:
   langfuse_public_key_env_var: LANGFUSE_PUBLIC_KEY
   langfuse_secret_key_env_var: LANGFUSE_SECRET_KEY
 
-# choose one of the predefined LLM service configs from above:
-# - local_llm_settings  - a locally-hosted service
-# - remote_llm_settings - a cloud-hosted service
 llm_config:
-  <<: *local_llm_settings
+  provider: local_ollama
+  deployment: granite4.2
 
-# choose one of the predefined embeddings service configs from above:
-# - local_embeddings_settings  - a locally-hosted service
-# - remote_embeddings_settings - a cloud-hosted service
 embeddings_config:
-  <<: *local_embeddings_settings
+  provider: local_ollama
+  deployment: snowflake-arctic-embed
 
 # choose one of the predefined vector store service configs from above:
 # - local_vectordb_settings - a locally-hosted service

@@ -45,11 +45,7 @@ EVAL_SUITES = {
                 )
             ]
         ),
-        [
-            PatternMatchMetric(
-                pattern="(?s)(?=.*Azure Pipelines).*", ignore_case=True
-            )
-        ],
+        [PatternMatchMetric(pattern="(?s)(?=.*Azure Pipelines).*", ignore_case=True)],
     ),
 }
 

@@ -27,13 +27,15 @@ EVAL_SUITES = {
                 )
             ]
         ),
-        [PatternMatchMetric(
-            pattern=(
-                r"(?s)(?!.*(?:\S+\s+){30}\S)"
-                r"(?=.*(?:impact|asteroid|extinct|collision|catastroph)).*"
-            ),
-            ignore_case=True,
-        )],
+        [
+            PatternMatchMetric(
+                pattern=(
+                    r"(?s)(?!.*(?:\S+\s+){30}\S)"
+                    r"(?=.*(?:impact|asteroid|extinct|collision|catastroph)).*"
+                ),
+                ignore_case=True,
+            )
+        ],
     ),
     "postcard_cheese": (
         EvaluationDataset(
