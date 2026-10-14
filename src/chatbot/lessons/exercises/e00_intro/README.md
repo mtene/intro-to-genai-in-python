@@ -118,7 +118,7 @@ Choose a model based on your application's required capabilities and available h
 * **10-20B parameters**: require more powerful workstation GPUs.
 * **> 20B parameters**: require cluster-grade GPUs.
 
-Some options are given below, in ascending order of hardware requirements. You can use them by pasting the Ollama catalog name in the `local_llm` settings from [`config.yaml`](/src/config.yaml).
+Some options are given below, in ascending order of hardware requirements. To use a different local model, add a deployment entry under `providers.local_ollama.deployments` (set `name` to the Ollama catalog name from the table) and set `llm_config.deployment` to that deployment key — see the existing `llm` deployment in [`config.yaml`](/src/config.yaml) for the pattern.
 
 Model                           | Active Params | Context Window | Input modality  | Structured Output   | Tool Calling  | Weights & Arch     | License           | Hardware Requirements  | Ollama Catalog Name
 ---                             |---            |---             |---              |---                  |---            |---                 |---                |---                     |---

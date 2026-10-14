@@ -39,7 +39,11 @@ EVAL_SUITES = {
                 )
             ]
         ),
-        [PatternMatchMetric(pattern="(?s)(?=.*(?:cocktail|gin|liquor|cordial)).*", ignore_case=True)],
+        [
+            PatternMatchMetric(
+                pattern="(?s)(?=.*(?:cocktail|gin|liquor|cordial)).*", ignore_case=True
+            )
+        ],
     ),
 }
 

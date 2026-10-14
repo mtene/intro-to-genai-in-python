@@ -7,7 +7,6 @@ from rich.markdown import Markdown
 from chatbot.chatbot_base import BaseChatBot
 from chatbot.chat_context import ChatContext
 from chatbot.testing.evaluator import ChatbotEvaluator
-from chatbot.start_chat import start_chat_services, stop_chat_services
 
 logger = logging.getLogger(__name__)
 
@@ -29,7 +28,6 @@ def handle_test_command(chatbot: BaseChatBot, rich_console: Console):
 
 
 def console(chatbot_type: Type[BaseChatBot]):
-    start_chat_services()
     chatbot = chatbot_type()
     rich_console = Console()
     rich_console.print(
@@ -64,5 +62,3 @@ def console(chatbot_type: Type[BaseChatBot]):
         logger.warning("Interrupted by user. Shutting down...")
     except Exception:
         logger.exception("Unhandled exception")
-    finally:
-        stop_chat_services()

@@ -3,11 +3,7 @@ import sys
 from pathlib import Path
 from typing import List
 from chatbot.utils.logging import configure_logging
-from chatbot.start_chat import (
-    start_chat_services,
-    stop_chat_services,
-    run_on_this_process,
-)
+from chatbot.utils.processes import run_on_this_process
 
 logger = logging.getLogger(__name__)
 
@@ -29,14 +25,10 @@ def start_streamlit(argv: List[str] | None = None) -> int:
 def main() -> int:
     configure_logging()
     try:
-        start_chat_services()
-        exit_code = start_streamlit()
+        return start_streamlit()
     except Exception:
         logger.exception("Unhandled exception")
-        exit_code = 1
-    finally:
-        stop_chat_services()
-    return exit_code
+        return 1
 
 
 if __name__ == "__main__":

@@ -23,13 +23,19 @@ To achieve this, inspect the LLM classes in [`src/chatbot/services`](/src/chatbo
 
 The language models used in this app must be compatible with the [OpenAI API](https://platform.openai.com/docs/api-reference/chat/create?api-mode=chat). Since this is the industry standard, most model vendors have implemented support.
 
-For local LLMs, Ollama provides OpenAI API compatibility, translating requests back and forth for all models in their catalog.
+For local LLMs, Ollama exposes an OpenAI-compatible API; the shipped `local_ollama` provider in [`config.yaml`](/src/config.yaml) points at it.
 
-## LLM authentication
+## LLM configuration
 
-**Local LLMs** require no authentication credentials. The dummy value in [`LocalLLM`](/src/chatbot/services/local_llm.py)'s constructor exists only because LangChain's `ChatOpenAI` expects a non-empty string.
+Local and remote models use the same layout in [`config.yaml`](/src/config.yaml):
 
-**Remote LLMs** use authentication via a fixed secret key configured through [`config.yaml`](/src/config.yaml) and [`RemoteLLM`](/src/chatbot/services/remote_llm.py), which connects to an OpenAI-compatible endpoint using LangChain's `ChatOpenAI`. More advanced authentication mechanisms (such as token services) are out of scope, but could easily be implemented by extending the [`Authenticator`](/src/chatbot/services/authenticator.py).
+* **`providers`** — each entry has an OpenAI-compatible `endpoint`, optional `extra_headers`, and optional `authentication` (API keys via [`Authenticator`](/src/chatbot/services/authenticator.py)).
+* **`deployments`** — under each provider, a `name` is the model id sent to that endpoint.
+* **`llm_config`** — `provider` and `deployment` select which entry to use.
+
+The default local path uses `local_ollama` with no `authentication`. [`build_chat_model`](/src/chatbot/services/clients.py) supplies a placeholder API key anyway because LangChain's `ChatOpenAI` expects a non-empty string.
+
+For a hosted model, add a provider (or copy the `remote_openai` pattern), add a deployment, and point `llm_config` at them.
 
 ## LLM behavior tuning
 

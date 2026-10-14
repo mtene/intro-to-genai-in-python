@@ -1,9 +1,15 @@
-from typing import Type
-from langchain_core.language_models import BaseChatModel
-from .local_llm import LocalLLM
-from .remote_llm import RemoteLLM
-from chatbot.config import config, ServiceType
+from typing import Any
 
-LLM: Type[BaseChatModel] = (
-    LocalLLM if config.get_llm_type() == ServiceType.LOCAL else RemoteLLM
-)
+from langchain_core.language_models.chat_models import BaseChatModel
+
+from chatbot.config import config
+from chatbot.services.clients import build_chat_model
+
+
+def LLM(**kwargs: Any) -> BaseChatModel:
+    """OpenAI-compatible chat model from ``llm_config`` (provider + deployment)."""
+    llm_config = config.get_llm_config()
+    model, connection = config.language_service_provider.resolve(
+        llm_config, "llm_config"
+    )
+    return build_chat_model(model=model, connection=connection, **kwargs)
