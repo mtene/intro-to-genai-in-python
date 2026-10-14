@@ -180,6 +180,13 @@ Needs datacenter-scale memory or several GPUs working together — weights and l
 
 To complete all tutorials, native support for both structured outputs and tool calling is needed. **IBM Granite 4.2 8B** meets these criteria and is able to run at decently low latency on a consumer-grade laptop with a discrete GPU. Opt for **OpenAI GPT-OSS 20B MoE** if your machine has better-than-average hardware.
 
+For Ollama, install models on the machine **before** starting the tutorial app. The OpenAI-compatible endpoint defined in [`config.yaml`](/src/config.yaml) only uses models already on disk; it does not download them on first request:
+
+```powershell
+ollama pull granite4.2:8b
+ollama pull snowflake-arctic-embed:m-long
+```
+
 ## A note on sync vs async programming
 
 **Synchronous code** runs one step at a time. When the program executes a network call (like asking an LLM) or accesses a disk, it stops and waits for the response before continuing. This is simple but wasteful, as the process sits idle while waiting.
